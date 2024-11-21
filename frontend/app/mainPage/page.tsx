@@ -6,6 +6,7 @@ import { Button } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
 import LoadingBar from "@/components/LoadingBar";
+import Field from "@/components/field";
 
 export default function Mainpage() {
   const lightTheme = createTheme({
@@ -56,62 +57,62 @@ export default function Mainpage() {
     <ThemeProvider theme={lightTheme}>
       <CssBaseline />
       <div className="flex flex-col items-center bg-[#0D0402] min-h-screen max-h-screen max-w-screen min-w-screen overflow-hidden">
-        <div className="h-full w-full flex flex-col justify-center items-center">
-          <h1 className="text-white text-[48px] font-normal leading-[141.667%] tracking-[-1.2px]">
+        <div className="w-[80%] flex flex-col justify-center items-center">
+          <h1 className="text-white text-4xl font-normal leading-[141.667%] tracking-[-1.2px]">
             Create Your Dream Team
           </h1>
 
-          <div className="w-screen flex flex-col items-center justify-center px-5">
-            <p className="text-white text-[24px] font-thin leading-[ 283.333%] tracking-[-0.6px] mt-3">
+          <div className="w-full flex flex-col items-center justify-center px-5">
+            <p className="text-white text-xl font-thin leading-[ 283.333%] tracking-[-0.6px] mt-3">
               Maximum of 10 players from one team
             </p>
             <div className="flex w-full px-10  justify-between">
               {/* players div */}
-              <div className="flex flex-col justify-between">
-                <h3 className="text-[#EBEBF599] text-2xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
+              <div className="flex flex-col">
+                <h3 className="text-[#EBEBF599] text-lg font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
                   Players
                 </h3>
-                <p className="text-white text-[32px] font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
-                  11 <span className="text-[#EBEBF599] text-2xl">/11</span>
+                <p className="text-white text-2xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
+                  11 <span className="text-[#EBEBF599] text-lg">/11</span>
                 </p>
               </div>
               <div className="flex items-center justify-between min-w-[50%] max-w-[50%] ">
                 {/* Team 1 */}
-                <div className="flex items-center justify-between w-[40%]">
+                <div className="flex items-center gap-10 w-[40%]">
                   <Image
                     src="/india.svg"
-                    width={"114"}
-                    height={"114"}
+                    width={"72"}
+                    height={"72"}
                     alt="/"
                   />
                   <div className="flex flex-col">
-                    <h3 className="text-[#EBEBF599] text-2xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
+                    <h3 className="text-[#EBEBF599] text-lg font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
                       IND
                     </h3>
-                    <p className="text-white text-[32px] font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
+                    <p className="text-white text-2xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
                       0
                     </p>
                   </div>
                 </div>
                 {/* Team 2 */}
-                <div className="flex items-center justify-between w-[40%]">
+                <div className="flex items-center gap-10 w-[40%] flex-row-reverse">
+                <Image src="/SA.svg" width={"72"} height={"72"} alt="/" />
                   <div className="flex flex-col">
-                    <h3 className="text-[#EBEBF599] text-2xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
+                    <h3 className="text-[#EBEBF599] text-lg font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
                       SA
                     </h3>
-                    <p className="text-white text-[32px] font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
+                    <p className="text-white text-2xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
                       0
                     </p>
                   </div>
-                  <Image src="/SA.svg" width={"114"} height={"114"} alt="/" />
                 </div>
               </div>
               {/* credits div */}
               <div className="flex flex-col">
-                <h3 className="text-[#EBEBF599] text-2xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
+                <h3 className="text-[#EBEBF599] text-lg font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
                   Credits Used
                 </h3>
-                <p className="text-white text-[32px] font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
+                <p className="text-white text-2xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
                   11
                 </p>
               </div>
@@ -123,12 +124,15 @@ export default function Mainpage() {
             <LoadingBar />
           </div>
         </div>
+        <div className="flex flex-row gap-4 m-10 w-[95%] grow">
+          <Field />
+        </div>
         <div className="flex flex-row gap-4">
           <Button
             type="submit"
             variant="contained"
             color="secondary"
-            className="mt-10"
+            className=""
           >
             Analyse My Pick
           </Button>
@@ -136,7 +140,7 @@ export default function Mainpage() {
             type="button"
             variant="contained"
             color="primary"
-            className="mt-10"
+            className=""
           >
             AI Expert Team
           </Button>
@@ -144,7 +148,7 @@ export default function Mainpage() {
             type="button"
             variant="contained"
             color="secondary"
-            className="mt-10"
+            className=""
           >
             Next
           </Button>

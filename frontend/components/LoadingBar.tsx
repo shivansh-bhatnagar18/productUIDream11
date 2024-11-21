@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 
 const LoadingBar = () => {
-  const parallelogramCount = 10; // Number of parallelograms
+  const parallelogramCount = 11; // Number of parallelograms
 
   return (
     <div
