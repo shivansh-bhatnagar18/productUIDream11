@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import LoadingBar from "@/components/LoadingBar";
 import Field from "@/components/field";
+import PlayerTable from "@/components/playerTable";
 
 export default function Mainpage() {
   const lightTheme = createTheme({
@@ -126,6 +127,7 @@ export default function Mainpage() {
         </div>
         <div className="flex flex-row gap-4 m-10 w-[95%] grow">
           <Field />
+          <PlayerTable/>
         </div>
         <div className="flex flex-row gap-4">
           <Button
