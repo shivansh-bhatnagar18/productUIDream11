@@ -9,6 +9,7 @@ import LoadingBar from "@/components/LoadingBar";
 import Field from "@/components/field";
 import PlayerTable from "@/components/playerTable";
 import 'ag-grid-enterprise'
+import Navbar from "@/components/navbar";
 
 export default function Mainpage() {
   const lightTheme = createTheme({
@@ -58,6 +59,7 @@ export default function Mainpage() {
   return (
     <ThemeProvider theme={lightTheme}>
       <CssBaseline />
+      <Navbar />
       <div className="flex flex-col items-center bg-[#0D0402] min-h-screen max-h-screen max-w-screen min-w-screen overflow-hidden">
         <div className="w-[80%] flex flex-col justify-center items-center">
           <h1 className="text-white text-4xl font-normal leading-[141.667%] tracking-[-1.2px]">
