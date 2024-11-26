@@ -8,6 +8,7 @@ import Image from "next/image";
 import LoadingBar from "@/components/LoadingBar";
 import Field from "@/components/field";
 import PlayerTable from "@/components/playerTable";
+import 'ag-grid-enterprise'
 
 export default function Mainpage() {
   const lightTheme = createTheme({

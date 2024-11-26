@@ -7,19 +7,19 @@ const LoadingBar = () => {
   return (
     <div
       style={{
-        display: "flex",
-        gap: "0.1rem",
-        backgroundColor: "#1a0000",
-        justifyContent: "center",
-        paddingRight: "3.5rem",
+      display: "flex",
+      gap: "0.1rem",
+      backgroundColor: "#0D0402",
+      justifyContent: "center",
       }}
     >
       {Array.from({ length: parallelogramCount }).map((_, index) => (
-        <img
-          src="/loading.svg"
-          alt="loading bar"
-          className="w-[9%] h-auto max-w-[5rem]"
-        />
+      <img
+        key={index}
+        src="/loading.svg"
+        alt="loading bar"
+        className="w-[9%] h-auto max-w-[5rem]"
+      />
       ))}
     </div>
   );
