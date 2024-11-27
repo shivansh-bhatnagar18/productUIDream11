@@ -61,7 +61,7 @@ function page() {
     <ThemeProvider theme={lightTheme}>
       <CssBaseline />
       <Navbar/>
-      <div className="flex flex-col items-center bg-[#0D0402] min-h-screen max-h-screen max-w-screen min-w-screen overflow-hidden scroll-m-10">
+      <div className="flex flex-col items-center bg-[#0D0402] h-full max-w-screen min-w-screen scroll-m-10">
         <div className="w-[80%] flex flex-col justify-center items-center">
           <h1 className="text-white text-4xl font-normal leading-[141.667%] tracking-[-1.2px]">
             Create Your Dream Team

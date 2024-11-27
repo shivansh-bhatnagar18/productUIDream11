@@ -94,6 +94,10 @@ const PlayerTable = () => {
         });
     }, []);
 
+    useEffect(() => {
+        console.log("isClicked state updated:", isClicked);
+    }, [isClicked]);
+
     const handleButtonClick = (key: number) => {
         setIsClicked(prevState => ({
             ...prevState,
@@ -123,7 +127,7 @@ const PlayerTable = () => {
                 <button
                     onClick={() => handleButtonClick(p.data.key)}
                     className={`w-6 h-6 flex items-center justify-center rounded-full text-white transition-colors ${
-                        isClicked[p.data.key] ? "bg-green-500 hover:bg-green-600" : "bg-red-500 hover:bg-red-600"
+                        isClicked[p.data.key] ? `bg-green-500 hover:bg-green-600` :`bg-red-500 hover:bg-red-600`
                     }`}
                 >
                     {isClicked[p.data.key] ? "+" : "−"}
@@ -138,9 +142,6 @@ const PlayerTable = () => {
         <div className='w-full'>
             <div
                 style={{ width: '100%', height: '100%' }}
-                // className={
-                //     "ag-theme-quartz-dark"
-                // }
             >
                 <AgGridReact rowData={rowData} columnDefs={columnDefs} theme={myTheme} />
             </div>
