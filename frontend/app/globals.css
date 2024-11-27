@@ -1,7 +1,8 @@
 @font-face {
   font-family: 'Product Sans';
-  src: url('/fonts/Product Sans Regular.ttf') format('ttf'),
-       url('/fonts/Product Sans Regular.ttf') format('ttf');
+  src:
+    url('/fonts/Product Sans Regular.ttf') format('ttf'),
+    url('/fonts/Product Sans Regular.ttf') format('ttf');
   font-weight: normal;
   font-style: normal;
 }
@@ -26,7 +27,9 @@ body {
   @apply font-sans;
   color: var(--foreground);
   background: var(--background);
-  font-family: Product Sans, sans-serif; /* Apply the custom font globally */
+  font-family:
+    Product Sans,
+    sans-serif; /* Apply the custom font globally */
   margin: 0;
   padding: 0;
 }
