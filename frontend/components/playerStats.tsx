@@ -51,26 +51,26 @@ const PlayerStats = () => {
         <div className="bg-white bg-opacity-10 rounded-xl border-2 border-white flex flex-col w-full">
             <div className=" w-auto h-[20%] mx-3 mt-3 rounded-xl flex gap-2">
                 <div className="bg-white bg-opacity-20 w-[25%] rounded-xl flex flex-col">
-                    <p className="text-white text-lg ml-2 mt-2">Player Stats</p>
+                    <p className="text-white text-lg ml-2 mt-2">Batting First</p>
                     <p className="text-white text-5xl font-bold ml-2">30</p>
                 </div>
                 <div className="bg-white bg-opacity-20 w-[25%] rounded-xl flex flex-col">
-                    <p className="text-white text-lg ml-2 mt-2">Player Stats</p>
+                    <p className="text-white text-lg ml-2 mt-2">Chasings</p>
                     <p className="text-white text-5xl font-bold ml-2">30</p>
                 </div>
                 <div className="bg-white bg-opacity-20 w-[25%] rounded-xl flex flex-col">
-                    <p className="text-white text-lg ml-2 mt-2">Player Stats</p>
+                    <p className="text-white text-lg ml-2 mt-2">Strike Rate</p>
                     <p className="text-white text-5xl font-bold ml-2">30</p>
                 </div>
                 <div className="bg-white bg-opacity-20 w-[25%] rounded-xl flex flex-col">
-                    <p className="text-white text-lg ml-2 mt-2">Player Stats</p>
+                    <p className="text-white text-lg ml-2 mt-2">Economy Rate</p>
                     <p className="text-white text-5xl font-bold ml-2">30</p>
                 </div>
             </div> 
             <div className=" w-auto h-[60%] m-3 rounded-xl flex gap-2">
                 <div className="w-[30%] rounded-xl flex flex-col gap-2">
                     <div className="bg-white bg-opacity-20 h-[50%] rounded-xl flex flex-col">
-                        <p className="text-white text-lg ml-2 mt-2">Player Stats</p>
+                        <p className="text-white text-lg ml-2 mt-2">Pitch Performance Prediction</p>
                         <RadialBarChart 
                             width={200} 
                             height={100} 
@@ -86,7 +86,7 @@ const PlayerStats = () => {
                         </RadialBarChart>
                     </div>
                     <div className="bg-white bg-opacity-20 h-[50%] rounded-xl flex flex-col">
-                        <p className="text-white text-lg ml-2 mt-2">Player Stats</p>
+                        <p className="text-white text-lg ml-2 mt-2">Relative FPts</p>
                         <PieChart width={200} height={100}>
                             <Pie data={data01} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={50} fill="#34C759" />
                             {/* <Pie data={data02} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={60} outerRadius={80} fill="#82ca9d" label /> */}
@@ -95,26 +95,26 @@ const PlayerStats = () => {
                 </div>
                 <div className="w-[70%] rounded-xl flex flex-col gap-2">
                     <div className="bg-white bg-opacity-20 h-[65%] rounded-xl flex gap-2">
-                    <p className="text-white text-lg ml-2 mt-2">Player Stats</p>
+                    <p className="text-white text-lg ml-2 mt-2">Performance Prediction</p>
                     </div>
                     <div className="h-[35%] rounded-xl flex gap-2">
                         <div className="bg-white bg-opacity-20 w-[35%] rounded-xl flex flex-col">
-                        <p className="text-white text-lg ml-2 mt-2">Player Stats</p>
+                        <p className="text-white text-lg ml-2 mt-2">Ceil Fpts</p>
                         <p className="text-white text-5xl font-bold ml-2">30</p>
                         </div>
                         <div className="bg-white bg-opacity-20 w-[35%] rounded-xl flex flex-col">
-                        <p className="text-white text-lg ml-2 mt-2">Player Stats</p>
+                        <p className="text-white text-lg ml-2 mt-2">Floor Fpts</p>
                         <p className="text-white text-5xl font-bold ml-2">30</p>
                         </div>
                         <div className="bg-white bg-opacity-20 w-[35%] rounded-xl flex flex-col">
-                        <p className="text-white text-lg ml-2 mt-2">Player Stats</p>
+                        <p className="text-white text-lg ml-2 mt-2">Risk</p>
                         <p className="text-white text-5xl font-bold ml-2">30</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="bg-white bg-opacity-20 w-auto h-[30%] mb-3 mx-3 rounded-xl flex gap-2">
-            <p className="text-white text-lg ml-2 mt-2">Player Stats</p>
+            <p className="text-white text-lg ml-2 mt-2">Alerts</p>
             </div>
         </div>
     )
