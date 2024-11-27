@@ -70,6 +70,7 @@ const PlayerTable = () => {
 
     const [rowData, setRowData] = useState<any[]>([]);
     const [isClicked, setIsClicked] = useState<{ [key: number]: boolean }>({});
+    
     useEffect(() => {
         readCSVData().then(data => {
             readCSVImageData().then(imageData => {
@@ -96,6 +97,7 @@ const PlayerTable = () => {
 
     useEffect(() => {
         console.log("isClicked state updated:", isClicked);
+        console.log(isClicked[0])
     }, [isClicked]);
 
     const handleButtonClick = (key: number) => {

@@ -1,8 +1,10 @@
 import React from "react";
 import Image from "next/image";
+import { CountertopsOutlined } from "@mui/icons-material";
 
-const LoadingBar = () => {
-  const parallelogramCount = 11; // Number of parallelograms
+const LoadingBar = (count: number) => {
+  const parallelogramCountGreen = count;
+  const parallelogramCount = 11 - count;
 
   return (
     <div
@@ -13,6 +15,14 @@ const LoadingBar = () => {
       justifyContent: "center",
       }}
     >
+      {Array.from({ length: parallelogramCountGreen }).map((_, index) => (
+      <img
+        key={index}
+        src="/loadinggreen.svg"
+        alt="loading bar"
+        className="w-[9%] h-auto max-w-[5rem]"
+      />
+      ))}
       {Array.from({ length: parallelogramCount }).map((_, index) => (
       <img
         key={index}

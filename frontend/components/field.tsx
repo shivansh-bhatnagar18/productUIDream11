@@ -5,7 +5,7 @@ import { Box, Card, Typography } from "@mui/material";
 const Field: React.FC = () => {
   return (
     <Card
-      className="bg-green-200 p-4 rounded-lg shadow-lg w-[40%]"
+      className="bg-green-200 p-4 rounded-lg shadow-lg w-[50%]"
       style={{
       backgroundImage: "url(/ground.svg)",
       backgroundSize: "cover",
