@@ -100,7 +100,7 @@ const PlayerCard = ({ playerName, rank }: PlayerCardProps) => {
 
 
     return (
-        <div className="bg-white bg-opacity-10 rounded-xl border-2 border-white">
+        <div className="bg-white bg-opacity-10 rounded-xl border-2 border-white max-w-80">
             <div className="bg-[#0D0402] w-auto h-[30%] m-3 rounded-xl flex gap-2">
                 <img src={playerImgSrc} alt="player" className="w-[45%] h-[90%] rounded-xl"/>
                 <div className="flex flex-col justify-center">
