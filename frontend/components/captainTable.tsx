@@ -18,45 +18,7 @@ import { themeQuartz } from '@ag-grid-community/theming';
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
-const readCSVData = (): Promise<any[]> => {
-  return new Promise((resolve, reject) => {
-    fetch('/data.csv')
-      .then((response) => response.text())
-      .then((data) => {
-        Papa.parse(data, {
-          header: true,
-          complete: (results: Papa.ParseResult<any>) => {
-            resolve(results.data);
-          },
-          error: (error: any) => {
-            reject(error);
-          },
-        });
-      })
-      .catch((error) => reject(error));
-  });
-};
-
-const readCSVImageData = (): Promise<any[]> => {
-  return new Promise((resolve, reject) => {
-    fetch('/names.csv')
-      .then((response) => response.text())
-      .then((data) => {
-        Papa.parse(data, {
-          header: true,
-          complete: (results: Papa.ParseResult<any>) => {
-            resolve(results.data);
-          },
-          error: (error: any) => {
-            reject(error);
-          },
-        });
-      })
-      .catch((error) => reject(error));
-  });
-};
-
-const CaptainTable = () => {
+const CaptainTable = ({ rowData }: { rowData: any[] }) => {
   const myTheme = themeQuartz.withParams({
     accentColor: '#D22A29',
     backgroundColor: '#0D0402',
@@ -70,40 +32,10 @@ const CaptainTable = () => {
     headerFontSize: 14,
   });
 
-  const [rowData, setRowData] = useState<any[]>([]);
   const [isCClicked, setIsCClicked] = useState<{ [key: number]: boolean }>({});
   const [isVCClicked, setIsVCClicked] = useState<{ [key: number]: boolean }>(
     {}
   );
-  useEffect(() => {
-    readCSVData().then((data) => {
-      readCSVImageData().then((imageData) => {
-        const playerData = data.map((row: any, index: number) => {
-          const playerImage = imageData.find(
-            (img) => img.Name === row['Predicted Player 1']
-          );
-          return {
-            key: index,
-            name: row['Predicted Player 1'],
-            points: row['Predicted Player 1 Points'],
-            imgSrc: playerImage ? playerImage.image_path : '',
-          };
-        });
-        setRowData(playerData);
-        console.log(playerData);
-        const initialClickedState = playerData.reduce(
-          (acc, player) => {
-            acc[player.key] = false;
-            return acc;
-          },
-          {} as { [key: number]: boolean }
-        );
-        setIsCClicked(initialClickedState);
-        setIsVCClicked(initialClickedState);
-        // console.log(initialClickedState);
-      });
-    });
-  }, []);
 
   const handleCButtonClick = (clickedKey: number) => {
     const updatedClickedState = Object.keys(isCClicked).reduce(

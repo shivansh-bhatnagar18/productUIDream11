@@ -7,8 +7,6 @@ import {
   ValueGetterParams,
 } from '@ag-grid-community/core';
 import { AgGridReact } from '@ag-grid-community/react';
-// import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the Data Grid
-// import "ag-grid-community/styles/ag-theme-quartz.css";
 import React, { StrictMode, useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import CloseIcon from '@mui/icons-material/Close';
@@ -18,45 +16,7 @@ import { themeQuartz } from '@ag-grid-community/theming';
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
-const readCSVData = (): Promise<any[]> => {
-  return new Promise((resolve, reject) => {
-    fetch('/data.csv')
-      .then((response) => response.text())
-      .then((data) => {
-        Papa.parse(data, {
-          header: true,
-          complete: (results: Papa.ParseResult<any>) => {
-            resolve(results.data);
-          },
-          error: (error: any) => {
-            reject(error);
-          },
-        });
-      })
-      .catch((error) => reject(error));
-  });
-};
-
-const readCSVImageData = (): Promise<any[]> => {
-  return new Promise((resolve, reject) => {
-    fetch('/names.csv')
-      .then((response) => response.text())
-      .then((data) => {
-        Papa.parse(data, {
-          header: true,
-          complete: (results: Papa.ParseResult<any>) => {
-            resolve(results.data);
-          },
-          error: (error: any) => {
-            reject(error);
-          },
-        });
-      })
-      .catch((error) => reject(error));
-  });
-};
-
-const PlayerTable = () => {
+const PlayerTable = ({ rowData }: { rowData: any[] }) => {
   const myTheme = themeQuartz.withParams({
     accentColor: '#D22A29',
     backgroundColor: '#0D0402',
@@ -70,43 +30,6 @@ const PlayerTable = () => {
     headerFontSize: 14,
   });
 
-  const [rowData, setRowData] = useState<any[]>([]);
-  const [isClicked, setIsClicked] = useState<{ [key: number]: boolean }>({});
-
-  useEffect(() => {
-    readCSVData().then((data) => {
-      readCSVImageData().then((imageData) => {
-        const playerData = data.map((row: any, index: number) => {
-          const playerImage = imageData.find(
-            (img) => img.Name === row['Predicted Player 1']
-          );
-          return {
-            key: index,
-            name: row['Predicted Player 1'],
-            points: row['Predicted Player 1 Points'],
-            imgSrc: playerImage ? playerImage.image_path : '',
-          };
-        });
-        setRowData(playerData);
-        console.log(playerData);
-        const initialClickedState = playerData.reduce(
-          (acc, player) => {
-            acc[player.key] = true;
-            return acc;
-          },
-          {} as { [key: number]: boolean }
-        );
-        setIsClicked(initialClickedState);
-        // console.log(initialClickedState);
-      });
-    });
-  }, []);
-
-  useEffect(() => {
-    console.log('isClicked state updated:', isClicked);
-    console.log(isClicked[0]);
-  }, [isClicked]);
-
   const handleButtonClick = (key: number) => {
     setIsClicked((prevState) => ({
       ...prevState,
@@ -114,6 +37,7 @@ const PlayerTable = () => {
     }));
   };
 
+  const [isClicked, setIsClicked] = useState<{ [key: number]: boolean }>({});
   const [columnDefs, setColumnDefs] = useState<
     (ColDef<any, any> | ColGroupDef<any>)[]
   >([
@@ -158,6 +82,18 @@ const PlayerTable = () => {
       flex: 1,
     },
   ]);
+
+  useEffect(() => {
+    const updatedClickedState = rowData.reduce(
+      (acc, row) => ({
+        ...acc,
+        [row.key]: row.isSelected || false,
+      }),
+      {} as { [key: number]: boolean }
+    );
+    setIsClicked(updatedClickedState);
+  }, [rowData]);
+
   return (
     // wrapping container with theme & size
     <div className="w-full">

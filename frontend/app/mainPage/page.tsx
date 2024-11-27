@@ -8,17 +8,82 @@ import PlayerTable from '@/components/playerTable';
 import 'ag-grid-enterprise';
 import Navbar from '@/components/navbar';
 import Header from '@/components/header';
+import Papa from 'papaparse';
+import { useEffect, useState } from 'react';
+
+const readCSVData = (): Promise<any[]> => {
+  return new Promise((resolve, reject) => {
+    fetch('/data.csv')
+      .then((response) => response.text())
+      .then((data) => {
+        Papa.parse(data, {
+          header: true,
+          complete: (results: Papa.ParseResult<any>) => {
+            resolve(results.data);
+          },
+          error: (error: any) => {
+            reject(error);
+          },
+        });
+      })
+      .catch((error) => reject(error));
+  });
+};
+
+const readCSVImageData = (): Promise<any[]> => {
+  return new Promise((resolve, reject) => {
+    fetch('/names.csv')
+      .then((response) => response.text())
+      .then((data) => {
+        Papa.parse(data, {
+          header: true,
+          complete: (results: Papa.ParseResult<any>) => {
+            resolve(results.data);
+          },
+          error: (error: any) => {
+            reject(error);
+          },
+        });
+      })
+      .catch((error) => reject(error));
+  });
+};
 
 export default function Mainpage() {
+  const [rowData, setRowData] = useState<any[]>([]);
+  const [countSelected, setCountSelected] = useState<number>(0);
+
+  useEffect(() => {
+    readCSVData().then((data) => {
+      readCSVImageData().then((imageData) => {
+        const playerData = data.map((row: any, index: number) => {
+          const playerImage = imageData.find(
+            (img) => img.Name === row['Predicted Player 1']
+          );
+          return {
+            key: index,
+            name: row['Predicted Player 1'],
+            points: row['Predicted Player 1 Points'],
+            imgSrc: playerImage ? playerImage.image_path : '',
+            isSelected: false,
+          };
+        });
+        setRowData(playerData);
+        const count = playerData.filter((player) => player.isSelected).length;
+        setCountSelected(count);
+      });
+    });
+  }, []);
+
   return (
     <div className="flex flex-col items-center bg-[#0D0402] min-h-screen max-h-screen max-w-screen min-w-screen">
       <Header />
       {/* team selection divs */}
       <div className="max-w-[50%] min-w-[50%] mx-auto mt-8">
-        <LoadingBar />
+        <LoadingBar count={countSelected} />
       </div>
       <div className="flex flex-row gap-4 m-10 w-[95%] grow">
-        <PlayerTable />
+        <PlayerTable rowData={rowData} />
         <Field />
       </div>
       <div className="flex flex-row gap-4">

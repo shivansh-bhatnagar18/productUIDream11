@@ -2,7 +2,11 @@ import React from 'react';
 import Image from 'next/image';
 import { CountertopsOutlined } from '@mui/icons-material';
 
-const LoadingBar = (count: number) => {
+interface LoadingBarProps {
+  count: number;
+}
+
+const LoadingBar: React.FC<LoadingBarProps> = ({ count }) => {
   const parallelogramCountGreen = count;
   const parallelogramCount = 11 - count;
 
