@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Product Sans';
+  src: url('/fonts/ProductSans-Regular.ttf') format('ttf'),
+       url('/fonts/ProductSans-Regular.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,12 +22,11 @@
   }
 }
 
-.ag
-
 body {
+  @apply font-sans;
   color: var(--foreground);
   background: var(--background);
-  font-family: "product-sans", sans-serif;
+  font-family: Product Sans, sans-serif; /* Apply the custom font globally */
   margin: 0;
   padding: 0;
 }
