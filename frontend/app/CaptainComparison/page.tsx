@@ -97,7 +97,12 @@ function page() {
         <PlayerStats />
         <PlayerStats />
       </div>
-      <Button type="button" variant="contained" color="primary" className="mt-10">
+      <Button
+        type="button"
+        variant="contained"
+        color="primary"
+        className="mt-10"
+      >
         Save
       </Button>
     </div>

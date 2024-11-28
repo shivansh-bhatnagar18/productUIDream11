@@ -57,7 +57,7 @@ export default function Mainpage() {
 
   const handleCloseModal = () => {
     setShowModal(false);
-  }
+  };
 
   useEffect(() => {
     readCSVData().then((data) => {
@@ -107,11 +107,10 @@ export default function Mainpage() {
           variant="contained"
           color="secondary"
           className=""
-          onClick={() => window.location.href = '/AIComparison'}
+          onClick={() => (window.location.href = '/AIComparison')}
         >
           Next
         </Button>
-        
       </div>
     </div>
   );

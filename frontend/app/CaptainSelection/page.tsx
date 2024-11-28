@@ -16,6 +16,7 @@ import CaptainTable from '@/components/captainTable';
 import Header from '@/components/header';
 import Papa from 'papaparse';
 import { useEffect, useState } from 'react';
+import TypeOfPlayerModal from '@/components/typeOfPlayerModal';
 
 const readCSVData = (): Promise<any[]> => {
   return new Promise((resolve, reject) => {
@@ -93,36 +94,8 @@ function page() {
         {/* <PlayerTable /> */}
         <PlayerCard playerName="Rohit Sharma" rank={2} />
       </div>
-      <div className="bg-white bg-opacity-10 rounded-xl border-2 border-white p-10 flex flex-col items-center mt-24">
-        <p className="text-white text-2xl mb-10">
-          Here are our top 3 recommendations
-        </p>
-        <div className="flex gap-10">
-          <PlayerCard playerName="Virat Kohli" rank={1} />
-          <PlayerCard playerName="Rohit Sharma" rank={2} />
-          <PlayerCard playerName="Jasprit Bumrah" rank={3} />
-          <div />
-        </div>
-      </div>
-      <div className="flex flex-row justify-center mt-10">
-          <Button
-            type="button"
-            variant="contained"
-            color="primary"
-            className="my-10 mx-5"
-            onClick={() => {window.location.href = '/CaptainComparison';}}
-          >
-            Save
-          </Button>
-          <Button
-            type="button"
-            variant="contained"
-            color="secondary"
-            className="my-10 "
-          >
-            Custom
-          </Button>
-        </div>
+
+      <TypeOfPlayerModal />
     </div>
   );
 }

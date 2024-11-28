@@ -7,19 +7,19 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Image from 'next/image';
 const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '40%',
-    bgcolor: 'rgba(255, 255, 255, 0.3)',
-    borderRadius: '10px',
-    border: '2px solid #fff',
-    boxShadow: 24,
-    p: 4,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '40%',
+  bgcolor: 'rgba(255, 255, 255, 0.3)',
+  borderRadius: '10px',
+  border: '2px solid #fff',
+  boxShadow: 24,
+  p: 4,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
 };
 
 export default function BattingFirstModal() {
@@ -30,13 +30,13 @@ export default function BattingFirstModal() {
   return (
     <div>
       <Button
-          type="button"
-          variant="contained"
-          color="primary"
-          onClick={handleOpen}
-        >
-          AI Expert Team
-        </Button>
+        type="button"
+        variant="contained"
+        color="primary"
+        onClick={handleOpen}
+      >
+        AI Expert Team
+      </Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -53,25 +53,25 @@ export default function BattingFirstModal() {
         <Fade in={open}>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h2">
-            Which team do you think will be batting first? 
+              Which team do you think will be batting first?
             </Typography>
             <div className="h-[35%] rounded-xl flex gap-2 w-full mt-10">
-            <div className="bg-white bg-opacity-20 grow rounded-xl flex flex-col items-center py-2 ">
+              <div className="bg-white bg-opacity-20 grow rounded-xl flex flex-col items-center py-2 ">
                 <Image src="/india.svg" width={'72'} height={'72'} alt="/" />
-              <p className="text-white text-lg ml-2 mt-2">IND</p>
-              {/* <p className="text-white text-5xl font-bold ml-2">30</p> */}
-            </div>
-            <div className="bg-white bg-opacity-20 w-[35%] rounded-xl flex flex-col items-center py-2">
+                <p className="text-white text-lg ml-2 mt-2">IND</p>
+                {/* <p className="text-white text-5xl font-bold ml-2">30</p> */}
+              </div>
+              <div className="bg-white bg-opacity-20 w-[35%] rounded-xl flex flex-col items-center py-2">
                 <Image src="/SA.svg" width={'72'} height={'72'} alt="/" />
-              <p className="text-white text-lg ml-2 mt-2">SA</p>
-              {/* <p className="text-white text-5xl font-bold ml-2">30</p> */}
-            </div>
-            <div className="bg-white bg-opacity-20 w-[35%] rounded-xl flex flex-col items-center py-2">
+                <p className="text-white text-lg ml-2 mt-2">SA</p>
+                {/* <p className="text-white text-5xl font-bold ml-2">30</p> */}
+              </div>
+              <div className="bg-white bg-opacity-20 w-[35%] rounded-xl flex flex-col items-center py-2">
                 <Image src="/think.png" width={'72'} height={'72'} alt="/" />
-              <p className="text-white text-lg ml-2 mt-2">Can't Say</p>
-              {/* <p className="text-white text-5xl font-bold ml-2">30</p> */}
+                <p className="text-white text-lg ml-2 mt-2">Can't Say</p>
+                {/* <p className="text-white text-5xl font-bold ml-2">30</p> */}
+              </div>
             </div>
-          </div>
           </Box>
         </Fade>
       </Modal>
