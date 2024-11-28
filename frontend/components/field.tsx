@@ -6,11 +6,16 @@ import PlayerFormation from './playerFormation';
 
 interface PlayerProps {
   imageSrc: string;
-  number: number;
+  points: number;
   name: string;
+  key: number;
 }
 
-const Field: React.FC = ({ players }: { players: PlayerProps[] }) => {
+interface FieldProps {
+  players: PlayerProps[];
+}
+
+const Field: React.FC<FieldProps> = ({ players }) => {
   return (
     <Card
       className="bg-green-200 p-4 rounded-lg shadow-lg w-[50%]"
@@ -35,7 +40,7 @@ const Field: React.FC = ({ players }: { players: PlayerProps[] }) => {
       </Typography>
 
       <Box className="relative my-4 w-full h-44 rounded-md flex justify-center items-center bg-cover bg-center">
-        {/* <PlayerFormation players={players}/> */}
+        <PlayerFormation players={players}/>
       </Box>
 
       <Box className="flex space-x-2 justify-center items-center">

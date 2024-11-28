@@ -52,6 +52,7 @@ const readCSVImageData = (): Promise<any[]> => {
 
 export default function Mainpage() {
   const [rowData, setRowData] = useState<any[]>([]);
+  const [selectedRowData, setSelectedRowData] = useState<any[]>([]);
   const [countSelected, setCountSelected] = useState<number>(0);
   const [showModal, setShowModal] = useState<boolean>(false);
 
@@ -89,8 +90,8 @@ export default function Mainpage() {
         <LoadingBar count={countSelected} />
       </div>
       <div className="flex flex-row gap-4 m-10 w-[95%] grow">
-        <PlayerTable rowData={rowData} />
-        <Field />
+        <PlayerTable rowData={rowData} setSelectedRowData={setSelectedRowData} setCountSelected={setCountSelected}/>
+        <Field players={selectedRowData}/>
       </div>
       <div className="flex flex-row gap-4">
         <Button

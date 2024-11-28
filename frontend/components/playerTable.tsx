@@ -10,7 +10,13 @@ import { themeQuartz } from '@ag-grid-community/theming';
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
-const PlayerTable = ({ rowData = [] }: { rowData: any[] }) => {
+interface PlayerTableProps {
+  rowData: any[];
+  setSelectedRowData: React.Dispatch<React.SetStateAction<any[]>>;
+  setCountSelected: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const PlayerTable: React.FC<PlayerTableProps> = ({ rowData, setSelectedRowData, setCountSelected }) => {
   const myTheme = themeQuartz.withParams({
     accentColor: '#D22A29',
     backgroundColor: '#0D0402',
@@ -29,19 +35,25 @@ const PlayerTable = ({ rowData = [] }: { rowData: any[] }) => {
   useEffect(() => {
     const initialClickedState = rowData.reduce(
       (acc, row) => {
-        acc[row.key] = row.isSelected || false;
-        return acc;
+      acc[row.key] = row.isSelected || false;
+      return acc;
       },
       {} as { [key: number]: boolean }
     );
     setIsClicked(initialClickedState);
-  }, [rowData]);
+    // console.log(initialClickedState);
+  }, []);
 
   const handleButtonClick = (key: number) => {
     setIsClicked((prevState) => ({
       ...prevState,
       [key]: !prevState[key],
     }));
+    // console.log(isClicked);
+  const selectedRows = rowData.filter(row => isClicked[row.key]);
+  setSelectedRowData(selectedRows);
+  setCountSelected(selectedRows.length);
+  console.log(selectedRows);
   };
 
   // Define columnDefs directly inside the component

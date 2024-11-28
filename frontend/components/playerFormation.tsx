@@ -2,8 +2,9 @@ import PlayerComponent from './playerAvatar';
 
 interface PlayerProps {
   imageSrc: string;
-  number: number;
+  points: number;
   name: string;
+  key: number;
 }
 
 const PlayerFormation = ({ players }: { players: PlayerProps[] }) => {
