@@ -40,7 +40,7 @@ const Field: React.FC<FieldProps> = ({ players }) => {
       </Typography>
 
       <Box className="relative my-4 w-full h-44 rounded-md flex justify-center items-center bg-cover bg-center">
-        <PlayerFormation players={players}/>
+        <PlayerFormation players={players} />
       </Box>
 
       <Box className="flex space-x-2 justify-center items-center">

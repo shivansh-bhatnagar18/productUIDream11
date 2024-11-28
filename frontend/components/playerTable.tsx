@@ -16,7 +16,11 @@ interface PlayerTableProps {
   setCountSelected: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const PlayerTable: React.FC<PlayerTableProps> = ({ rowData, setSelectedRowData, setCountSelected }) => {
+const PlayerTable: React.FC<PlayerTableProps> = ({
+  rowData,
+  setSelectedRowData,
+  setCountSelected,
+}) => {
   const myTheme = themeQuartz.withParams({
     accentColor: '#D22A29',
     backgroundColor: '#0D0402',
@@ -35,8 +39,8 @@ const PlayerTable: React.FC<PlayerTableProps> = ({ rowData, setSelectedRowData, 
   useEffect(() => {
     const initialClickedState = rowData.reduce(
       (acc, row) => {
-      acc[row.key] = row.isSelected || false;
-      return acc;
+        acc[row.key] = row.isSelected || false;
+        return acc;
       },
       {} as { [key: number]: boolean }
     );
@@ -50,10 +54,10 @@ const PlayerTable: React.FC<PlayerTableProps> = ({ rowData, setSelectedRowData, 
       [key]: !prevState[key],
     }));
     // console.log(isClicked);
-  const selectedRows = rowData.filter(row => isClicked[row.key]);
-  setSelectedRowData(selectedRows);
-  setCountSelected(selectedRows.length);
-  console.log(selectedRows);
+    const selectedRows = rowData.filter((row) => isClicked[row.key]);
+    setSelectedRowData(selectedRows);
+    setCountSelected(selectedRows.length);
+    console.log(selectedRows);
   };
 
   // Define columnDefs directly inside the component
