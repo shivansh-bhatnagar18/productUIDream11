@@ -27,6 +27,7 @@ const Field: React.FC<FieldProps> = ({ players }) => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
+        alignItems: 'center',
       }}
     >
       <Typography
@@ -40,18 +41,18 @@ const Field: React.FC<FieldProps> = ({ players }) => {
         <span className="text-white font-sans">SuperSport Park, Centurion</span>
       </Typography>
 
-      <Box className="relative my-4 w-full h-44 rounded-md flex justify-center items-center bg-cover bg-center">
+      <Box className="relative my-4 w-96 h-96 rounded-md flex justify-center items-center bg-cover bg-center">
         <PlayerFormation players={players} />
       </Box>
 
-      <Box className="flex space-x-2 justify-center items-center">
+      <Box className="flex space-x-2 justify-center items-center w-full">
         <Box
           className="flex items-center p-2 rounded-md flex-row"
           justifyContent="space-between"
           style={{
             backgroundColor: 'rgb(88 172 108)',
             padding: '4px',
-            width: '20%',
+            width: '25%',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -87,7 +88,7 @@ const Field: React.FC<FieldProps> = ({ players }) => {
           style={{
             backgroundColor: 'rgb(88 172 108)',
             padding: '4.5px',
-            width: '20%',
+            width: '25%',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -124,7 +125,7 @@ const Field: React.FC<FieldProps> = ({ players }) => {
           style={{
             backgroundColor: 'rgb(88 172 108)',
             padding: '3px',
-            width: '20%',
+            width: '25%',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -160,7 +161,7 @@ const Field: React.FC<FieldProps> = ({ players }) => {
           style={{
             backgroundColor: 'rgb(88 172 108)',
             padding: '4px',
-            width: '20%',
+            width: '25%',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',

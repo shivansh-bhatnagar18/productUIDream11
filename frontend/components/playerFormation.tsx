@@ -14,7 +14,7 @@ const PlayerFormation = ({ players }: { players: PlayerProps[] }) => {
     console.log(players);
   });
   return (
-    <div className="flex flex-wrap justify-cente z-50 relative">
+    <div className="flex flex-wrap justify-center z-50 relative">
       <div className="w-[90%] flex justify-center">
         <PlayerComponent {...players[0]} />
       </div>
