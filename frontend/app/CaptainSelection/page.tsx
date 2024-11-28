@@ -80,7 +80,7 @@ function page() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center bg-[#0D0402] min-h-screen max-h-screen max-w-screen min-w-screen">
+    <div className="flex flex-col items-center bg-[#0D0402] min-h-screen max-w-screen min-w-screen">
       <Header />
       {/* team selection divs */}
       {/* <div className="max-w-[50%] min-w-[50%] mx-auto mt-8">
@@ -103,12 +103,14 @@ function page() {
           <PlayerCard playerName="Jasprit Bumrah" rank={3} />
           <div />
         </div>
-        <div className="flex flex-row justify-center mt-10">
+      </div>
+      <div className="flex flex-row justify-center mt-10">
           <Button
             type="button"
             variant="contained"
             color="primary"
-            className=""
+            className="my-10 mx-5"
+            onClick={() => {window.location.href = '/CaptainComparison';}}
           >
             Save
           </Button>
@@ -116,12 +118,11 @@ function page() {
             type="button"
             variant="contained"
             color="secondary"
-            className=""
+            className="my-10 "
           >
             Custom
           </Button>
         </div>
-      </div>
     </div>
   );
 }

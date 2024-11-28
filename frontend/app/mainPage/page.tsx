@@ -103,6 +103,7 @@ export default function Mainpage() {
           variant="contained"
           color="secondary"
           className=""
+          onClick={() => window.location.href = '/AIComparison'}
         >
           Next
         </Button>
