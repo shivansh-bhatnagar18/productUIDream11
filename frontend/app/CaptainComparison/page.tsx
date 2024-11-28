@@ -101,7 +101,7 @@ function page() {
         type="button"
         variant="contained"
         color="primary"
-        className="mt-10"
+        className="mt-10 bg-[#2CA74B]"
       >
         Save
       </Button>

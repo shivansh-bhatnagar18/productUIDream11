@@ -46,7 +46,7 @@ export default function TypeOfPlayerModal() {
           type="button"
           variant="contained"
           color="primary"
-          className="my-10 mx-5"
+          className="my-10 mx-5 bg-[#525E74]"
           onClick={() => {
             window.location.href = '/CaptainComparison';
           }}
@@ -57,7 +57,7 @@ export default function TypeOfPlayerModal() {
           type="button"
           variant="contained"
           color="primary"
-          className="my-10 mx-5"
+          className="my-10 mx-5 bg-[#F69C2C]"
           onClick={() => {
             handleOpen();
             setShowRecommendations(false);

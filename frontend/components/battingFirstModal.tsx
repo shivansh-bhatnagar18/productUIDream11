@@ -34,6 +34,7 @@ export default function BattingFirstModal() {
         variant="contained"
         color="primary"
         onClick={handleOpen}
+        className='bg-[#F64848]'
       >
         AI Expert Team
       </Button>

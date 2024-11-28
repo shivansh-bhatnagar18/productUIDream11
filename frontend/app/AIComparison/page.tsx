@@ -99,8 +99,7 @@ function page() {
       <Button
         type="button"
         variant="contained"
-        color="primary"
-        className="m-10"
+        className="m-10 bg-[#2CA74B]"
         onClick={() => {
           window.location.href = '/CaptainSelection';
         }}

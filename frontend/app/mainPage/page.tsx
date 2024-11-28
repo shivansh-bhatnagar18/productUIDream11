@@ -97,7 +97,7 @@ export default function Mainpage() {
           type="submit"
           variant="contained"
           color="secondary"
-          className=""
+          className="bg-[#525E74]"
         >
           Analyse My Pick
         </Button>
@@ -106,7 +106,7 @@ export default function Mainpage() {
           type="button"
           variant="contained"
           color="secondary"
-          className=""
+          className="bg-[#525E74]"
           onClick={() => (window.location.href = '/AIComparison')}
         >
           Next
