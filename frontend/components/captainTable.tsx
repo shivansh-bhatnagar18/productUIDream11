@@ -65,7 +65,7 @@ const CaptainTable = ({ rowData }: { rowData: any[] }) => {
           data={p.data}
           handleButtonClick={handleCButtonClick}
           isSelected={selectedCKey === p.data.key}
-          isDisabled={selectedCKey !== null && selectedCKey !== p.data.key}
+          isDisabled={selectedVCKey !== null && selectedVCKey === p.data.key}
         />
       ),
       flex: 1,
@@ -77,7 +77,7 @@ const CaptainTable = ({ rowData }: { rowData: any[] }) => {
           data={p.data}
           handleButtonClick={handleVCButtonClick}
           isSelected={selectedVCKey === p.data.key}
-          isDisabled={selectedVCKey !== null && selectedVCKey !== p.data.key}
+          isDisabled={selectedCKey !== null && selectedCKey === p.data.key}
         />
       ),
       flex: 1,
