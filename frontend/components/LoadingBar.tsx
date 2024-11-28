@@ -23,14 +23,14 @@ const LoadingBar: React.FC<LoadingBarProps> = ({ count }) => {
         <img
           key={index}
           src="/loadinggreen.svg"
-          alt="loading bar"
+          alt="loading bar green"
           className="w-[9%] h-auto max-w-[5rem]"
         />
       ))}
       {Array.from({ length: parallelogramCount }).map((_, index) => (
         <img
           key={index}
-          src="/loading.svg"
+          src="/loadingwhite.svg"
           alt="loading bar"
           className="w-[9%] h-auto max-w-[5rem]"
         />
