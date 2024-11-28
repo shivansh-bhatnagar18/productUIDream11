@@ -10,6 +10,7 @@ import Navbar from '@/components/navbar';
 import Header from '@/components/header';
 import Papa from 'papaparse';
 import { useEffect, useState } from 'react';
+import BattingFirstModal from '@/components/battingFirstModal';
 
 const readCSVData = (): Promise<any[]> => {
   return new Promise((resolve, reject) => {
@@ -52,6 +53,11 @@ const readCSVImageData = (): Promise<any[]> => {
 export default function Mainpage() {
   const [rowData, setRowData] = useState<any[]>([]);
   const [countSelected, setCountSelected] = useState<number>(0);
+  const [showModal, setShowModal] = useState<boolean>(false);
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  }
 
   useEffect(() => {
     readCSVData().then((data) => {
@@ -95,9 +101,7 @@ export default function Mainpage() {
         >
           Analyse My Pick
         </Button>
-        <Button type="button" variant="contained" color="primary" className="">
-          AI Expert Team
-        </Button>
+        <BattingFirstModal />
         <Button
           type="button"
           variant="contained"
@@ -107,6 +111,7 @@ export default function Mainpage() {
         >
           Next
         </Button>
+        
       </div>
     </div>
   );
