@@ -1,8 +1,16 @@
 'use client';
 import React from 'react';
 import { Box, Card, Typography } from '@mui/material';
+import PlayerComponent from './playerAvatar';
+import PlayerFormation from './playerFormation';
 
-const Field: React.FC = () => {
+interface PlayerProps {
+  imageSrc: string;
+  number: number;
+  name: string;
+}
+
+const Field: React.FC = ({ players }: { players: PlayerProps[] }) => {
   return (
     <Card
       className="bg-green-200 p-4 rounded-lg shadow-lg w-[50%]"
@@ -26,7 +34,9 @@ const Field: React.FC = () => {
         <span className="text-white font-sans">SuperSport Park, Centurion</span>
       </Typography>
 
-      <Box className="relative my-4 w-full h-44 rounded-md flex justify-center items-center bg-cover bg-center"></Box>
+      <Box className="relative my-4 w-full h-44 rounded-md flex justify-center items-center bg-cover bg-center">
+        {/* <PlayerFormation players={players}/> */}
+      </Box>
 
       <Box className="flex space-x-2 justify-center items-center">
         <Box

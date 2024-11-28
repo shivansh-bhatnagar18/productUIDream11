@@ -9,6 +9,9 @@ import {
   PieChart,
   Pie,
 } from 'recharts';
+import { PureComponent } from 'react';
+import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 
 const data01 = [
   {
@@ -52,7 +55,57 @@ const data = [
   },
 ];
 
+const databar = [
+  {
+    name: 'Page A',
+    uv: 4000,
+    pv: 2400,
+    amt: 2400,
+  },
+  {
+    name: 'Page B',
+    uv: 3000,
+    pv: 1398,
+    amt: 2210,
+  },
+  {
+    name: 'Page C',
+    uv: 2000,
+    pv: 9800,
+    amt: 2290,
+  },
+  {
+    name: 'Page D',
+    uv: 2780,
+    pv: 3908,
+    amt: 2000,
+  },
+  {
+    name: 'Page E',
+    uv: 1890,
+    pv: 4800,
+    amt: 2181,
+  },
+  {
+    name: 'Page F',
+    uv: 2390,
+    pv: 3800,
+    amt: 2500,
+  },
+  {
+    name: 'Page G',
+    uv: 3490,
+    pv: 4300,
+    amt: 2100,
+  },
+];
+
 const PlayerStats = () => {
+
+  const [alert, setAlert] = useState<string>('');
+  useEffect(() => {
+    setAlert('Player X scored a brilliant century, but met with an accident.\nPlayer X praised for his match-winning performance.\nPlayer X faces fitness concerns ahead of the next match.');
+  }, []);
   return (
     <div className="bg-white bg-opacity-10 rounded-xl border-2 border-white flex flex-col w-full">
       <div className=" w-auto h-[20%] mx-3 mt-3 rounded-xl flex gap-2">
@@ -116,18 +169,38 @@ const PlayerStats = () => {
                 cx="50%"
                 cy="50%"
                 outerRadius={50}
-                fill="#34C759"
+                fill="#36D25D"
               />
               {/* <Pie data={data02} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={60} outerRadius={80} fill="#82ca9d" label /> */}
             </PieChart>
           </div>
         </div>
         <div className="w-[70%] rounded-xl flex flex-col gap-2">
-          <div className="bg-white bg-opacity-20 h-[65%] rounded-xl flex gap-2">
+          <div className="bg-white bg-opacity-20 h-[65%] rounded-xl flex flex-col gap-2">
             <p className="text-white text-lg ml-2 mt-2">
               Performance Prediction
             </p>
-          </div>
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                width={500}
+                height={300}
+                data={databar}
+                margin={{
+                  top: 5,
+                  right: 30,
+                  left: 20,
+                  bottom: 5,
+                }}
+              >
+                <XAxis dataKey="name" stroke="white"/>
+                <YAxis stroke="white"/>
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="pv" fill="#67B402" activeBar={<Rectangle fill="pink" stroke="blue" />} />
+                <Bar dataKey="uv" fill="#367CEA" activeBar={<Rectangle fill="gold" stroke="purple" />} />
+              </BarChart>
+            </ResponsiveContainer>
+                </div>
           <div className="h-[35%] rounded-xl flex gap-2">
             <div className="bg-white bg-opacity-20 w-[35%] rounded-xl flex flex-col">
               <p className="text-white text-lg ml-2 mt-2">Ceil Fpts</p>
@@ -144,8 +217,12 @@ const PlayerStats = () => {
           </div>
         </div>
       </div>
-      <div className="bg-white bg-opacity-20 w-auto h-[30%] mb-3 mx-3 rounded-xl flex gap-2">
-        <p className="text-white text-lg ml-2 mt-2">Alerts</p>
+      <div className="bg-white bg-opacity-20 w-auto h-[30%] mb-3 mx-3 rounded-xl flex flex-col gap-2">
+        <div className='flex justify-between my-5'>
+          <div className="text-white text-lg ml-2 mt-2">Alerts</div>
+          <VolumeUpIcon className='mr-5'/>
+        </div>
+        <p className="text-white text-md ml-2">{alert}</p>
       </div>
     </div>
   );
