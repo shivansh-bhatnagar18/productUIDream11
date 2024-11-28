@@ -167,10 +167,10 @@ const PlayerStats = () => {
               endAngle={0}
             >
               <RadialBar
-                minAngle={15}
+                // minAngle={15}
                 label={{ fill: '#666', position: 'insideStart' }}
                 background
-                clockWise={true}
+                // clockWise={true}
                 dataKey="uv"
               />
               <Legend

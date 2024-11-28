@@ -1,13 +1,18 @@
+import { useEffect } from 'react';
 import PlayerComponent from './playerAvatar';
 
 interface PlayerProps {
   imageSrc: string;
+  isSelected: boolean;
   points: number;
   name: string;
   key: number;
 }
 
 const PlayerFormation = ({ players }: { players: PlayerProps[] }) => {
+  useEffect(() => {
+    console.log(players);
+  });
   return (
     <div className="flex flex-wrap justify-cente z-50 relative">
       <div className="w-[90%] flex justify-center">

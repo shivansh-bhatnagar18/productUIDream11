@@ -71,7 +71,7 @@ export default function Mainpage() {
             key: index,
             name: row['Predicted Player 1'],
             points: row['Predicted Player 1 Points'],
-            imgSrc: playerImage ? playerImage.image_path : '',
+            imageSrc: playerImage ? playerImage.image_path : '',
             isSelected: false,
           };
         });

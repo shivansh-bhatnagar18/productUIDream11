@@ -34,27 +34,9 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
     headerFontSize: 14,
   });
 
-  const [isClicked, setIsClicked] = useState<{ [key: number]: boolean }>({});
-
-  useEffect(() => {
-    const initialClickedState = rowData.reduce(
-      (acc, row) => {
-        acc[row.key] = row.isSelected || false;
-        return acc;
-      },
-      {} as { [key: number]: boolean }
-    );
-    setIsClicked(initialClickedState);
-    // console.log(initialClickedState);
-  }, []);
-
   const handleButtonClick = (key: number) => {
-    setIsClicked((prevState) => ({
-      ...prevState,
-      [key]: !prevState[key],
-    }));
-    // console.log(isClicked);
-    const selectedRows = rowData.filter((row) => isClicked[row.key]);
+    rowData[key].isSelected = !rowData[key].isSelected;
+    const selectedRows = rowData.filter((row) => row.isSelected);
     setSelectedRowData(selectedRows);
     setCountSelected(selectedRows.length);
     console.log(selectedRows);
@@ -69,7 +51,7 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
         return (
           <div className="flex gap-5">
             <img
-              src={params.data.imgSrc}
+              src={params.data.imageSrc}
               alt={params.data.name}
               className="w-8 h-8 rounded-full"
             />
@@ -107,7 +89,6 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
           <ButtonRenderer
             data={params.data}
             handleButtonClick={handleButtonClick}
-            isClicked={isClicked}
           />
         );
       },
@@ -134,8 +115,8 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
 };
 
 const ButtonRenderer = (props: any) => {
-  const { data, handleButtonClick, isClicked } = props;
-  const clicked = isClicked[data.key] || false;
+  const { data, handleButtonClick } = props;
+  const clicked = data.isSelected;
 
   return (
     <button

@@ -49,7 +49,7 @@ const CaptainTable = ({ rowData }: { rowData: any[] }) => {
       cellRenderer: (p: any) => (
         <div className="flex gap-5">
           <img
-            src={p.data.imgSrc}
+            src={p.data.imageSrc}
             alt={p.data.name}
             className="w-8 h-8 rounded-full"
           />

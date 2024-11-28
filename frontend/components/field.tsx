@@ -9,6 +9,7 @@ interface PlayerProps {
   points: number;
   name: string;
   key: number;
+  isSelected: boolean;
 }
 
 interface FieldProps {
