@@ -10,7 +10,15 @@ import {
   Pie,
 } from 'recharts';
 import { PureComponent } from 'react';
-import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
+import {
+  BarChart,
+  Bar,
+  Rectangle,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  ResponsiveContainer,
+} from 'recharts';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 
 const data01 = [
@@ -101,11 +109,28 @@ const databar = [
 ];
 
 const PlayerStats = () => {
-
   const [alert, setAlert] = useState<string>('');
+
   useEffect(() => {
-    setAlert('Player X scored a brilliant century, but met with an accident.\nPlayer X praised for his match-winning performance.\nPlayer X faces fitness concerns ahead of the next match.');
+    setAlert(
+      'Player X scored a brilliant century, but met with an accident.\nPlayer X praised for his match-winning performance.\nPlayer X faces fitness concerns ahead of the next match.'
+    );
   }, []);
+
+  const handleSpeakerClick = () => {
+    if (!alert) {
+      return;
+    }
+
+    const synth = window.speechSynthesis;
+    const utterThis = new SpeechSynthesisUtterance(alert);
+    utterThis.rate = 1.5;
+    utterThis.pitch = 1;
+    utterThis.lang = 'en-US';
+
+    synth.speak(utterThis);
+  };
+
   return (
     <div className="bg-white bg-opacity-10 rounded-xl border-2 border-white flex flex-col w-full">
       <div className=" w-auto h-[20%] mx-3 mt-3 rounded-xl flex gap-2">
@@ -192,15 +217,23 @@ const PlayerStats = () => {
                   bottom: 5,
                 }}
               >
-                <XAxis dataKey="name" stroke="white"/>
-                <YAxis stroke="white"/>
+                <XAxis dataKey="name" stroke="white" />
+                <YAxis stroke="white" />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="pv" fill="#67B402" activeBar={<Rectangle fill="pink" stroke="blue" />} />
-                <Bar dataKey="uv" fill="#367CEA" activeBar={<Rectangle fill="gold" stroke="purple" />} />
+                <Bar
+                  dataKey="pv"
+                  fill="#67B402"
+                  activeBar={<Rectangle fill="pink" stroke="blue" />}
+                />
+                <Bar
+                  dataKey="uv"
+                  fill="#367CEA"
+                  activeBar={<Rectangle fill="gold" stroke="purple" />}
+                />
               </BarChart>
             </ResponsiveContainer>
-                </div>
+          </div>
           <div className="h-[35%] rounded-xl flex gap-2">
             <div className="bg-white bg-opacity-20 w-[35%] rounded-xl flex flex-col">
               <p className="text-white text-lg ml-2 mt-2">Ceil Fpts</p>
@@ -218,9 +251,9 @@ const PlayerStats = () => {
         </div>
       </div>
       <div className="bg-white bg-opacity-20 w-auto h-[30%] mb-3 mx-3 rounded-xl flex flex-col gap-2">
-        <div className='flex justify-between my-5'>
+        <div className="flex justify-between my-5">
           <div className="text-white text-lg ml-2 mt-2">Alerts</div>
-          <VolumeUpIcon className='mr-5'/>
+          <VolumeUpIcon className="mr-5" onClick={handleSpeakerClick} />
         </div>
         <p className="text-white text-md ml-2">{alert}</p>
       </div>

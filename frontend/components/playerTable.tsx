@@ -1,10 +1,6 @@
 'use client';
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
-import {
-  ColDef,
-  ColGroupDef,
-  ModuleRegistry,
-} from '@ag-grid-community/core';
+import { ColDef, ColGroupDef, ModuleRegistry } from '@ag-grid-community/core';
 import { AgGridReact } from '@ag-grid-community/react';
 import React, { useEffect, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
@@ -31,10 +27,13 @@ const PlayerTable = ({ rowData = [] }: { rowData: any[] }) => {
   const [isClicked, setIsClicked] = useState<{ [key: number]: boolean }>({});
 
   useEffect(() => {
-    const initialClickedState = rowData.reduce((acc, row) => {
-      acc[row.key] = row.isSelected || false;
-      return acc;
-    }, {} as { [key: number]: boolean });
+    const initialClickedState = rowData.reduce(
+      (acc, row) => {
+        acc[row.key] = row.isSelected || false;
+        return acc;
+      },
+      {} as { [key: number]: boolean }
+    );
     setIsClicked(initialClickedState);
   }, [rowData]);
 
@@ -126,7 +125,9 @@ const ButtonRenderer = (props: any) => {
     <button
       onClick={() => handleButtonClick(data.key)}
       className={`w-6 h-6 flex items-center justify-center rounded-full text-white transition-colors ${
-        clicked ?'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600' 
+        clicked
+          ? 'bg-red-500 hover:bg-red-600'
+          : 'bg-green-500 hover:bg-green-600'
       }`}
     >
       {clicked ? '-' : '+'}

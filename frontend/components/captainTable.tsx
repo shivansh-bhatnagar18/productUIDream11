@@ -109,7 +109,9 @@ const CButtonRenderer = (props: any) => {
     <button
       onClick={() => handleButtonClick(data.key)}
       className={`w-6 h-6 flex items-center justify-center rounded-full text-black transition-colors ${
-        isSelected ? 'bg-green-500 hover:bg-green-600 text-white' : 'bg-white hover:bg-gray-300 text-black'
+        isSelected
+          ? 'bg-green-500 hover:bg-green-600 text-white'
+          : 'bg-white hover:bg-gray-300 text-black'
       }`}
       disabled={isDisabled}
     >
@@ -125,7 +127,9 @@ const VCButtonRenderer = (props: any) => {
     <button
       onClick={() => handleButtonClick(data.key)}
       className={`w-6 h-6 flex items-center justify-center rounded-full  transition-colors ${
-        isSelected ? 'bg-green-500 hover:bg-green-600 text-white' : 'bg-white hover:bg-gray-300 text-black'
+        isSelected
+          ? 'bg-green-500 hover:bg-green-600 text-white'
+          : 'bg-white hover:bg-gray-300 text-black'
       }`}
       disabled={isDisabled}
     >
