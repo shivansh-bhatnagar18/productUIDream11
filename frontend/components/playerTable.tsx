@@ -4,11 +4,9 @@ import {
   ColDef,
   ColGroupDef,
   ModuleRegistry,
-  ValueGetterParams,
 } from '@ag-grid-community/core';
 import { AgGridReact } from '@ag-grid-community/react';
-import React, { StrictMode, useEffect, useState } from 'react';
-import Papa from 'papaparse';
+import React, { useEffect, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import 'ag-grid-enterprise';
@@ -16,7 +14,7 @@ import { themeQuartz } from '@ag-grid-community/theming';
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
-const PlayerTable = ({ rowData }: { rowData: any[] }) => {
+const PlayerTable = ({ rowData = [] }: { rowData: any[] }) => {
   const myTheme = themeQuartz.withParams({
     accentColor: '#D22A29',
     backgroundColor: '#0D0402',
@@ -30,6 +28,16 @@ const PlayerTable = ({ rowData }: { rowData: any[] }) => {
     headerFontSize: 14,
   });
 
+  const [isClicked, setIsClicked] = useState<{ [key: number]: boolean }>({});
+
+  useEffect(() => {
+    const initialClickedState = rowData.reduce((acc, row) => {
+      acc[row.key] = row.isSelected || false;
+      return acc;
+    }, {} as { [key: number]: boolean });
+    setIsClicked(initialClickedState);
+  }, [rowData]);
+
   const handleButtonClick = (key: number) => {
     setIsClicked((prevState) => ({
       ...prevState,
@@ -37,65 +45,67 @@ const PlayerTable = ({ rowData }: { rowData: any[] }) => {
     }));
   };
 
-  const [isClicked, setIsClicked] = useState<{ [key: number]: boolean }>({});
-  const [columnDefs, setColumnDefs] = useState<
-    (ColDef<any, any> | ColGroupDef<any>)[]
-  >([
+  // Define columnDefs directly inside the component
+  const columnDefs: (ColDef<any, any> | ColGroupDef<any>)[] = [
     {
       headerName: 'Name',
-      cellRenderer: (p: any) => (
-        <div className="flex gap-5">
-          <img
-            src={p.data.imgSrc}
-            alt={p.data.name}
-            className="w-8 h-8 rounded-full"
-          />
-          <p>{p.data.name}</p>
-        </div>
-      ),
+      cellRenderer: (params: any) => {
+        if (!params.data) return null;
+        return (
+          <div className="flex gap-5">
+            <img
+              src={params.data.imgSrc}
+              alt={params.data.name}
+              className="w-8 h-8 rounded-full"
+            />
+            <p>{params.data.name}</p>
+          </div>
+        );
+      },
       flex: 2,
     },
-    { field: 'Points', valueFormatter: (p: any) => p.data.points, flex: 1 },
+    {
+      field: 'Points',
+      valueFormatter: (params: any) => {
+        if (!params.data) return '';
+        return params.data.points;
+      },
+      flex: 1,
+    },
     {
       field: 'Lock/Exclude',
-      cellRenderer: () => (
-        <div>
-          <CloseIcon />
-          <LockOpenIcon />
-        </div>
-      ),
+      cellRenderer: (params: any) => {
+        if (!params.data) return null;
+        return (
+          <div>
+            <CloseIcon />
+            <LockOpenIcon />
+          </div>
+        );
+      },
       flex: 1,
     },
     {
-      cellRenderer: (p: any) => (
-        <button
-          onClick={() => handleButtonClick(p.data.key)}
-          className={`w-6 h-6 flex items-center justify-center rounded-full text-white transition-colors ${
-            isClicked[p.data.key]
-              ? `bg-green-500 hover:bg-green-600`
-              : `bg-red-500 hover:bg-red-600`
-          }`}
-        >
-          {isClicked[p.data.key] ? '+' : '−'}
-        </button>
-      ),
+      cellRenderer: (params: any) => {
+        if (!params.data) return null;
+        return (
+          <ButtonRenderer
+            data={params.data}
+            handleButtonClick={handleButtonClick}
+            isClicked={isClicked}
+          />
+        );
+      },
       flex: 1,
     },
-  ]);
+  ];
 
-  useEffect(() => {
-    const updatedClickedState = rowData.reduce(
-      (acc, row) => ({
-        ...acc,
-        [row.key]: row.isSelected || false,
-      }),
-      {} as { [key: number]: boolean }
-    );
-    setIsClicked(updatedClickedState);
-  }, [rowData]);
+  // Check if rowData is valid before rendering the grid
+  if (!rowData || rowData.length === 0) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    // wrapping container with theme & size
     <div className="w-full">
       <div style={{ width: '100%', height: '100%' }}>
         <AgGridReact
@@ -105,6 +115,22 @@ const PlayerTable = ({ rowData }: { rowData: any[] }) => {
         />
       </div>
     </div>
+  );
+};
+
+const ButtonRenderer = (props: any) => {
+  const { data, handleButtonClick, isClicked } = props;
+  const clicked = isClicked[data.key] || false;
+
+  return (
+    <button
+      onClick={() => handleButtonClick(data.key)}
+      className={`w-6 h-6 flex items-center justify-center rounded-full text-white transition-colors ${
+        clicked ?'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600' 
+      }`}
+    >
+      {clicked ? '-' : '+'}
+    </button>
   );
 };
 

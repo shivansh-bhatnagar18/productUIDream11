@@ -32,38 +32,18 @@ const CaptainTable = ({ rowData }: { rowData: any[] }) => {
     headerFontSize: 14,
   });
 
-  const [isCClicked, setIsCClicked] = useState<{ [key: number]: boolean }>({});
-  const [isVCClicked, setIsVCClicked] = useState<{ [key: number]: boolean }>(
-    {}
-  );
+  const [selectedCKey, setSelectedCKey] = useState<number | null>(null);
+  const [selectedVCKey, setSelectedVCKey] = useState<number | null>(null);
 
-  const handleCButtonClick = (clickedKey: number) => {
-    const updatedClickedState = Object.keys(isCClicked).reduce(
-      (acc, key) => {
-        acc[Number(key)] = Number(key) === clickedKey;
-        return acc;
-      },
-      {} as { [key: number]: boolean }
-    );
-
-    setIsCClicked(updatedClickedState);
+  const handleCButtonClick = (key: number) => {
+    setSelectedCKey((prevKey) => (prevKey === key ? null : key));
   };
 
-  const handleVCButtonClick = (clickedKey: number) => {
-    const updatedClickedState = Object.keys(isCClicked).reduce(
-      (acc, key) => {
-        acc[Number(key)] = Number(key) === clickedKey;
-        return acc;
-      },
-      {} as { [key: number]: boolean }
-    );
-
-    setIsVCClicked(updatedClickedState);
+  const handleVCButtonClick = (key: number) => {
+    setSelectedVCKey((prevKey) => (prevKey === key ? null : key));
   };
 
-  const [columnDefs, setColumnDefs] = useState<
-    (ColDef<any, any> | ColGroupDef<any>)[]
-  >([
+  const columnDefs: (ColDef<any, any> | ColGroupDef<any>)[] = [
     {
       headerName: 'Selected By',
       cellRenderer: (p: any) => (
@@ -81,37 +61,37 @@ const CaptainTable = ({ rowData }: { rowData: any[] }) => {
     {
       field: '%C By',
       cellRenderer: (p: any) => (
-        <button
-          onClick={() => handleCButtonClick(p.data.key)}
-          className={`w-6 h-6 flex items-center justify-center rounded-full text-black border border-gray-300 ${isCClicked[p.data.key] ? 'bg-green-500' : 'bg-white'}`}
-        >
-          C
-        </button>
+        <CButtonRenderer
+          data={p.data}
+          handleButtonClick={handleCButtonClick}
+          isSelected={selectedCKey === p.data.key}
+          isDisabled={selectedCKey !== null && selectedCKey !== p.data.key}
+        />
       ),
       flex: 1,
     },
     {
       field: '%VC By',
       cellRenderer: (p: any) => (
-        <button
-          onClick={() => handleVCButtonClick(p.data.key)}
-          className={`w-6 h-6 flex items-center justify-center rounded-full text-black border border-gray-300 ${isCClicked[p.data.key] ? 'bg-green-500' : 'bg-white'}`}
-        >
-          VC
-        </button>
+        <VCButtonRenderer
+          data={p.data}
+          handleButtonClick={handleVCButtonClick}
+          isSelected={selectedVCKey === p.data.key}
+          isDisabled={selectedVCKey !== null && selectedVCKey !== p.data.key}
+        />
       ),
       flex: 1,
     },
-  ]);
+  ];
+
+  if (!rowData || rowData.length === 0) {
+    return <div>Loading...</div>;
+  }
+
   return (
     // wrapping container with theme & size
     <div className="w-full">
-      <div
-        style={{ width: '100%', height: '100%' }}
-        // className={
-        //     "ag-theme-quartz-dark"
-        // }
-      >
+      <div style={{ width: '100%', height: '100%' }}>
         <AgGridReact
           rowData={rowData}
           columnDefs={columnDefs}
@@ -119,6 +99,38 @@ const CaptainTable = ({ rowData }: { rowData: any[] }) => {
         />
       </div>
     </div>
+  );
+};
+
+const CButtonRenderer = (props: any) => {
+  const { data, handleButtonClick, isSelected, isDisabled } = props;
+
+  return (
+    <button
+      onClick={() => handleButtonClick(data.key)}
+      className={`w-6 h-6 flex items-center justify-center rounded-full text-black transition-colors ${
+        isSelected ? 'bg-green-500 hover:bg-green-600 text-white' : 'bg-white hover:bg-gray-300 text-black'
+      }`}
+      disabled={isDisabled}
+    >
+      C
+    </button>
+  );
+};
+
+const VCButtonRenderer = (props: any) => {
+  const { data, handleButtonClick, isSelected, isDisabled } = props;
+
+  return (
+    <button
+      onClick={() => handleButtonClick(data.key)}
+      className={`w-6 h-6 flex items-center justify-center rounded-full  transition-colors ${
+        isSelected ? 'bg-green-500 hover:bg-green-600 text-white' : 'bg-white hover:bg-gray-300 text-black'
+      }`}
+      disabled={isDisabled}
+    >
+      VC
+    </button>
   );
 };
 
