@@ -69,7 +69,7 @@ function page() {
             key: index,
             name: row['Predicted Player 1'],
             points: row['Predicted Player 1 Points'],
-            imgSrc: playerImage ? playerImage.image_path : '',
+            imageSrc: playerImage ? playerImage.image_path : '',
             isSelected: false,
           };
         });
@@ -99,8 +99,7 @@ function page() {
       <Button
         type="button"
         variant="contained"
-        color="primary"
-        className="m-10"
+        className="m-10 bg-[#2CA74B]"
         onClick={() => {
           window.location.href = '/CaptainSelection';
         }}

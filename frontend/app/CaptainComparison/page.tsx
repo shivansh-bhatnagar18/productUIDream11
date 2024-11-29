@@ -70,7 +70,7 @@ function page() {
             key: index,
             name: row['Predicted Player 1'],
             points: row['Predicted Player 1 Points'],
-            imgSrc: playerImage ? playerImage.image_path : '',
+            imageSrc: playerImage ? playerImage.image_path : '',
             isCSelected: false,
             isVCSelected: false,
           };
@@ -101,7 +101,7 @@ function page() {
         type="button"
         variant="contained"
         color="primary"
-        className="mt-10"
+        className="mt-10 bg-[#2CA74B]"
       >
         Save
       </Button>

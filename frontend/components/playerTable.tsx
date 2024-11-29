@@ -1,10 +1,6 @@
 'use client';
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
-import {
-  ColDef,
-  ColGroupDef,
-  ModuleRegistry,
-} from '@ag-grid-community/core';
+import { ColDef, ColGroupDef, ModuleRegistry } from '@ag-grid-community/core';
 import { AgGridReact } from '@ag-grid-community/react';
 import React, { useEffect, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
@@ -14,7 +10,17 @@ import { themeQuartz } from '@ag-grid-community/theming';
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
-const PlayerTable = ({ rowData = [] }: { rowData: any[] }) => {
+interface PlayerTableProps {
+  rowData: any[];
+  setSelectedRowData: React.Dispatch<React.SetStateAction<any[]>>;
+  setCountSelected: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const PlayerTable: React.FC<PlayerTableProps> = ({
+  rowData,
+  setSelectedRowData,
+  setCountSelected,
+}) => {
   const myTheme = themeQuartz.withParams({
     accentColor: '#D22A29',
     backgroundColor: '#0D0402',
@@ -28,21 +34,12 @@ const PlayerTable = ({ rowData = [] }: { rowData: any[] }) => {
     headerFontSize: 14,
   });
 
-  const [isClicked, setIsClicked] = useState<{ [key: number]: boolean }>({});
-
-  useEffect(() => {
-    const initialClickedState = rowData.reduce((acc, row) => {
-      acc[row.key] = row.isSelected || false;
-      return acc;
-    }, {} as { [key: number]: boolean });
-    setIsClicked(initialClickedState);
-  }, [rowData]);
-
   const handleButtonClick = (key: number) => {
-    setIsClicked((prevState) => ({
-      ...prevState,
-      [key]: !prevState[key],
-    }));
+    rowData[key].isSelected = !rowData[key].isSelected;
+    const selectedRows = rowData.filter((row) => row.isSelected);
+    setSelectedRowData(selectedRows);
+    setCountSelected(selectedRows.length);
+    console.log(selectedRows);
   };
 
   // Define columnDefs directly inside the component
@@ -54,7 +51,7 @@ const PlayerTable = ({ rowData = [] }: { rowData: any[] }) => {
         return (
           <div className="flex gap-5">
             <img
-              src={params.data.imgSrc}
+              src={params.data.imageSrc}
               alt={params.data.name}
               className="w-8 h-8 rounded-full"
             />
@@ -92,7 +89,6 @@ const PlayerTable = ({ rowData = [] }: { rowData: any[] }) => {
           <ButtonRenderer
             data={params.data}
             handleButtonClick={handleButtonClick}
-            isClicked={isClicked}
           />
         );
       },
@@ -119,14 +115,16 @@ const PlayerTable = ({ rowData = [] }: { rowData: any[] }) => {
 };
 
 const ButtonRenderer = (props: any) => {
-  const { data, handleButtonClick, isClicked } = props;
-  const clicked = isClicked[data.key] || false;
+  const { data, handleButtonClick } = props;
+  const clicked = data.isSelected;
 
   return (
     <button
       onClick={() => handleButtonClick(data.key)}
       className={`w-6 h-6 flex items-center justify-center rounded-full text-white transition-colors ${
-        clicked ?'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600' 
+        clicked
+          ? 'bg-red-500 hover:bg-red-600'
+          : 'bg-green-500 hover:bg-green-600'
       }`}
     >
       {clicked ? '-' : '+'}

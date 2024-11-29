@@ -85,8 +85,12 @@ const data = [
 
 const PlayerCard = ({ playerName, rank }: PlayerCardProps) => {
   const [playerPosition, setPlayerPosition] = useState('Unknown Position');
-  const [playerBattingStyle, setPlayerBattingStyle] = useState('Unknown Batting Style');
-  const [playerBowlingStyle, setPlayerBowlingStyle] = useState('Unknown Bowling Style');
+  const [playerBattingStyle, setPlayerBattingStyle] = useState(
+    'Unknown Batting Style'
+  );
+  const [playerBowlingStyle, setPlayerBowlingStyle] = useState(
+    'Unknown Bowling Style'
+  );
   const [playerImgSrc, setPlayerImgSrc] = useState('/default-image-path.jpg');
   const [playerCountry, setPlayerCountry] = useState('Unknown Country');
 
