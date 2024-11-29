@@ -14,7 +14,7 @@ import BattingFirstModal from '@/components/battingFirstModal';
 
 const readCSVData = (): Promise<any[]> => {
   return new Promise((resolve, reject) => {
-    fetch('/data.csv')
+    fetch('/file_1.csv')
       .then((response) => response.text())
       .then((data) => {
         Papa.parse(data, {
@@ -67,28 +67,45 @@ export default function Page() {
   };
 
   useEffect(() => {
-    readCSVData().then((data) => {
-      readCSVImageData().then((imageData) => {
-        const playerData = data.map((row: any, index: number) => {
-          const playerImage = imageData.find(
-            (img) => img.Name === row['Predicted Player 1']
-          );
-          return {
-            key: index,
-            name: row['Predicted Player 1'],
-            points: row['Predicted Player 1 Points'],
-            imageSrc: playerImage ? playerImage.image_path : '',
-            isSelected: false,
-            isCaptain: false,
-            isViceCaptain: false,
-            toCompare: false,
-          };
+    const playerDat = JSON.parse(localStorage.getItem('rowData') || '[]');
+    setRowData(playerDat);
+    const selectedPlayerData = JSON.parse(
+      localStorage.getItem('selectedRowData') || '[]'
+    );
+    setSelectedRowData(selectedPlayerData);
+    const count = playerDat.filter((player: any) => player.isSelected).length;
+    setCountSelected(count);
+    if (count === 0) {
+      readCSVData().then((data) => {
+        readCSVImageData().then((imageData) => {
+          const playerData = data.map((row: any, index: number) => {
+            const playerImage = imageData.find(
+              (img) => img.Name === row['player']
+            );
+            return {
+              key: index,
+              name: row['player'],
+              imageSrc: playerImage ? playerImage.image_path : '',
+              isSelected: false,
+              isCaptain: false,
+              isViceCaptain: false,
+              toCompare: false,
+              values: (() => {
+                try {
+                  const fixedJSONString = row['values'].replace(/'/g, '"');
+                  return JSON.parse(fixedJSONString);
+                } catch (e) {
+                  console.error('Error parsing JSON:', e);
+                  return {};
+                }
+              })(),
+            };
+          });
+          setRowData(playerData);
         });
-        setRowData(playerData);
-        const count = playerData.filter((player) => player.isSelected).length;
-        setCountSelected(count);
       });
-    });
+      setCountSelected(0);
+    }
   }, []);
 
   return (
@@ -122,7 +139,12 @@ export default function Page() {
         >
           Analyse My Pick
         </Button>
-        <BattingFirstModal />
+        <BattingFirstModal
+          rowData={rowData}
+          setRowData={setRowData}
+          setSelectedRowData={setSelectedRowData}
+          setCountSelected={setCountSelected}
+        />
         <Button
           type="button"
           variant="contained"

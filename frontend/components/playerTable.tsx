@@ -59,11 +59,17 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
   });
 
   const handleButtonClick = (key: number) => {
-    rowData[key].isSelected = !rowData[key].isSelected;
-    setRowData([...rowData]);
     const selectedRows = rowData.filter((row) => row.isSelected);
-    setSelectedRowData(selectedRows);
-    setCountSelected(selectedRows.length);
+    if (selectedRows.length < 11 || rowData[key].isSelected) {
+      rowData[key].isSelected = !rowData[key].isSelected;
+      setRowData([...rowData]);
+      const updatedSelectedRows = rowData.filter((row) => row.isSelected);
+      setSelectedRowData(updatedSelectedRows);
+      setCountSelected(updatedSelectedRows.length);
+    }
+    const selectedRowsFinal = rowData.filter((row) => row.isSelected);
+    localStorage.setItem('rowData', JSON.stringify(rowData));
+    localStorage.setItem('selectedRowData', JSON.stringify(selectedRowsFinal));
   };
 
   // Define columnDefs directly inside the component
@@ -97,7 +103,7 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
       field: 'Points',
       valueFormatter: (params: any) => {
         if (!params.data) return '';
-        return params.data.points;
+        return Math.round(params.data.values.score).toString();
       },
       flex: 1,
     },
