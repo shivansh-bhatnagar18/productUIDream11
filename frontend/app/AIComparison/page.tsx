@@ -81,7 +81,7 @@ function page() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center bg-[#0D0402] min-h-screen max-w-screen min-w-screen">
+    <div className="flex flex-col items-center bg-gradient-to-tr  from-black via-[#1A0000] to-[#250000]  min-h-screen max-w-screen min-w-screen">
       <Header />
       {/* team selection divs */}
       <div className="max-w-[50%] min-w-[50%] mx-auto mt-8">
@@ -92,9 +92,9 @@ function page() {
         <PlayerTable rowData={rowData} />
         <PlayerCard playerName="Rohit Sharma" rank={2} />
       </div>
-      <div className="flex w-[95%] mt-10 gap-5">
-        <PlayerStats />
-        <PlayerStats />
+      <div className="flex w-[95%] mt-10">
+        <PlayerStats classname ='rounded-l-2xl border-x-2' />
+        <PlayerStats classname ='rounded-r-2xl border-r-2'/>
       </div>
       <Button
         type="button"
