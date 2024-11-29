@@ -14,9 +14,15 @@ interface PlayerProps {
 
 interface FieldProps {
   players: PlayerProps[];
+  rowData: any[];
+  setCountSelected?: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const Field: React.FC<FieldProps> = ({ players }) => {
+const Field: React.FC<FieldProps> = ({
+  players,
+  rowData,
+  setCountSelected,
+}) => {
   return (
     <Card
       className="bg-green-200 p-4 rounded-lg shadow-lg w-[50%]"
@@ -42,7 +48,11 @@ const Field: React.FC<FieldProps> = ({ players }) => {
       </Typography>
 
       <Box className="relative my-4 w-96 h-96 rounded-md flex justify-center items-center bg-cover bg-center">
-        <PlayerFormation players={players} />
+        <PlayerFormation
+          players={players}
+          rowData={rowData}
+          setCountSelected={setCountSelected}
+        />
       </Box>
 
       <Box className="flex space-x-2 justify-center items-center w-full">

@@ -7,14 +7,35 @@ import CloseIcon from '@mui/icons-material/Close';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import 'ag-grid-enterprise';
 import { themeQuartz } from '@ag-grid-community/theming';
+import Papa from 'papaparse';
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
+
+const readCSVImageData = (): Promise<any[]> => {
+  return new Promise((resolve, reject) => {
+    fetch('/names.csv')
+      .then((response) => response.text())
+      .then((data) => {
+        Papa.parse(data, {
+          header: true,
+          complete: (results: Papa.ParseResult<any>) => {
+            resolve(results.data);
+          },
+          error: (error: any) => {
+            reject(error);
+          },
+        });
+      })
+      .catch((error) => reject(error));
+  });
+};
 
 interface PlayerTableProps {
   rowData: any[];
   setSelectedRowData: React.Dispatch<React.SetStateAction<any[]>>;
   setCountSelected: React.Dispatch<React.SetStateAction<number>>;
   setRowData: React.Dispatch<React.SetStateAction<any[]>>;
+  setToComparePlayer: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const PlayerTable: React.FC<PlayerTableProps> = ({
@@ -22,6 +43,7 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
   setRowData,
   setSelectedRowData,
   setCountSelected,
+  setToComparePlayer,
 }) => {
   const myTheme = themeQuartz.withParams({
     accentColor: '#D22A29',
@@ -51,7 +73,15 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
       cellRenderer: (params: any) => {
         if (!params.data) return null;
         return (
-          <div className="flex gap-5">
+          <div
+            className="flex gap-5"
+            onClick={() => {
+              rowData.forEach((row, index) => {
+                row.toCompare = index === params.node.rowIndex;
+              });
+              setToComparePlayer(params.data.name);
+            }}
+          >
             <img
               src={params.data.imageSrc}
               alt={params.data.name}
@@ -88,7 +118,7 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
       cellRenderer: (params: any) => {
         if (!params.data) return null;
         return (
-          <ButtonRenderer
+          <ButtonRendererAdd
             data={params.data}
             handleButtonClick={handleButtonClick}
           />
@@ -116,7 +146,7 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
   );
 };
 
-const ButtonRenderer = (props: any) => {
+const ButtonRendererAdd = (props: any) => {
   const { data, handleButtonClick } = props;
   const clicked = data.isSelected;
 

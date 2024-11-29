@@ -15,6 +15,7 @@ import PlayerStats from '@/components/playerStats';
 import Header from '@/components/header';
 import Papa from 'papaparse';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 const readCSVData = (): Promise<any[]> => {
   return new Promise((resolve, reject) => {
@@ -54,10 +55,13 @@ const readCSVImageData = (): Promise<any[]> => {
   });
 };
 
-function page() {
+function Page() {
+  const searchParams = useSearchParams();
+  const name = searchParams.get('name');
   const [rowData, setRowData] = useState<any[]>([]);
   const [countSelected, setCountSelected] = useState<number>(0);
   const [selectedPlayers, setSelectedPlayers] = useState<any[]>([]);
+  const [toComparePlayer, setToComparePlayer] = useState<string>(name || '');
 
   useEffect(() => {
     const playerData = JSON.parse(localStorage.getItem('rowData') || '[]');
@@ -74,14 +78,18 @@ function page() {
         <LoadingBar count={countSelected} />
       </div>
       <div className="flex w-[95%] mt-10 gap-5">
-        <PlayerCard playerName="Virat Kohli" rank={1} />
+        <PlayerCard
+          playerName={Array.isArray(name) ? name[0] : name || ''}
+          rank={1}
+        />
         <PlayerTable
           rowData={rowData}
           setSelectedRowData={setSelectedPlayers}
           setCountSelected={setCountSelected}
           setRowData={setRowData}
+          setToComparePlayer={setToComparePlayer}
         />
-        <PlayerCard playerName="Rohit Sharma" rank={2} />
+        <PlayerCard playerName={toComparePlayer} rank={2} />
       </div>
       <div className="flex w-[95%] mt-10">
         <PlayerStats classname="rounded-l-2xl border-x-2" />
@@ -101,4 +109,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

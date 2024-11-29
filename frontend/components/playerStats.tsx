@@ -127,9 +127,9 @@ const PlayerStats = (props: any) => {
 
     const synth = window.speechSynthesis;
     const utterThis = new SpeechSynthesisUtterance(alert);
-    utterThis.rate = 1.5;
+    utterThis.rate = 1;
     utterThis.pitch = 1;
-    utterThis.lang = 'en-US';
+    utterThis.lang = 'hi-IN';
 
     synth.speak(utterThis);
   };

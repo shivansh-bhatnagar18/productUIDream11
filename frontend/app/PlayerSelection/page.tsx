@@ -55,9 +55,15 @@ export default function Page() {
   const [selectedRowData, setSelectedRowData] = useState<any[]>([]);
   const [countSelected, setCountSelected] = useState<number>(0);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [toComparePlayer, setToComparePlayer] = useState<any | null>(null);
 
   const handleCloseModal = () => {
     setShowModal(false);
+  };
+
+  const handleAIComparisonClick = () => {
+    localStorage.setItem('rowData', JSON.stringify(rowData));
+    localStorage.setItem('selectedRowData', JSON.stringify(selectedRowData));
   };
 
   useEffect(() => {
@@ -75,6 +81,7 @@ export default function Page() {
             isSelected: false,
             isCaptain: false,
             isViceCaptain: false,
+            toCompare: false,
           };
         });
         setRowData(playerData);
@@ -97,8 +104,13 @@ export default function Page() {
           setSelectedRowData={setSelectedRowData}
           setCountSelected={setCountSelected}
           setRowData={setRowData}
+          setToComparePlayer={setToComparePlayer}
         />
-        <Field players={selectedRowData} />
+        <Field
+          players={selectedRowData}
+          rowData={rowData}
+          setCountSelected={setCountSelected}
+        />
       </div>
       <div className="flex flex-row gap-4">
         <Button
@@ -116,13 +128,8 @@ export default function Page() {
           color="secondary"
           className="bg-[#525E74]"
           onClick={() => {
-            localStorage.setItem('rowData', JSON.stringify(rowData));
-            localStorage.setItem(
-              'selectedRowData',
-              JSON.stringify(selectedRowData)
-            );
-            console.log('rowData', rowData);
-            window.location.href = '/AIComparison';
+            handleAIComparisonClick();
+            window.location.href = '/CaptainSelection';
           }}
         >
           Next

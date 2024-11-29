@@ -112,7 +112,7 @@ const PlayerCard = ({ playerName, rank }: PlayerCardProps) => {
       setPlayerCountry(playerCountry.country_name);
     });
     console.log(playerImgSrc);
-  }, []);
+  }, [playerName]);
 
   return (
     <div className="bg-white bg-opacity-10 rounded-xl border-2 border-white max-w-80">
