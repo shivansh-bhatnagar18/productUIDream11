@@ -8,18 +8,13 @@ import {
   Tooltip,
   PieChart,
   Pie,
-} from 'recharts';
-import {
-  BarChart,
-  Bar,
-  Rectangle,
   XAxis,
   YAxis,
-  CartesianGrid,
   ResponsiveContainer,
   LineChart,
   Line,
 } from 'recharts';
+import Rating from '@mui/material/Rating';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 
 const data01 = [
@@ -64,7 +59,10 @@ const data = [
   },
 ];
 
+
 const PlayerStats = (props: any) => {
+  const [value, setValue] = useState<number>(2);
+  const [isClicked, setIsClicked] = useState<boolean>(false);
   const { classname } = props;
 
   const databar = [
@@ -112,24 +110,43 @@ const PlayerStats = (props: any) => {
     },
   ];
 
-  const [alert, setAlert] = useState<string>('');
+  const [alertEng, setAlertEng] = useState<string>('');
+  const [alertHindi, setAlertHindi] = useState<string>('');
 
   useEffect(() => {
-    setAlert(
+    setAlertEng(
       'Player X scored a brilliant century, but met with an accident.\nPlayer X praised for his match-winning performance.\nPlayer X faces fitness concerns ahead of the next match.'
     );
   }, []);
+  useEffect(() => {
+    setAlertHindi(
+      'प्लेयर एक्स ने शानदार शतक बनाया, लेकिन एक दुर्घटना का शिकार हो गया। \nप्लेयर एक्स की मैच विजेता प्रदर्शन के लिए प्रशंसा की गई। \nखिलाड़ी X को अगले मैच से पहले फिटनेस संबंधी चिंताओं का सामना करना पड़ता है।'
+    );
+  }, []);
 
-  const handleSpeakerClick = () => {
-    if (!alert) {
+  const handleSpeakerClickEnglish = () => {
+    if (!alertEng) {
       return;
     }
 
     const synth = window.speechSynthesis;
-    const utterThis = new SpeechSynthesisUtterance(alert);
+    const utterThis = new SpeechSynthesisUtterance(alertEng);
     utterThis.rate = 1.5;
     utterThis.pitch = 1;
     utterThis.lang = 'en-US';
+
+    synth.speak(utterThis);
+  };
+  const handleSpeakerClickHindi = () => {
+    if (!alertHindi) {
+      return;
+    }
+
+    const synth = window.speechSynthesis;
+    const utterThis = new SpeechSynthesisUtterance(alertHindi);
+    utterThis.rate = 1;
+    utterThis.pitch = 1;
+    utterThis.lang = 'hi-IN';
 
     synth.speak(utterThis);
   };
@@ -273,10 +290,30 @@ const PlayerStats = (props: any) => {
       <div className="bg-[#312D2C] w-auto h-[30%] mb-3 mt-1 mx-3 rounded-2xl flex flex-col gap-2">
         <div className="flex flex-col justify-between my-5">
           <div className="flex justify-between">
-            <div className="text-white text-lg ml-9">Alerts</div>
-            <VolumeUpIcon className="mr-5" onClick={handleSpeakerClick} />
+            <div className="text-white text-lg ml-9">
+              Alerts
+            </div>
+            <Rating name="read-only" value={value} readOnly />
+            <div className='flex justify-around gap-2 '>
+            <div onClick={()=>{setIsClicked((prev)=> {
+              return !prev
+            })}} className={`${isClicked ? 'text-[#787878]' : 'text-white'}`}>
+              English
+            </div>
+            <div>
+              |
+            </div>
+            <div onClick={()=>{setIsClicked((prev)=> {
+              return !prev
+            })}} className={`${isClicked ?  'text-white':'text-[#787878]' }`}>
+            हिन्दी
+            </div>
+            </div>
+            <VolumeUpIcon className="mr-5" onClick={isClicked ?  handleSpeakerClickHindi :  handleSpeakerClickEnglish } />
           </div>
-          {alert.split('\n').map((line, index) => (
+          { isClicked ? alertHindi.split('\n').map((line, index) => (
+            <p className="text-white text-md ml-20">{line}</p>
+          )) : alertEng.split('\n').map((line, index) => (
             <p className="text-white text-md ml-20">{line}</p>
           ))}
         </div>
