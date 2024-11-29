@@ -93,9 +93,9 @@ function page() {
         {/* <PlayerTable /> */}
         <PlayerCard playerName="Rohit Sharma" rank={2} />
       </div>
-      <div className="flex w-[95%] mt-10 gap-5">
-        <PlayerStats />
-        <PlayerStats />
+      <div className="flex w-[95%] mt-10">
+      <PlayerStats classname ='rounded-l-2xl border-x-2' />
+      <PlayerStats classname ='rounded-r-2xl border-r-2'/>
       </div>
       <Button
         type="button"

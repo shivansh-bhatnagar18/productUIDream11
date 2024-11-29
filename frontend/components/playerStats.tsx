@@ -63,6 +63,10 @@ const data = [
   },
 ];
 
+const PlayerStats = (props: any) => {
+
+  const {classname} = props
+  
 const databar = [
   {
     name: 'Page A',
@@ -108,7 +112,6 @@ const databar = [
   },
 ];
 
-const PlayerStats = () => {
   const [alert, setAlert] = useState<string>('');
 
   useEffect(() => {
@@ -132,35 +135,46 @@ const PlayerStats = () => {
   };
 
   return (
-    <div className="bg-white bg-opacity-10 rounded-xl border-2 border-white flex flex-col w-full">
-      <div className=" w-auto h-[20%] mx-3 mt-3 rounded-xl flex gap-2">
-        <div className="bg-white bg-opacity-20 w-[25%] rounded-xl flex flex-col">
-          <p className="text-white text-lg ml-2 mt-2">Batting First</p>
-          <p className="text-white text-5xl font-bold ml-2">30</p>
+    <div className= {`bg-gray-600 bg-opacity-10 border-y-2 border-gray-600 border-opacity-60 flex flex-col w-full ${classname}`}>
+      <div className= "w-auto h-[20%] mx-3 mt-3 flex gap-2" >
+        <div className="bg-[#312D2C] mr-2 w-[25%] rounded-2xl flex flex-col">
+          <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Batting First</p>
+          <div className='flex w-full mb-2 mt-2'>
+            <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">24</p>
+            <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">FPts</p>
+          </div>
         </div>
-        <div className="bg-white bg-opacity-20 w-[25%] rounded-xl flex flex-col">
-          <p className="text-white text-lg ml-2 mt-2">Chasings</p>
-          <p className="text-white text-5xl font-bold ml-2">30</p>
+        <div className="bg-[#312D2C] mr-2 w-[25%] rounded-2xl flex flex-col">
+          <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Chasing</p>
+          <div className='flex w-full mb-2 mt-2'>
+            <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">91</p>
+            <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">FPts</p>
+          </div>
         </div>
-        <div className="bg-white bg-opacity-20 w-[25%] rounded-xl flex flex-col">
-          <p className="text-white text-lg ml-2 mt-2">Strike Rate</p>
-          <p className="text-white text-5xl font-bold ml-2">30</p>
+        <div className="bg-[#312D2C] mr-2 w-[25%] rounded-2xl flex flex-col">
+          <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Strike Rate</p>
+          <div className='flex w-full mb-2 mt-2'>
+            <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">64</p>
+            <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">FPts</p>
+          </div>
         </div>
-        <div className="bg-white bg-opacity-20 w-[25%] rounded-xl flex flex-col">
-          <p className="text-white text-lg ml-2 mt-2">Economy Rate</p>
-          <p className="text-white text-5xl font-bold ml-2">30</p>
+        <div className="bg-[#312D2C] w-[25%] rounded-2xl flex flex-col">
+          <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Economy Rate</p>
+          <div className='flex w-full mb-2 mt-2'>
+            <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">83</p>
+            <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">FPts</p>
+          </div>
         </div>
       </div>
-      <div className=" w-auto h-[60%] m-3 rounded-xl flex gap-2">
-        <div className="w-[30%] rounded-xl flex flex-col gap-2">
-          <div className="bg-white bg-opacity-20 h-[50%] rounded-xl flex flex-col">
-            <p className="text-white text-lg ml-2 mt-2">
+      <div className=" w-auto h-[60%] m-3 rounded-2xl flex gap-2">
+        <div className="w-[60%] rounded-xl flex flex-col gap-2">
+          <div className="bg-[#312D2C] mt-1 mr-2 h-[50%] rounded-xl flex flex-col">
+            <p className="text-[#E4DAD7] text-lg ml-2 mt-2 mb-2 font-bold pl-3">
               Pitch Performance Prediction
             </p>
             <RadialBarChart
               width={200}
               height={100}
-              innerRadius="10%"
               outerRadius="80%"
               data={data}
               startAngle={180}
@@ -173,19 +187,10 @@ const PlayerStats = () => {
                 // clockWise={true}
                 dataKey="uv"
               />
-              <Legend
-                iconSize={10}
-                width={120}
-                height={140}
-                layout="vertical"
-                verticalAlign="middle"
-                align="right"
-              />
-              <Tooltip />
             </RadialBarChart>
           </div>
-          <div className="bg-white bg-opacity-20 h-[50%] rounded-xl flex flex-col">
-            <p className="text-white text-lg ml-2 mt-2">Relative FPts</p>
+          <div className="bg-[#312D2C] h-[50%] mt-2 mr-2 rounded-2xl flex flex-col pb-3">
+            <p className="text-[#E4DAD7] text-lg ml-2 mt-2 mb-2 font-bold pl-3">Relative FPts</p>
             <PieChart width={200} height={100}>
               <Pie
                 data={data01}
@@ -200,9 +205,9 @@ const PlayerStats = () => {
             </PieChart>
           </div>
         </div>
-        <div className="w-[70%] rounded-xl flex flex-col gap-2">
-          <div className="bg-white bg-opacity-20 h-[65%] rounded-xl flex flex-col gap-2">
-            <p className="text-white text-lg ml-2 mt-2">
+        <div className="w-full h-auto rounded-xl mt-1 flex flex-col gap-2">
+          <div className="bg-[#312D2C] h-full rounded-2xl flex flex-col gap-2">
+            <p className="text-[#E4DAD7] text-lg ml-2 mt-2 font-bold pl-2">
               Performance Prediction
             </p>
             <ResponsiveContainer width="100%" height="100%">
@@ -234,31 +239,33 @@ const PlayerStats = () => {
               </BarChart>
             </ResponsiveContainer>
           </div>
-          <div className="h-[35%] rounded-xl flex gap-2">
-            <div className="bg-white bg-opacity-20 w-[35%] rounded-xl flex flex-col">
-              <p className="text-white text-lg ml-2 mt-2">Ceil Fpts</p>
-              <p className="text-white text-5xl font-bold ml-2">30</p>
+          <div className=" rounded-xl flex gap-2">
+            <div className="bg-[#312D2C] w-full justify-center align-middle mt-2 mr-2 rounded-2xl flex flex-col">
+              <p className="text-[#E4DAD7] text-center text-lg mx-3">Ceil Fpts</p>
+              <p className="text-[#E4DAD7] text-center text-5xl font-bold">5</p>
             </div>
-            <div className="bg-white bg-opacity-20 w-[35%] rounded-xl flex flex-col">
-              <p className="text-white text-lg ml-2 mt-2">Floor Fpts</p>
-              <p className="text-white text-5xl font-bold ml-2">30</p>
+            <div className="bg-[#312D2C] w-full justify-center align-middle mt-2 mr-2 rounded-2xl flex flex-col">
+              <p className="text-[#E4DAD7] text-center text-lg mx-3">Floor Fpts</p>
+              <p className="text-[#E4DAD7] text-center text-5xl font-bold">5</p>
             </div>
-            <div className="bg-white bg-opacity-20 w-[35%] rounded-xl flex flex-col">
-              <p className="text-white text-lg ml-2 mt-2">Risk</p>
-              <p className="text-white text-5xl font-bold ml-2">30</p>
+            <div className="bg-[#312D2C] w-full mt-2 rounded-2xl flex flex-col">
+              <p className="text-[#E4DAD7] text-lg ml-4 mt-2 mb-2">Risk</p>
+              <p className="text-white mx-4 rounded-[3px] text-center text-2xl bg-[#D83D3D] font-bold mb-2 px-7 ">High</p>
             </div>
           </div>
         </div>
       </div>
-      <div className="bg-white bg-opacity-20 w-auto h-[30%] mb-3 mx-3 rounded-xl flex flex-col gap-2">
-        <div className="flex justify-between my-5">
-          <div className="text-white text-lg ml-2 mt-2">Alerts</div>
+      <div className="bg-[#312D2C] w-auto h-[30%] mb-3 mt-1 mx-3 rounded-2xl flex flex-col gap-2">
+        <div className="flex flex-col justify-between my-5">
+          <div className='flex justify-between'>
+          <div className="text-white text-lg ml-9">Alerts</div>
           <VolumeUpIcon className="mr-5" onClick={handleSpeakerClick} />
+          </div>
+           {alert.split('\n').map((line, index) => (<p className="text-white text-md ml-20">{line}</p>))} 
         </div>
-        <p className="text-white text-md ml-2">{alert}</p>
       </div>
     </div>
   );
 };
 
-export default PlayerStats;
+export default PlayerStats
