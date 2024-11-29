@@ -12,7 +12,7 @@ interface PlayerTableProps {
   rowData: any[];
 }
 
-const AnalysisTable: React.FC<PlayerTableProps> = ({rowData}) => {
+const AnalysisTable: React.FC<PlayerTableProps> = ({ rowData }) => {
   const myTheme = themeQuartz.withParams({
     accentColor: '#D22A29',
     backgroundColor: '#0D0402',
@@ -60,7 +60,7 @@ const AnalysisTable: React.FC<PlayerTableProps> = ({rowData}) => {
 
   return (
     <div className="w-full">
-      <div className='w-full h-full rounded-3xl'>
+      <div className="w-full h-full rounded-3xl">
         <AgGridReact
           rowData={rowData}
           columnDefs={columnDefs}
@@ -70,6 +70,5 @@ const AnalysisTable: React.FC<PlayerTableProps> = ({rowData}) => {
     </div>
   );
 };
-
 
 export default AnalysisTable;

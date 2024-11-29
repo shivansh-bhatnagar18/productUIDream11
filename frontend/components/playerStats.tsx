@@ -59,7 +59,6 @@ const data = [
   },
 ];
 
-
 const PlayerStats = (props: any) => {
   const [value, setValue] = useState<number>(2);
   const [isClicked, setIsClicked] = useState<boolean>(false);
@@ -290,32 +289,49 @@ const PlayerStats = (props: any) => {
       <div className="bg-[#312D2C] w-auto h-[30%] mb-3 mt-1 mx-3 rounded-2xl flex flex-col gap-2">
         <div className="flex flex-col justify-between my-5">
           <div className="flex justify-between">
-            <div className="text-white text-lg ml-9">
-              Alerts
-            </div>
+            <div className="text-white text-lg ml-9">Alerts</div>
             <Rating name="read-only" value={value} readOnly />
-            <div className='flex justify-around gap-2 '>
-            <div onClick={()=>{setIsClicked((prev)=> {
-              return !prev
-            })}} className={`${isClicked ? 'text-[#787878]' : 'text-white'}`}>
-              English
+            <div className="flex justify-around gap-2 ">
+              <div
+                onClick={() => {
+                  setIsClicked((prev) => {
+                    return !prev;
+                  });
+                }}
+                className={`${isClicked ? 'text-[#787878]' : 'text-white'}`}
+              >
+                English
+              </div>
+              <div>|</div>
+              <div
+                onClick={() => {
+                  setIsClicked((prev) => {
+                    return !prev;
+                  });
+                }}
+                className={`${isClicked ? 'text-white' : 'text-[#787878]'}`}
+              >
+                हिन्दी
+              </div>
             </div>
-            <div>
-              |
-            </div>
-            <div onClick={()=>{setIsClicked((prev)=> {
-              return !prev
-            })}} className={`${isClicked ?  'text-white':'text-[#787878]' }`}>
-            हिन्दी
-            </div>
-            </div>
-            <VolumeUpIcon className="mr-5" onClick={isClicked ?  handleSpeakerClickHindi :  handleSpeakerClickEnglish } />
+            <VolumeUpIcon
+              className="mr-5"
+              onClick={
+                isClicked ? handleSpeakerClickHindi : handleSpeakerClickEnglish
+              }
+            />
           </div>
-          { isClicked ? alertHindi.split('\n').map((line, index) => (
-            <p className="text-white text-md ml-20">{line}</p>
-          )) : alertEng.split('\n').map((line, index) => (
-            <p className="text-white text-md ml-20">{line}</p>
-          ))}
+          {isClicked
+            ? alertHindi
+                .split('\n')
+                .map((line, index) => (
+                  <p className="text-white text-md ml-20">{line}</p>
+                ))
+            : alertEng
+                .split('\n')
+                .map((line, index) => (
+                  <p className="text-white text-md ml-20">{line}</p>
+                ))}
         </div>
       </div>
     </div>
