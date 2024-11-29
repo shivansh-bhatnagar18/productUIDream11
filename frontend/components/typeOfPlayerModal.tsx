@@ -24,7 +24,11 @@ const style = {
   alignItems: 'center',
 };
 
-export default function TypeOfPlayerModal() {
+interface typeOfPlayerModalProps {
+  rowData: any[];
+}
+
+export default function TypeOfPlayerModal({ rowData }: typeOfPlayerModalProps) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -48,6 +52,8 @@ export default function TypeOfPlayerModal() {
           color="primary"
           className="my-10 mx-5 bg-[#525E74]"
           onClick={() => {
+            localStorage.setItem('rowData', JSON.stringify(rowData));
+            console.log('rowData', rowData);
             window.location.href = '/CaptainComparison';
           }}
         >

@@ -73,6 +73,8 @@ export default function Page() {
             points: row['Predicted Player 1 Points'],
             imageSrc: playerImage ? playerImage.image_path : '',
             isSelected: false,
+            isCaptain: false,
+            isViceCaptain: false,
           };
         });
         setRowData(playerData);
@@ -94,6 +96,7 @@ export default function Page() {
           rowData={rowData}
           setSelectedRowData={setSelectedRowData}
           setCountSelected={setCountSelected}
+          setRowData={setRowData}
         />
         <Field players={selectedRowData} />
       </div>
@@ -112,7 +115,15 @@ export default function Page() {
           variant="contained"
           color="secondary"
           className="bg-[#525E74]"
-          onClick={() => (window.location.href = '/AIComparison')}
+          onClick={() => {
+            localStorage.setItem('rowData', JSON.stringify(rowData));
+            localStorage.setItem(
+              'selectedRowData',
+              JSON.stringify(selectedRowData)
+            );
+            console.log('rowData', rowData);
+            window.location.href = '/AIComparison';
+          }}
         >
           Next
         </Button>

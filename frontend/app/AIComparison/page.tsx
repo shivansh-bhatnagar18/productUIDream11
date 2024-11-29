@@ -57,27 +57,13 @@ const readCSVImageData = (): Promise<any[]> => {
 function page() {
   const [rowData, setRowData] = useState<any[]>([]);
   const [countSelected, setCountSelected] = useState<number>(0);
+  const [selectedPlayers, setSelectedPlayers] = useState<any[]>([]);
 
   useEffect(() => {
-    readCSVData().then((data) => {
-      readCSVImageData().then((imageData) => {
-        const playerData = data.map((row: any, index: number) => {
-          const playerImage = imageData.find(
-            (img) => img.Name === row['Predicted Player 1']
-          );
-          return {
-            key: index,
-            name: row['Predicted Player 1'],
-            points: row['Predicted Player 1 Points'],
-            imageSrc: playerImage ? playerImage.image_path : '',
-            isSelected: false,
-          };
-        });
-        setRowData(playerData);
-        const count = playerData.filter((player) => player.isSelected).length;
-        setCountSelected(count);
-      });
-    });
+    const playerData = JSON.parse(localStorage.getItem('rowData') || '[]');
+    setRowData(playerData);
+    const count = playerData.filter((player: any) => player.isSelected).length;
+    setCountSelected(count);
   }, []);
 
   return (
@@ -89,12 +75,17 @@ function page() {
       </div>
       <div className="flex w-[95%] mt-10 gap-5">
         <PlayerCard playerName="Virat Kohli" rank={1} />
-        <PlayerTable rowData={rowData} />
+        <PlayerTable
+          rowData={rowData}
+          setSelectedRowData={setSelectedPlayers}
+          setCountSelected={setCountSelected}
+          setRowData={setRowData}
+        />
         <PlayerCard playerName="Rohit Sharma" rank={2} />
       </div>
       <div className="flex w-[95%] mt-10">
-        <PlayerStats classname ='rounded-l-2xl border-x-2' />
-        <PlayerStats classname ='rounded-r-2xl border-r-2'/>
+        <PlayerStats classname="rounded-l-2xl border-x-2" />
+        <PlayerStats classname="rounded-r-2xl border-r-2" />
       </div>
       <Button
         type="button"

@@ -14,10 +14,12 @@ interface PlayerTableProps {
   rowData: any[];
   setSelectedRowData: React.Dispatch<React.SetStateAction<any[]>>;
   setCountSelected: React.Dispatch<React.SetStateAction<number>>;
+  setRowData: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
 const PlayerTable: React.FC<PlayerTableProps> = ({
   rowData,
+  setRowData,
   setSelectedRowData,
   setCountSelected,
 }) => {
@@ -36,10 +38,10 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
 
   const handleButtonClick = (key: number) => {
     rowData[key].isSelected = !rowData[key].isSelected;
+    setRowData([...rowData]);
     const selectedRows = rowData.filter((row) => row.isSelected);
     setSelectedRowData(selectedRows);
     setCountSelected(selectedRows.length);
-    console.log(selectedRows);
   };
 
   // Define columnDefs directly inside the component

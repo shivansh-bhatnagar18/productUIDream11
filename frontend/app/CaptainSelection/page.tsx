@@ -58,44 +58,43 @@ const readCSVImageData = (): Promise<any[]> => {
 
 function page() {
   const [rowData, setRowData] = useState<any[]>([]);
+  const [selectedCaptain, setSelectedCaptain] = useState<any | null>(null);
+  const [selectedViceCaptain, setSelectedViceCaptain] = useState<any | null>(
+    null
+  );
+  const [countSelected, setCountSelected] = useState<number>(0);
 
   useEffect(() => {
-    readCSVData().then((data) => {
-      readCSVImageData().then((imageData) => {
-        const playerData = data.map((row: any, index: number) => {
-          const playerImage = imageData.find(
-            (img) => img.Name === row['Predicted Player 1']
-          );
-          return {
-            key: index,
-            name: row['Predicted Player 1'],
-            points: row['Predicted Player 1 Points'],
-            imageSrc: playerImage ? playerImage.image_path : '',
-            isCSelected: false,
-            isVCSelected: false,
-          };
-        });
-        setRowData(playerData);
-      });
-    });
+    const teamData = JSON.parse(
+      localStorage.getItem('selectedRowData') || '[]'
+    );
+    const data = JSON.parse(localStorage.getItem('rowData') || '[]');
+    const count = data.filter((player: any) => player.isSelected).length;
+    setCountSelected(count);
+    setRowData(teamData);
   }, []);
 
   return (
     <div className="flex flex-col items-center bg-[#0D0402] min-h-screen max-w-screen min-w-screen">
       <Header />
       {/* team selection divs */}
-      {/* <div className="max-w-[50%] min-w-[50%] mx-auto mt-8">
-        <LoadingBar count =  {countSelected}/>
-      </div> */}
+      <div className="max-w-[50%] min-w-[50%] mx-auto mt-8">
+        <LoadingBar count={countSelected} />
+      </div>
       <div className="flex w-[95%] mt-10 gap-5">
         <PlayerCard playerName="Virat Kohli" rank={1} />
         {/* <div className="h-[30%] w-[30%]"></div> */}
-        <CaptainTable rowData={rowData} />
+        <CaptainTable
+          rowData={rowData}
+          setCaptainData={setSelectedCaptain}
+          setViceCaptainData={setSelectedViceCaptain}
+          setRowData={setRowData}
+        />
         {/* <PlayerTable /> */}
         <PlayerCard playerName="Rohit Sharma" rank={2} />
       </div>
 
-      <TypeOfPlayerModal />
+      <TypeOfPlayerModal rowData={rowData} />
     </div>
   );
 }

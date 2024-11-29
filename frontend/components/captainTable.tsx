@@ -18,7 +18,19 @@ import { themeQuartz } from '@ag-grid-community/theming';
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
-const CaptainTable = ({ rowData }: { rowData: any[] }) => {
+interface CaptainTableProps {
+  rowData: any[];
+  setRowData: React.Dispatch<React.SetStateAction<any[]>>;
+  setCaptainData: React.Dispatch<React.SetStateAction<any[]>>;
+  setViceCaptainData: React.Dispatch<React.SetStateAction<any[]>>;
+}
+
+const CaptainTable = ({
+  rowData,
+  setCaptainData,
+  setViceCaptainData,
+  setRowData,
+}: CaptainTableProps) => {
   const myTheme = themeQuartz.withParams({
     accentColor: '#D22A29',
     backgroundColor: '#0D0402',
@@ -37,10 +49,26 @@ const CaptainTable = ({ rowData }: { rowData: any[] }) => {
 
   const handleCButtonClick = (key: number) => {
     setSelectedCKey((prevKey) => (prevKey === key ? null : key));
+    setCaptainData(rowData.find((row) => row.key === key) || []);
+    setRowData((prevData) =>
+      prevData.map((row) =>
+        row.key === key
+          ? { ...row, isCaptain: true }
+          : { ...row, isCaptain: false }
+      )
+    );
   };
 
   const handleVCButtonClick = (key: number) => {
     setSelectedVCKey((prevKey) => (prevKey === key ? null : key));
+    setViceCaptainData(rowData.find((row) => row.key === key) || []);
+    setRowData((prevData) =>
+      prevData.map((row) =>
+        row.key === key
+          ? { ...row, isViceCaptain: true }
+          : { ...row, isViceCaptain: false }
+      )
+    );
   };
 
   const columnDefs: (ColDef<any, any> | ColGroupDef<any>)[] = [
@@ -65,6 +93,8 @@ const CaptainTable = ({ rowData }: { rowData: any[] }) => {
           data={p.data}
           handleButtonClick={handleCButtonClick}
           isSelected={selectedCKey === p.data.key}
+          isCaptain={p.data.isCaptain}
+          isViceCaptain={p.data.isViceCaptain}
           isDisabled={selectedVCKey !== null && selectedVCKey === p.data.key}
         />
       ),
@@ -77,6 +107,8 @@ const CaptainTable = ({ rowData }: { rowData: any[] }) => {
           data={p.data}
           handleButtonClick={handleVCButtonClick}
           isSelected={selectedVCKey === p.data.key}
+          isCaptain={p.data.isCaptain}
+          isViceCaptain={p.data.isViceCaptain}
           isDisabled={selectedCKey !== null && selectedCKey === p.data.key}
         />
       ),
@@ -103,13 +135,13 @@ const CaptainTable = ({ rowData }: { rowData: any[] }) => {
 };
 
 const CButtonRenderer = (props: any) => {
-  const { data, handleButtonClick, isSelected, isDisabled } = props;
+  const { data, handleButtonClick, isSelected, isDisabled, isCaptain } = props;
 
   return (
     <button
       onClick={() => handleButtonClick(data.key)}
       className={`w-6 h-6 flex items-center justify-center rounded-full text-black transition-colors ${
-        isSelected
+        isCaptain
           ? 'bg-green-500 hover:bg-green-600 text-white'
           : 'bg-white hover:bg-gray-300 text-black'
       }`}
@@ -121,13 +153,14 @@ const CButtonRenderer = (props: any) => {
 };
 
 const VCButtonRenderer = (props: any) => {
-  const { data, handleButtonClick, isSelected, isDisabled } = props;
+  const { data, handleButtonClick, isSelected, isDisabled, isViceCaptain } =
+    props;
 
   return (
     <button
       onClick={() => handleButtonClick(data.key)}
       className={`w-6 h-6 flex items-center justify-center rounded-full  transition-colors ${
-        isSelected
+        isViceCaptain
           ? 'bg-green-500 hover:bg-green-600 text-white'
           : 'bg-white hover:bg-gray-300 text-black'
       }`}
