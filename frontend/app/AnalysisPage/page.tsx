@@ -151,15 +151,14 @@ function page() {
                         />
                         </RadarChart>
                         </ResponsiveContainer>
-                        </div>
-                        
+                        </div> 
                     </div>
                 </div>
                 <div className='w-full h-full flex flex-col gap-5'>
-                 <div className='flex w-full justify-around'>
+                    <div className='flex w-full justify-around'>
                         <p className='h-fit text-4xl font-bold'>Add</p>
                         <p className='h-fit text-4xl font-bold'>Drop</p>
-                 </div>
+                    </div>
                     <div className='w-full h-full max-h-[400px] flex gap-5' >
                         <AnalysisTable rowData={rowData} />
                         <AnalysisTable rowData={rowData} />
@@ -172,15 +171,16 @@ function page() {
             </div>
         </div>
       
-    <div className="flex items-center w-full mt-30 justify-center ">
-      <Button
-        type="button"
-        variant="contained"
-        className="mt-10 mr-7 focus:border-2 text-[#525E74] hover:bg-[#959595] focus:border-[#525E74] focus:border-solid bg-[#B0AFAF] font-bold rounded-md"
+    <div className="flex items-center w-full mt-28 justify-center ">
+        <Button
+          type="button"
+          variant="contained"
+          className="mt-10 mr-7 focus:border-2 text-[#525E74] hover:bg-[#959595] focus:border-[#525E74] focus:border-solid bg-[#B0AFAF] font-bold rounded-md"
+          onClick={() => {window.location.href = '/PlayerSelection';}}
         >
-        Analyse my pick
-      </Button>
-      <Button
+          Preview
+        </Button>
+        <Button
         type="button"
         variant="contained"
         className="mt-10 mr-7 focus:border-2 text-[#525E74] hover:bg-[#959595] focus:border-[#525E74] focus:border-solid bg-[#B0AFAF] font-bold rounded-md"

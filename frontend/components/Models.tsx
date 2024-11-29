@@ -20,7 +20,7 @@ function Models(props: any) {
         {models.map((model) => (
           <div
             key={model.id}
-            className={`justify-between min-w-40 items-center align-middle flex py-4 px-5 mx-4 mb-2 mt-2 gap-3 border-[1px] rounded-xl bg-[#413030] ${
+            className={`justify-between items-center  align-middle flex py-4 px-5 mx-4 mb-2 mt-2 gap-3 border-[1px] rounded-xl bg-[#413030] ${
               selectedModel === model.id ? 'border-white' : 'border-white border-opacity-30'
             }`}
             onClick={() => {
@@ -32,7 +32,7 @@ function Models(props: any) {
             }}
           >
             <img src={model.icon} className='w-8' alt={model.label} />
-            <p className='text-md text-center'>{model.label}</p>
+            <p className='text-md text-center '>{model.label}</p>
             <button
               className={`w-6 h-6 rounded-full border-2 ${
                 selectedModel === model.id ? 'bg-[#FFFFFF]' : 'bg-transparent border-white'
@@ -40,15 +40,6 @@ function Models(props: any) {
             />
           </div>
         ))}
-      </div>
-      <div className='flex w-full items-center justify-center'>
-        <Button
-          type="button"
-          variant="contained"
-          className="hover:bg-[#299e46] bg-[#34C759] px-6 text-black font-bold rounded-lg p-2 justify-center align-middle mb-4"
-        >
-          Preview
-        </Button>
       </div>
     </div>
   )
