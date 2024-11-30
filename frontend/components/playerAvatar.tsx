@@ -30,7 +30,11 @@ const PlayerComponent = ({
       className="w-[20%] self-center flex flex-col relative m-2 bg-[#878789] rounded-full"
       onClick={() => {
         setCountSelected(rowData.filter((row) => row.isSelected).length);
-        window.location.href = `/AIComparison?name=${name}`;
+        const params = new URLSearchParams({
+          match: `${initial1} vs ${initial2}`,
+          name: name,
+        });
+        window.location.href = `/AIComparison/?${params.toString()}`;
         const updatedRowData = rowData.map((row) =>
           row.name === name ? { ...row, toCompare: true } : row
         );
