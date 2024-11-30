@@ -1,3 +1,4 @@
+import { init } from 'next/dist/compiled/webpack/webpack';
 import React, { useEffect } from 'react';
 // import handleAIComparisonClick from '../app/PlayerSelection/page';
 
@@ -8,10 +9,10 @@ interface PlayerProps {
   key: number;
   isSelected: boolean;
   rowData: any[];
-  // setSelectedRowData: React.Dispatch<React.SetStateAction<any[]>>;
-  setCountSelected: React.Dispatch<React.SetStateAction<number>>;
   initial1: string;
   initial2: string;
+  // setSelectedRowData: React.Dispatch<React.SetStateAction<any[]>>;
+  setCountSelected: React.Dispatch<React.SetStateAction<number>>;
   // setRowData: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
@@ -29,7 +30,7 @@ const PlayerComponent = ({
       className="w-[20%] self-center flex flex-col relative m-2 bg-[#878789] rounded-full"
       onClick={() => {
         setCountSelected(rowData.filter((row) => row.isSelected).length);
-        window.location.href = `/AIComparison?name=${name}&match=${initial1} vs ${initial2}`;
+        window.location.href = `/AIComparison?name=${name}`;
         const updatedRowData = rowData.map((row) =>
           row.name === name ? { ...row, toCompare: true } : row
         );

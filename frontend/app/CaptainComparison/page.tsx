@@ -22,12 +22,30 @@ function page() {
   const [toComparePlayer, setToComparePlayer] = useState<string>(name || '');
   const [initial1, setInitial1] = useState<string>('');
   const [initial2, setInitial2] = useState<string>('');
-
+  const [match, setMatch] = useState<string>('');
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const match = new URLSearchParams(window.location.search).get(
         'match'
       ) as string;
+      const getMatch = () => {
+        switch (match) {
+          case 'CSK vs PW':
+            return '1';
+          case 'AUS vs PAK':
+            return '2';
+          case 'ENG vs SA':
+            return '3';
+          default:
+            return -1;
+        }
+      };
+      if (getMatch() === -1) {
+        console.log('Invalid match');
+        window.location.href = '/'; // navigate to error page!
+        // add error popup here
+      }
+      setMatch(getMatch() as string);
       const [team1, team2] = match.split(' vs ');
       setInitial1(team1);
       setInitial2(team2);
@@ -65,10 +83,17 @@ function page() {
       </div>
       <div className="flex w-[95%] mt-10">
         <PlayerStats
+          rowData={rowData}
           playerName={selectedCaptain}
+          match={match}
           classname="rounded-l-2xl border-x-2"
         />
-        <PlayerStats classname="rounded-r-2xl border-r-2" />
+        <PlayerStats
+          classname="rounded-r-2xl border-r-2"
+          rowData={rowData}
+          playerName={toComparePlayer}
+          match={match}
+        />
       </div>
       <Button
         type="button"

@@ -136,7 +136,7 @@ export default function Page() {
               })(),
               ai_alerts: (() => {
                 try {
-                  const fixedJSONString = row['ai_alert'].replace(/'/g, '"');
+                  const fixedJSONString = row['ai_alerts'].replace(/'/g, '"');
                   return JSON.parse(fixedJSONString);
                 } catch (e) {
                   console.error('Error parsing JSON:', e);
