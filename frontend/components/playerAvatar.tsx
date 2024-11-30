@@ -10,6 +10,8 @@ interface PlayerProps {
   rowData: any[];
   // setSelectedRowData: React.Dispatch<React.SetStateAction<any[]>>;
   setCountSelected: React.Dispatch<React.SetStateAction<number>>;
+  initial1: string;
+  initial2: string;
   // setRowData: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
@@ -18,6 +20,8 @@ const PlayerComponent = ({
   points,
   name,
   rowData,
+  initial1,
+  initial2,
   setCountSelected,
 }: PlayerProps) => {
   return (
@@ -25,7 +29,7 @@ const PlayerComponent = ({
       className="w-[20%] self-center flex flex-col relative m-2 bg-[#878789] rounded-full"
       onClick={() => {
         setCountSelected(rowData.filter((row) => row.isSelected).length);
-        window.location.href = `/AIComparison?name=${name}`;
+        window.location.href = `/AIComparison?name=${name}&match=${initial1} vs ${initial2}`;
         const updatedRowData = rowData.map((row) =>
           row.name === name ? { ...row, toCompare: true } : row
         );

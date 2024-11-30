@@ -62,7 +62,7 @@ const CaptainTable = ({
     );
     localStorage.setItem('rowData', JSON.stringify(rowData));
     localStorage.setItem('captain', JSON.stringify(captain?.name || ''));
-    // console.log(rowData);
+    console.log(rowData);
   };
 
   const handleVCButtonClick = (key: number) => {
@@ -81,7 +81,7 @@ const CaptainTable = ({
       'viceCaptain',
       JSON.stringify(viceCaptain?.name || '')
     );
-    // console.log(rowData);
+    console.log(rowData);
   };
 
   const columnDefs: (ColDef<any, any> | ColGroupDef<any>)[] = [
@@ -115,7 +115,6 @@ const CaptainTable = ({
           handleButtonClick={handleCButtonClick}
           isSelected={selectedCKey === p.data.key}
           isCaptain={p.data.isCaptain}
-          isViceCaptain={p.data.isViceCaptain}
           isDisabled={selectedVCKey !== null && selectedVCKey === p.data.key}
         />
       ),
@@ -128,7 +127,6 @@ const CaptainTable = ({
           data={p.data}
           handleButtonClick={handleVCButtonClick}
           isSelected={selectedVCKey === p.data.key}
-          isCaptain={p.data.isCaptain}
           isViceCaptain={p.data.isViceCaptain}
           isDisabled={selectedCKey !== null && selectedCKey === p.data.key}
         />
@@ -156,7 +154,7 @@ const CaptainTable = ({
 };
 
 const CButtonRenderer = (props: any) => {
-  const { data, handleButtonClick, isSelected, isDisabled, isCaptain } = props;
+  const { data, handleButtonClick, isDisabled, isCaptain } = props;
 
   return (
     <button
@@ -174,8 +172,7 @@ const CButtonRenderer = (props: any) => {
 };
 
 const VCButtonRenderer = (props: any) => {
-  const { data, handleButtonClick, isSelected, isDisabled, isViceCaptain } =
-    props;
+  const { data, handleButtonClick, isDisabled, isViceCaptain } = props;
 
   return (
     <button

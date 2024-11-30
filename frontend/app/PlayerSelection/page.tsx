@@ -171,6 +171,8 @@ export default function Page() {
           players={selectedRowData}
           rowData={rowData}
           setCountSelected={setCountSelected}
+          initial1={initial1}
+          initial2={initial2}
         />
       </div>
       <div className="flex flex-row gap-4">

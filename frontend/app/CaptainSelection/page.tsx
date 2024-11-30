@@ -57,7 +57,10 @@ function page() {
         <LoadingBar count={countSelected} />
       </div>
       <div className="flex w-[95%] mt-10 gap-5">
-        <PlayerCard playerName={selectedCaptain || 'Virat Kohli'} rank={1} />
+        <PlayerCard
+          playerName={selectedCaptain || 'Captain Default'}
+          rank={1}
+        />
         {/* <div className="h-[30%] w-[30%]"></div> */}
         <CaptainTable
           rowData={rowData}
@@ -67,7 +70,7 @@ function page() {
         />
         {/* <PlayerTable /> */}
         <PlayerCard
-          playerName={selectedViceCaptain || 'Virat Kohli'}
+          playerName={selectedViceCaptain || 'Vice Captain'}
           rank={2}
         />
       </div>

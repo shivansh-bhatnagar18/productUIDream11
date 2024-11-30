@@ -32,9 +32,11 @@ function Page() {
       const match = new URLSearchParams(window.location.search).get(
         'match'
       ) as string;
-      const [team1, team2] = match.split(' vs ');
-      setInitial1(team1);
-      setInitial2(team2);
+      if (match) {
+        const [team1, team2] = match.split(' vs ');
+        setInitial1(team1);
+        setInitial2(team2);
+      }
     }
   }, []);
 
@@ -83,7 +85,7 @@ function Page() {
         variant="contained"
         className="m-10 bg-[#2CA74B]"
         onClick={() => {
-          window.location.href = '/PlayerSelection';
+          window.location.href = `/PlayerSelection?match=${initial1} vs ${initial2}`;
         }}
       >
         Preview

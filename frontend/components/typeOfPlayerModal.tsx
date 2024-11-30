@@ -60,6 +60,7 @@ export default function TypeOfPlayerModal({
           onClick={() => {
             localStorage.setItem('rowData', JSON.stringify(rowData));
             console.log('rowData', rowData);
+            window.location.href = '/';
           }}
         >
           Save

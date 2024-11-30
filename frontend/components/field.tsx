@@ -16,12 +16,16 @@ interface FieldProps {
   players: PlayerProps[];
   rowData: any[];
   setCountSelected?: React.Dispatch<React.SetStateAction<number>>;
+  initial1: string;
+  initial2: string;
 }
 
 const Field: React.FC<FieldProps> = ({
   players,
   rowData,
   setCountSelected,
+  initial1,
+  initial2,
 }) => {
   return (
     <Card
@@ -52,6 +56,8 @@ const Field: React.FC<FieldProps> = ({
           players={players}
           rowData={rowData}
           setCountSelected={setCountSelected}
+          initial1={initial1}
+          initial2={initial2}
         />
       </Box>
 

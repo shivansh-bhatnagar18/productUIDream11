@@ -76,7 +76,7 @@ function page() {
         color="primary"
         className="mt-10 bg-[#2CA74B]"
         onClick={() => {
-          window.location.href = '/CaptainSelection';
+          window.location.href = `/CaptainSelection?match=${initial1} vs ${initial2}`;
         }}
       >
         Preview
