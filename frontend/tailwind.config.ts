@@ -15,6 +15,9 @@ export default {
       fontFamily: {
         sans: ['Product Sans', 'sans-serif'],
       },
+      blur: {
+        xs: '2px',
+      }
     },
   },
   plugins: [],
