@@ -25,6 +25,7 @@
 
 body {
   @apply font-sans;
+  overflow-x: hidden;
   color: var(--foreground);
   background: var(--background);
   font-family:
@@ -32,4 +33,14 @@ body {
     sans-serif; /* Apply the custom font globally */
   margin: 0;
   padding: 0;
+  
+}
+*::-webkit-scrollbar {
+  width: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: #444e54;
 }
