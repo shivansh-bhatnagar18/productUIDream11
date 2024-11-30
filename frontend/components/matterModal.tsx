@@ -70,7 +70,7 @@ export default function MatterModal({ player }: MatterModalProps) {
                 <p className="text-white text-sm ml-2">{player}</p>
               </div>
               <div className="bg-white bg-opacity-20 w-[35%] rounded-xl flex flex-col items-center py-2">
-                {/* <Image src="/SA.svg" width={'72'} height={'72'} alt="/" /> */}
+                {/* <Image src="/teamlogos/SA.svg" width={'72'} height={'72'} alt="/" /> */}
                 <p className="text-white text-lg ml-2 mt-2">Performance</p>
                 {/* <p className="text-white text-5xl font-bold ml-2">30</p> */}
               </div>

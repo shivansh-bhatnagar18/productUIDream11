@@ -21,6 +21,7 @@ const Match: React.FC<MatchProps> = ({
     <div
       className="bg-white bg-opacity-20 rounded-xl border-2 border-white flex w-full py-5 px-10 justify-center mt-2 overflow-x-auto"
       onClick={() => {
+        localStorage.clear();
         window.location.href = '/PlayerSelection';
       }}
     >
@@ -39,7 +40,7 @@ const Match: React.FC<MatchProps> = ({
         {time}
       </p>
       <div className="flex items-center gap-10 w-[40%] flex-row-reverse">
-        <Image src="/SA.svg" width={'72'} height={'72'} alt="/" />
+        <Image src="/teamlogos/SA.svg" width={'72'} height={'72'} alt="/" />
         <div className="flex flex-col">
           <h3 className="text-white text-3xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
             {initial2}

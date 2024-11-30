@@ -42,7 +42,12 @@ const Header = () => {
                 </div>
                 {/* Team 2 */}
                 <div className="flex items-center gap-10 w-[40%] flex-row-reverse">
-                  <Image src="/SA.svg" width={'72'} height={'72'} alt="/" />
+                  <Image
+                    src="/teamlogos/SA.svg"
+                    width={'72'}
+                    height={'72'}
+                    alt="/"
+                  />
                   <div className="flex flex-col">
                     <h3 className="text-[#EBEBF599] text-lg font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
                       SA
