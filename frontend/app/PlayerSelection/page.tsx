@@ -189,7 +189,7 @@ export default function Page() {
           className="bg-[#525E74]"
           onClick={() => {
             handleAIComparisonClick();
-            window.location.href = '/CaptainSelection';
+            window.location.href = `/PlayerSelection/?match=${initial1} vs ${initial2}`;
           }}
         >
           Next
