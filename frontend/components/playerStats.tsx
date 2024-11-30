@@ -20,6 +20,7 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 interface Props {
   rowData: any[];
   playerName: string;
+  match: string;
 }
 
 const data01 = [
@@ -63,12 +64,49 @@ const data = [
     fill: '#34C759',
   },
 ];
+interface AiAlerts {
+  final_rating: number;
+  insights: string[];
+  [key: string]: any;
+}
+
+interface PlayerData {
+  name: string;
+  imageSrc: string;
+  isSelected: boolean;
+  isCaptain: boolean;
+  isViceCaptain: boolean;
+  toCompare: boolean;
+  values: {
+    batting_first_predicted_score: number[];
+    chasing_first_predicted_score: number[];
+    strike_rate: number[];
+    economy: number[];
+    ceil_value: number;
+    floor_value: number;
+    [key: string]: any;
+  };
+  ai_alerts: AiAlerts;
+}
 
 const PlayerStats = (props: any) => {
-  const { rowData, playerName, classname } = props;
+  const { rowData, playerName, classname, match } = props;
   const [value, setValue] = useState<number>(2);
   const [isClicked, setIsClicked] = useState<boolean>(false);
+  const [playerData, setPlayerData] = useState<PlayerData | null>(null);
+  interface AiAlerts {
+    final_rating: number;
+    insights: string[];
+    [key: string]: any;
+  }
 
+  useEffect(() => {
+    console.log('rowData:', rowData);
+    const data = rowData.find((player: any) => player.name === playerName);
+    console.log('Found player data:', data);
+    setPlayerData(data);
+  }, [rowData, playerName]);
+  console.log(playerData?.ai_alerts);
   const databar = [
     {
       name: 'Page A',
@@ -155,6 +193,12 @@ const PlayerStats = (props: any) => {
     synth.speak(utterThis);
   };
 
+  if (!playerData) {
+    return <div>Player not found</div>;
+  }
+  console.log(playerData);
+  console.log(rowData);
+
   return (
     <div
       className={`bg-gray-600 bg-opacity-10 border-y-2 border-gray-600 border-opacity-60 flex flex-col w-full ${classname}`}
@@ -163,7 +207,11 @@ const PlayerStats = (props: any) => {
         <div className="bg-[#312D2C] mr-2 w-[25%] rounded-2xl flex flex-col">
           <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Batting First</p>
           <div className="flex w-full mb-2 mt-2">
-            <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">24</p>
+            <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
+              {Number(
+                playerData.values.batting_first_predicted_score[Number(match)]
+              ).toFixed(2)}
+            </p>
             <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
               FPts
             </p>
@@ -172,7 +220,12 @@ const PlayerStats = (props: any) => {
         <div className="bg-[#312D2C] mr-2 w-[25%] rounded-2xl flex flex-col">
           <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Chasing</p>
           <div className="flex w-full mb-2 mt-2">
-            <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">91</p>
+            <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
+              {' '}
+              {Number(
+                playerData.values.chasing_first_predicted_score[Number(match)]
+              ).toFixed(2)}
+            </p>
             <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
               FPts
             </p>
@@ -181,7 +234,9 @@ const PlayerStats = (props: any) => {
         <div className="bg-[#312D2C] mr-2 w-[25%] rounded-2xl flex flex-col">
           <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Strike Rate</p>
           <div className="flex w-full mb-2 mt-2">
-            <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">64</p>
+            <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
+              {Number(playerData.values.strike_rate[0]).toFixed(2)}
+            </p>
             <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
               FPts
             </p>
@@ -190,7 +245,10 @@ const PlayerStats = (props: any) => {
         <div className="bg-[#312D2C] w-[25%] rounded-2xl flex flex-col">
           <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Economy Rate</p>
           <div className="flex w-full mb-2 mt-2">
-            <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">83</p>
+            <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
+              {' '}
+              {Number(playerData.values.economy[0]).toFixed(2)}
+            </p>
             <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
               FPts
             </p>
@@ -274,13 +332,17 @@ const PlayerStats = (props: any) => {
               <p className="text-[#E4DAD7] text-center text-lg mx-3">
                 Ceil Fpts
               </p>
-              <p className="text-[#E4DAD7] text-center text-5xl font-bold">5</p>
+              <p className="text-[#E4DAD7] text-center text-5xl font-bold">
+                {Number(playerData.values.ceil_value.toFixed(2))}
+              </p>
             </div>
             <div className="bg-[#312D2C] w-full justify-center align-middle mt-2 mr-2 rounded-2xl flex flex-col">
               <p className="text-[#E4DAD7] text-center text-lg mx-3">
                 Floor Fpts
               </p>
-              <p className="text-[#E4DAD7] text-center text-5xl font-bold">5</p>
+              <p className="text-[#E4DAD7] text-center text-5xl font-bold">
+                {Number(playerData.values.floor_value.toFixed(2))}
+              </p>
             </div>
             <div className="bg-[#312D2C] w-full mt-2 rounded-2xl flex flex-col">
               <p className="text-[#E4DAD7] text-lg ml-4 mt-2 mb-2">Risk</p>
@@ -295,7 +357,11 @@ const PlayerStats = (props: any) => {
         <div className="flex flex-col justify-between my-5">
           <div className="flex justify-between">
             <div className="text-white text-lg ml-9">Alerts</div>
-            <Rating name="read-only" value={value} readOnly />
+            <Rating
+              name="read-only"
+              value={playerData.ai_alerts.final_rating}
+              readOnly
+            />
             <div className="flex justify-around gap-2 ">
               <div
                 onClick={() => {

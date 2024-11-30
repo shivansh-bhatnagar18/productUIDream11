@@ -15,9 +15,9 @@ interface PlayerProps {
 interface FieldProps {
   players: PlayerProps[];
   rowData: any[];
-  setCountSelected?: React.Dispatch<React.SetStateAction<number>>;
   initial1: string;
   initial2: string;
+  setCountSelected?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const Field: React.FC<FieldProps> = ({
