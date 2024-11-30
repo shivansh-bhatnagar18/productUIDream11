@@ -17,7 +17,7 @@ export default {
       },
       blur: {
         xs: '2px',
-      }
+      },
     },
   },
   plugins: [],
