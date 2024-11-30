@@ -72,7 +72,11 @@ function page() {
         />
       </div>
 
-      <TypeOfPlayerModal rowData={rowData} />
+      <TypeOfPlayerModal
+        rowData={rowData}
+        initial1={initial1}
+        initial2={initial2}
+      />
     </div>
   );
 }

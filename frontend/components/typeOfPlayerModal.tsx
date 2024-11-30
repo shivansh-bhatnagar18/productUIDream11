@@ -26,9 +26,15 @@ const style = {
 
 interface typeOfPlayerModalProps {
   rowData: any[];
+  initial1?: string;
+  initial2?: string;
 }
 
-export default function TypeOfPlayerModal({ rowData }: typeOfPlayerModalProps) {
+export default function TypeOfPlayerModal({
+  rowData,
+  initial1,
+  initial2,
+}: typeOfPlayerModalProps) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -167,9 +173,13 @@ export default function TypeOfPlayerModal({ rowData }: typeOfPlayerModalProps) {
           <div className="flex gap-10">
             {rowData.slice(0, 3).map((player, index) => (
               <div
+                key={index}
                 onClick={() => {
-                  window.location.href =
-                    '/CaptainComparison?playerName=' + player.name;
+                  const params = new URLSearchParams({
+                    match: `${initial1} vs ${initial2}`,
+                    playerName: player.name,
+                  });
+                  window.location.href = `/CaptainComparison/?${params.toString()}`;
                 }}
               >
                 <PlayerCard
