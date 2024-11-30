@@ -65,7 +65,7 @@ const data = [
 ];
 
 const PlayerStats = (props: any) => {
-  const { rowData, playerName } = props;
+  const { rowData, playerName, classname } = props;
   const [value, setValue] = useState<number>(2);
   const [isClicked, setIsClicked] = useState<boolean>(false);
 
@@ -157,7 +157,7 @@ const PlayerStats = (props: any) => {
 
   return (
     <div
-      className={`bg-gray-600 bg-opacity-10 border-y-2 border-gray-600 border-opacity-60 flex flex-col w-full`}
+      className={`bg-gray-600 bg-opacity-10 border-y-2 border-gray-600 border-opacity-60 flex flex-col w-full ${classname}`}
     >
       <div className="w-auto h-[20%] mx-3 mt-3 flex gap-2">
         <div className="bg-[#312D2C] mr-2 w-[25%] rounded-2xl flex flex-col">

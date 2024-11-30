@@ -109,7 +109,7 @@ export default function Page() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center bg-[#0D0402] min-h-screen max-w-screen min-w-screen">
+    <div className="flex flex-col items-center bg-[#0D0402] min-h-screen max-w-screen min-w-screen overflow-x-hidden">
       <Header />
       {/* team selection divs */}
       <div className="max-w-[50%] min-w-[50%] mx-auto mt-8">
