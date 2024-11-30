@@ -79,11 +79,19 @@ export default function Page() {
   const [countSelected, setCountSelected] = useState<number>(0);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [toComparePlayer, setToComparePlayer] = useState<any | null>(null);
-  const match = new window.URLSearchParams(window.location.search).get(
-    'match'
-  ) as string;
-  const initial1 = match.split(' vs ')[0];
-  const initial2 = match.split(' vs ')[1];
+  const [initial1, setInitial1] = useState<string>('');
+  const [initial2, setInitial2] = useState<string>('');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const match = new URLSearchParams(window.location.search).get(
+        'match'
+      ) as string;
+      const [team1, team2] = match.split(' vs ');
+      setInitial1(team1);
+      setInitial2(team2);
+    }
+  }, []);
   const handleCloseModal = () => {
     setShowModal(false);
   };
@@ -94,13 +102,13 @@ export default function Page() {
   };
 
   useEffect(() => {
-    const playerDat = JSON.parse(localStorage.getItem('rowData') || '[]');
-    setRowData(playerDat);
+    const playerData = JSON.parse(localStorage.getItem('rowData') || '[]');
+    setRowData(playerData);
     const selectedPlayerData = JSON.parse(
       localStorage.getItem('selectedRowData') || '[]'
     );
     setSelectedRowData(selectedPlayerData);
-    const count = playerDat.filter((player: any) => player.isSelected).length;
+    const count = playerData.filter((player: any) => player.isSelected).length;
     setCountSelected(count);
     if (count === 0) {
       readCSVData().then((data) => {
@@ -171,6 +179,8 @@ export default function Page() {
           setRowData={setRowData}
           setSelectedRowData={setSelectedRowData}
           setCountSelected={setCountSelected}
+          initial1={initial1}
+          initial2={initial2}
         />
         <Button
           type="button"
