@@ -6,6 +6,7 @@ import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Image from 'next/image';
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -27,6 +28,8 @@ interface Props {
   setRowData: React.Dispatch<React.SetStateAction<any[]>>;
   setSelectedRowData: React.Dispatch<React.SetStateAction<any[]>>;
   setCountSelected: React.Dispatch<React.SetStateAction<number>>;
+  initial1: string;
+  initial2: string;
 }
 
 export default function BattingFirstModal({
@@ -34,6 +37,8 @@ export default function BattingFirstModal({
   setRowData,
   setCountSelected,
   setSelectedRowData,
+  initial1,
+  initial2,
 }: Props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -89,22 +94,27 @@ export default function BattingFirstModal({
                 className="bg-white bg-opacity-20 grow rounded-xl flex flex-col items-center py-2"
                 onClick={handleClick}
               >
-                <Image src="/india.svg" width={'72'} height={'72'} alt="/" />
-                <p className="text-white text-lg ml-2 mt-2">IND</p>
-                {/* <p className="text-white text-5xl font-bold ml-2">30</p> */}
+                <Image
+                  src={`/teamlogos/${initial1}.svg`}
+                  width={'72'}
+                  height={'72'}
+                  alt="/"
+                  className="rounded-full w-34 h-34"
+                />
+                <p className="text-white text-lg ml-2 mt-2">{initial1}</p>
               </div>
               <div
                 className="bg-white bg-opacity-20 w-[35%] rounded-xl flex flex-col items-center py-2"
                 onClick={handleClick}
               >
                 <Image
-                  src="/teamlogos/SA.svg"
+                  src={`/teamlogos/${initial2}.svg`}
                   width={'72'}
                   height={'72'}
                   alt="/"
+                  className="rounded-full w-34 h-34"
                 />
-                <p className="text-white text-lg ml-2 mt-2">SA</p>
-                {/* <p className="text-white text-5xl font-bold ml-2">30</p> */}
+                <p className="text-white text-lg ml-2 mt-2">{initial2}</p>
               </div>
               <div
                 className="bg-white bg-opacity-20 w-[35%] rounded-xl flex flex-col items-center py-2"
@@ -112,7 +122,6 @@ export default function BattingFirstModal({
               >
                 <Image src="/think.png" width={'72'} height={'72'} alt="/" />
                 <p className="text-white text-lg ml-2 mt-2">Can't Say</p>
-                {/* <p className="text-white text-5xl font-bold ml-2">30</p> */}
               </div>
             </div>
           </Box>

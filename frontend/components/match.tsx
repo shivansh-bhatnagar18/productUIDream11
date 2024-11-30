@@ -22,7 +22,7 @@ const Match: React.FC<MatchProps> = ({
       className="bg-white bg-opacity-20 rounded-xl border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white flex w-full py-5 px-10 justify-center mt-2 overflow-x-auto shadow-inner shadow-white hover:cursor-pointer"
       onClick={() => {
         localStorage.clear();
-        window.location.href = '/PlayerSelection';
+        window.location.href = `/PlayerSelection/?match=${initial1} vs ${initial2}`;
       }}
     >
       <div className="flex items-center gap-10 w-[40%]">
