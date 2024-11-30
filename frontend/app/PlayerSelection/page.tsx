@@ -14,7 +14,7 @@ import BattingFirstModal from '@/components/battingFirstModal';
 import { url } from 'inspector';
 import { get } from 'http';
 
-const readCSVData = (): Promise<any[]> => {
+export const readCSVData = (): Promise<any[]> => {
   return new Promise((resolve, reject) => {
     const match = new window.URLSearchParams(window.location.search).get(
       'match'
@@ -134,6 +134,15 @@ export default function Page() {
                   return {};
                 }
               })(),
+              ai_alerts: (() => {
+                try {
+                  const fixedJSONString = row['ai_alert'].replace(/'/g, '"');
+                  return JSON.parse(fixedJSONString);
+                } catch (e) {
+                  console.error('Error parsing JSON:', e);
+                  return {};
+                }
+              })(),
             };
           });
           setRowData(playerData);
@@ -142,7 +151,7 @@ export default function Page() {
       setCountSelected(0);
     }
   }, []);
-
+  console.log(rowData);
   return (
     <div className="flex flex-col items-center bg-[#0D0402] min-h-screen max-w-screen min-w-screen">
       <Header initial1={initial1} initial2={initial2} />
