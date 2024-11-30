@@ -54,7 +54,6 @@ export default function TypeOfPlayerModal({ rowData }: typeOfPlayerModalProps) {
           onClick={() => {
             localStorage.setItem('rowData', JSON.stringify(rowData));
             console.log('rowData', rowData);
-            window.location.href = '/CaptainComparison';
           }}
         >
           Save
@@ -166,10 +165,20 @@ export default function TypeOfPlayerModal({ rowData }: typeOfPlayerModalProps) {
             Here are our top 3 recommendations
           </p>
           <div className="flex gap-10">
-            <PlayerCard playerName="Virat Kohli" rank={1} />
-            <PlayerCard playerName="Rohit Sharma" rank={2} />
-            <PlayerCard playerName="Jasprit Bumrah" rank={3} />
-            <div />
+            {rowData.slice(0, 3).map((player, index) => (
+              <div
+                onClick={() => {
+                  window.location.href =
+                    '/CaptainComparison?playerName=' + player.name;
+                }}
+              >
+                <PlayerCard
+                  key={index}
+                  playerName={player.name}
+                  rank={index + 1}
+                />
+              </div>
+            ))}
           </div>
         </div>
       )}

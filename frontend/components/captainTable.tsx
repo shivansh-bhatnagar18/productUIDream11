@@ -23,6 +23,7 @@ interface CaptainTableProps {
   setRowData: React.Dispatch<React.SetStateAction<any[]>>;
   setCaptainData: React.Dispatch<React.SetStateAction<any[]>>;
   setViceCaptainData: React.Dispatch<React.SetStateAction<any[]>>;
+  setToComparePlayer?: React.Dispatch<React.SetStateAction<any>>;
 }
 
 const CaptainTable = ({
@@ -30,6 +31,7 @@ const CaptainTable = ({
   setCaptainData,
   setViceCaptainData,
   setRowData,
+  setToComparePlayer,
 }: CaptainTableProps) => {
   const myTheme = themeQuartz.withParams({
     accentColor: '#D22A29',
@@ -44,12 +46,13 @@ const CaptainTable = ({
     headerFontSize: 14,
   });
 
-  const [selectedCKey, setSelectedCKey] = useState<number | null>(null);
   const [selectedVCKey, setSelectedVCKey] = useState<number | null>(null);
+  const [selectedCKey, setSelectedCKey] = useState<number | null>(null);
 
   const handleCButtonClick = (key: number) => {
     setSelectedCKey((prevKey) => (prevKey === key ? null : key));
-    setCaptainData(rowData.find((row) => row.key === key) || []);
+    const captain = rowData.find((row) => row.key === key);
+    setCaptainData(captain?.name || []);
     setRowData((prevData) =>
       prevData.map((row) =>
         row.key === key
@@ -57,11 +60,15 @@ const CaptainTable = ({
           : { ...row, isCaptain: false }
       )
     );
+    localStorage.setItem('rowData', JSON.stringify(rowData));
+    localStorage.setItem('captain', JSON.stringify(captain?.name || ''));
+    // console.log(rowData);
   };
 
   const handleVCButtonClick = (key: number) => {
     setSelectedVCKey((prevKey) => (prevKey === key ? null : key));
-    setViceCaptainData(rowData.find((row) => row.key === key) || []);
+    const viceCaptain = rowData.find((row) => row.key === key);
+    setViceCaptainData(viceCaptain?.name || []);
     setRowData((prevData) =>
       prevData.map((row) =>
         row.key === key
@@ -69,13 +76,27 @@ const CaptainTable = ({
           : { ...row, isViceCaptain: false }
       )
     );
+    localStorage.setItem('rowData', JSON.stringify(rowData));
+    localStorage.setItem(
+      'viceCaptain',
+      JSON.stringify(viceCaptain?.name || '')
+    );
+    // console.log(rowData);
   };
 
   const columnDefs: (ColDef<any, any> | ColGroupDef<any>)[] = [
     {
       headerName: 'Selected By',
       cellRenderer: (p: any) => (
-        <div className="flex gap-5">
+        <div
+          className="flex gap-5"
+          onClick={() => {
+            rowData.forEach((row, index) => {
+              row.toCompare = index === p.node.rowIndex;
+            });
+            setToComparePlayer && setToComparePlayer(p.data.name);
+          }}
+        >
           <img
             src={p.data.imageSrc}
             alt={p.data.name}

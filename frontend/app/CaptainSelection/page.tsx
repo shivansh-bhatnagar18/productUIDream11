@@ -18,44 +18,6 @@ import Papa from 'papaparse';
 import { useEffect, useState } from 'react';
 import TypeOfPlayerModal from '@/components/typeOfPlayerModal';
 
-const readCSVData = (): Promise<any[]> => {
-  return new Promise((resolve, reject) => {
-    fetch('/data.csv')
-      .then((response) => response.text())
-      .then((data) => {
-        Papa.parse(data, {
-          header: true,
-          complete: (results: Papa.ParseResult<any>) => {
-            resolve(results.data);
-          },
-          error: (error: any) => {
-            reject(error);
-          },
-        });
-      })
-      .catch((error) => reject(error));
-  });
-};
-
-const readCSVImageData = (): Promise<any[]> => {
-  return new Promise((resolve, reject) => {
-    fetch('/names.csv')
-      .then((response) => response.text())
-      .then((data) => {
-        Papa.parse(data, {
-          header: true,
-          complete: (results: Papa.ParseResult<any>) => {
-            resolve(results.data);
-          },
-          error: (error: any) => {
-            reject(error);
-          },
-        });
-      })
-      .catch((error) => reject(error));
-  });
-};
-
 function page() {
   const [rowData, setRowData] = useState<any[]>([]);
   const [selectedCaptain, setSelectedCaptain] = useState<any | null>(null);
@@ -82,7 +44,7 @@ function page() {
         <LoadingBar count={countSelected} />
       </div>
       <div className="flex w-[95%] mt-10 gap-5">
-        <PlayerCard playerName="Virat Kohli" rank={1} />
+        <PlayerCard playerName={selectedCaptain || 'Virat Kohli'} rank={1} />
         {/* <div className="h-[30%] w-[30%]"></div> */}
         <CaptainTable
           rowData={rowData}
@@ -91,7 +53,10 @@ function page() {
           setRowData={setRowData}
         />
         {/* <PlayerTable /> */}
-        <PlayerCard playerName="Rohit Sharma" rank={2} />
+        <PlayerCard
+          playerName={selectedViceCaptain || 'Virat Kohli'}
+          rank={2}
+        />
       </div>
 
       <TypeOfPlayerModal rowData={rowData} />

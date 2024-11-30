@@ -17,44 +17,6 @@ import Papa from 'papaparse';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-const readCSVData = (): Promise<any[]> => {
-  return new Promise((resolve, reject) => {
-    fetch('/data.csv')
-      .then((response) => response.text())
-      .then((data) => {
-        Papa.parse(data, {
-          header: true,
-          complete: (results: Papa.ParseResult<any>) => {
-            resolve(results.data);
-          },
-          error: (error: any) => {
-            reject(error);
-          },
-        });
-      })
-      .catch((error) => reject(error));
-  });
-};
-
-const readCSVImageData = (): Promise<any[]> => {
-  return new Promise((resolve, reject) => {
-    fetch('/names.csv')
-      .then((response) => response.text())
-      .then((data) => {
-        Papa.parse(data, {
-          header: true,
-          complete: (results: Papa.ParseResult<any>) => {
-            resolve(results.data);
-          },
-          error: (error: any) => {
-            reject(error);
-          },
-        });
-      })
-      .catch((error) => reject(error));
-  });
-};
-
 function Page() {
   const searchParams = useSearchParams();
   const name = searchParams.get('name');

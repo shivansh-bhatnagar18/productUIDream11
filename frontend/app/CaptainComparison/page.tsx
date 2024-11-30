@@ -16,52 +16,18 @@ import Header from '@/components/header';
 import CaptainTable from '@/components/captainTable';
 import Papa from 'papaparse';
 import { useEffect, useState } from 'react';
-
-const readCSVData = (): Promise<any[]> => {
-  return new Promise((resolve, reject) => {
-    fetch('/data.csv')
-      .then((response) => response.text())
-      .then((data) => {
-        Papa.parse(data, {
-          header: true,
-          complete: (results: Papa.ParseResult<any>) => {
-            resolve(results.data);
-          },
-          error: (error: any) => {
-            reject(error);
-          },
-        });
-      })
-      .catch((error) => reject(error));
-  });
-};
-
-const readCSVImageData = (): Promise<any[]> => {
-  return new Promise((resolve, reject) => {
-    fetch('/names.csv')
-      .then((response) => response.text())
-      .then((data) => {
-        Papa.parse(data, {
-          header: true,
-          complete: (results: Papa.ParseResult<any>) => {
-            resolve(results.data);
-          },
-          error: (error: any) => {
-            reject(error);
-          },
-        });
-      })
-      .catch((error) => reject(error));
-  });
-};
+import { useSearchParams } from 'next/navigation';
 
 function page() {
+  const searchParams = useSearchParams();
+  const name = searchParams.get('playerName');
   const [rowData, setRowData] = useState<any[]>([]);
   const [selectedCaptain, setSelectedCaptain] = useState<any | null>(null);
   const [selectedViceCaptain, setSelectedViceCaptain] = useState<any | null>(
     null
   );
   const [countSelected, setCountSelected] = useState<number>(0);
+  const [toComparePlayer, setToComparePlayer] = useState<string>(name || '');
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem('rowData') || '[]');
@@ -78,15 +44,19 @@ function page() {
         <LoadingBar count={countSelected} />
       </div>
       <div className="flex w-[95%] mt-10 gap-5">
-        <PlayerCard playerName="Virat Kohli" rank={1} />
+        <PlayerCard
+          playerName={Array.isArray(name) ? name[0] : name || ''}
+          rank={1}
+        />
         <CaptainTable
           rowData={rowData}
           setCaptainData={setSelectedCaptain}
           setViceCaptainData={setSelectedViceCaptain}
           setRowData={setRowData}
+          setToComparePlayer={setToComparePlayer}
         />
         {/* <PlayerTable /> */}
-        <PlayerCard playerName="Rohit Sharma" rank={2} />
+        <PlayerCard playerName={toComparePlayer} rank={2} />
       </div>
       <div className="flex w-[95%] mt-10">
         <PlayerStats classname="rounded-l-2xl border-x-2" />
@@ -97,8 +67,11 @@ function page() {
         variant="contained"
         color="primary"
         className="mt-10 bg-[#2CA74B]"
+        onClick={() => {
+          window.location.href = '/CaptainSelection';
+        }}
       >
-        Save
+        Preview
       </Button>
     </div>
   );
