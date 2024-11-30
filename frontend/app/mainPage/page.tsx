@@ -11,16 +11,16 @@ export default function Mainpage() {
           Choose Match
         </h1>
         <div className="w-full flex items-center justify-center mt-10">
-          <div className="h-[2px] bg-slate-500 w-full"></div>
+          <div className="h-[2px] bg-white w-full blur-xs"></div>
           <div className="flex items-center z-10">
-            <h2 className="text-white text-2xl font-normal leading-[141.667%] tracking-[-1.2px] bg-red-800 px-20 py-2 rounded-full">
+            <h2 className="text-white text-2xl font-normal leading-[141.667%] tracking-[-1.2px] bg-red-800 px-20 py-2 rounded-xl">
               LIVE
             </h2>
           </div>
-          <div className="h-[2px] bg-slate-500 w-full"></div>
+          <div className="h-[2px] bg-white w-full blur-xs"></div>
         </div>
 
-        <div className="bg-white bg-opacity-10 rounded-xl border-1 border-white flex flex-col w-[80%] py-5 px-10 mt-12">
+        <div className="bg-white bg-opacity-10  rounded-xl border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white flex flex-col w-[80%] py-5 px-10 mt-12 shadow-inner shadow-white">
           <Match
             Team1="India"
             Team2="South Africa"
@@ -37,15 +37,15 @@ export default function Mainpage() {
           />
         </div>
         <div className="w-full flex items-center justify-center mt-10">
-          <div className="h-[2px] bg-slate-500 w-full"></div>
+          <div className="h-[2px] bg-white w-full blur-xs"></div>
           <div className="flex items-center z-10">
             <h2 className="text-white text-2xl font-normal leading-[141.667%] tracking-[-1.2px] py-2 w-max px-4">
               UPCOMING MATCHES
             </h2>
           </div>
-          <div className="h-[2px] bg-slate-500 w-full"></div>
+          <div className="h-[2px] bg-white w-full blur-xs"></div>
         </div>
-        <div className="bg-white bg-opacity-10 rounded-xl border-1 border-white flex flex-col w-[80%] py-5 px-10 my-12">
+        <div className="bg-white bg-opacity-10 rounded-xl border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white flex flex-col w-[80%] py-5 px-10 my-12 shadow-inner shadow-white">
           <Match
             Team1="India"
             Team2="South Africa"
