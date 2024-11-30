@@ -11,10 +11,33 @@ import Header from '@/components/header';
 import Papa from 'papaparse';
 import { useEffect, useState } from 'react';
 import BattingFirstModal from '@/components/battingFirstModal';
+import { url } from 'inspector';
+import { get } from 'http';
 
 const readCSVData = (): Promise<any[]> => {
   return new Promise((resolve, reject) => {
-    fetch('/file_1.csv')
+    const match = new window.URLSearchParams(window.location.search).get(
+      'match'
+    );
+    const getMatch = () => {
+      switch (match) {
+        case 'CSK vs PW':
+          return '1';
+        case 'AUS vs PAK':
+          return '2';
+        case 'ENG vs SA':
+          return '3';
+        default:
+          return -1;
+      }
+    };
+    if (getMatch() === -1) {
+      reject('Invalid match');
+      window.location.href = '/'; // navigate to error page!
+      // add error popup here
+    }
+    const idx = getMatch();
+    fetch(`/file_${idx}.csv`)
       .then((response) => response.text())
       .then((data) => {
         Papa.parse(data, {
@@ -56,7 +79,11 @@ export default function Page() {
   const [countSelected, setCountSelected] = useState<number>(0);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [toComparePlayer, setToComparePlayer] = useState<any | null>(null);
-
+  const match = new window.URLSearchParams(window.location.search).get(
+    'match'
+  ) as string;
+  const initial1 = match.split(' vs ')[0];
+  const initial2 = match.split(' vs ')[1];
   const handleCloseModal = () => {
     setShowModal(false);
   };
@@ -109,8 +136,8 @@ export default function Page() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center bg-[#0D0402] min-h-screen max-w-screen min-w-screen overflow-x-hidden">
-      <Header />
+    <div className="flex flex-col items-center bg-[#0D0402] min-h-screen max-w-screen min-w-screen">
+      <Header initial1={initial1} initial2={initial2} />
       {/* team selection divs */}
       <div className="max-w-[50%] min-w-[50%] mx-auto mt-8">
         <LoadingBar count={countSelected} />
