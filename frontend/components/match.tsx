@@ -26,7 +26,13 @@ const Match: React.FC<MatchProps> = ({
       }}
     >
       <div className="flex items-center gap-10 w-[40%]">
-        <Image src="/india.svg" width={'72'} height={'72'} alt="/" />
+        <Image
+          src={`/teamlogos/${initial1}.svg`}
+          width={'72'}
+          height={'72'}
+          alt="/"
+          className="rounded-full h-20 w-20"
+        />
         <div className="flex flex-col">
           <h3 className="text-white text-3xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
             {initial1}
@@ -40,7 +46,13 @@ const Match: React.FC<MatchProps> = ({
         {time}
       </p>
       <div className="flex items-center gap-10 w-[40%] flex-row-reverse">
-        <Image src="/teamlogos/SA.svg" width={'72'} height={'72'} alt="/" />
+        <Image
+          src={`/teamlogos/${initial2}.svg`}
+          width={'72'}
+          height={'72'}
+          alt="/"
+          className="rounded-full h-20 w-20"
+        />
         <div className="flex flex-col">
           <h3 className="text-white text-3xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
             {initial2}
