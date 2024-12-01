@@ -41,15 +41,14 @@ const PlayerCard = ({ playerName }: PlayerCardProps) => {
   const [playerData, setPlayerData] = useState<PlayerData | null>(null);
   const [rowData, setRowData] = useState<any[]>([]);
   const [data, setData] = useState<any[]>([
-    { name: 'Match 1', actual: 0, predictions: 0 },
-    { name: 'Match 2', actual: 0, predictions: 0 },
-    { name: 'Match 3', actual: 0, predictions: 0 },
-    { name: 'Match 4', actual: 0, predictions: 0 },
-    { name: 'Match 5', actual: 0, predictions: 0 },
-    { name: 'Match 6', actual: 0, predictions: 0 },
+    { name: 'Match 1', y_pred: 0 },
+    { name: 'Match 2', y_pred: 0 },
+    { name: 'Match 3', y_pred: 0 },
+    { name: 'Match 4', y_pred: 0 },
+    { name: 'Match 5', y_pred: 0 },
+    { name: 'Match 6', y_pred: 0 },
   ]);
 
-  // Fetch player information from CSV
   useEffect(() => {
     readCSVImageData().then((imageData) => {
       const playerInfo = imageData.find((img) => img.Name === playerName);
@@ -67,13 +66,10 @@ const PlayerCard = ({ playerName }: PlayerCardProps) => {
     });
   }, [playerName]);
 
-  // Load local storage data
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem('rowData') || '[]');
     setRowData(data);
   }, []);
-
-  // Find specific player data from rowData
   useEffect(() => {
     const player = rowData.find((player: any) => player.name === playerName);
     if (player) {
@@ -82,26 +78,20 @@ const PlayerCard = ({ playerName }: PlayerCardProps) => {
     }
   }, [rowData, playerName]);
 
-  // Update graph data when playerData changes
   useEffect(() => {
     if (playerData && playerData.values) {
       setRank(playerData.values.rank || 0);
-      updateDatabar(
-        playerData.values.y_actual || [],
-        playerData.values.y_pred || []
-      );
+      updateDatabar(playerData.values.y_pred || []);
     }
   }, [playerData]);
 
-  // Function to update the graph data
-  const updateDatabar = (y_actual: number[], y_pred: number[]) => {
+  const updateDatabar = (y_pred: number[]) => {
     const updatedDatabar = data.map((item, index) => ({
       ...item,
-      actual: y_actual[index] || 0,
-      predictions: y_pred[index] || 0,
+      y_pred: y_pred[index] || 0,
     }));
-    console.log('Updated Databar:', updatedDatabar);
     setData(updatedDatabar);
+    return updatedDatabar;
   };
 
   return (
@@ -147,11 +137,11 @@ const PlayerCard = ({ playerName }: PlayerCardProps) => {
                 </linearGradient>
               </defs>
               <XAxis dataKey="name" stroke="#FFF" />
-              <YAxis stroke="#FFF" />
+              <YAxis stroke="#FFF" dataKey="y_pred" />
               <Tooltip />
               <Area
                 type="monotone"
-                dataKey="actual"
+                dataKey="y_pred"
                 stroke="#FFA18D"
                 fillOpacity={1}
                 fill="url(#colorUv)"
