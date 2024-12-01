@@ -46,10 +46,7 @@ function page() {
         <LoadingBar count={countSelected} />
       </div>
       <div className="flex w-[95%] mt-10 gap-5">
-        <PlayerCard
-          playerName={selectedCaptain || 'Captain Default'}
-          rank={1}
-        />
+        <PlayerCard playerName={selectedCaptain || 'Captain Default'} />
         {/* <div className="h-[30%] w-[30%]"></div> */}
         <CaptainTable
           rowData={rowData}
@@ -57,10 +54,7 @@ function page() {
           setViceCaptainData={setSelectedViceCaptain}
           setRowData={setRowData}
         />
-        <PlayerCard
-          playerName={selectedViceCaptain || 'Vice Captain'}
-          rank={2}
-        />
+        <PlayerCard playerName={selectedViceCaptain || 'Vice Captain'} />
       </div>
 
       <TypeOfPlayerModal
