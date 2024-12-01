@@ -99,58 +99,55 @@ const PlayerStats = (props: any) => {
     insights: string[];
     [key: string]: any;
   }
+  const [databar, setDatabar] = useState<any[]>([
+    {
+      name: 'Match 1',
+      actual: 0,
+      predictions: 0,
+    },
+    {
+      name: 'Match 2',
+      actual: 0,
+      predictions: 0,
+    },
+    {
+      name: 'Match 3',
+      actual: 0,
+      predictions: 0,
+    },
+    {
+      name: 'Match 4',
+      actual: 0,
+      predictions: 0,
+    },
+    {
+      name: 'Match 5',
+      actual: 0,
+      predictions: 0,
+    },
+    {
+      name: 'Match 6',
+      actual: 0,
+      predictions: 0,
+    }
+  ]);
 
   useEffect(() => {
     console.log('rowData:', rowData);
     const data = rowData.find((player: any) => player.name === playerName);
     console.log('Found player data:', data);
     setPlayerData(data);
+    console.log('Player data:', playerData);
+    if (data) {
+      const updatedDatabar = databar.map((item, index) => ({
+        ...item,
+        actual: data.values.y_actual[index] || 0,
+        predictions: data.values.y_pred[index] || 0,
+      }));
+      setDatabar(updatedDatabar);
+    }
   }, [rowData, playerName]);
   console.log(playerData?.ai_alerts);
-  const databar = [
-    {
-      name: 'Page A',
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: 'Page B',
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: 'Page C',
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: 'Page D',
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: 'Page E',
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: 'Page F',
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: 'Page G',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ];
 
   const [alertEng, setAlertEng] = useState<string>('');
   const [alertHindi, setAlertHindi] = useState<string>('');
@@ -208,9 +205,7 @@ const PlayerStats = (props: any) => {
           <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Batting First</p>
           <div className="flex w-full mb-2 mt-2">
             <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
-              {Number(
-                playerData.values.batting_first_predicted_score[Number(match)]
-              ).toFixed(2)}
+              {Math.round(playerData.values.batting_first_predicted_score[0])}
             </p>
             <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
               FPts
@@ -222,9 +217,7 @@ const PlayerStats = (props: any) => {
           <div className="flex w-full mb-2 mt-2">
             <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
               {' '}
-              {Number(
-                playerData.values.chasing_first_predicted_score[Number(match)]
-              ).toFixed(2)}
+              {Math.round(playerData.values.chasing_first_predicted_score[0])}
             </p>
             <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
               FPts
@@ -235,7 +228,7 @@ const PlayerStats = (props: any) => {
           <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Strike Rate</p>
           <div className="flex w-full mb-2 mt-2">
             <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
-              {Number(playerData.values.strike_rate[0]).toFixed(2)}
+            {Math.round(playerData.values.strike_rate[0])}
             </p>
             <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
               FPts
@@ -247,7 +240,7 @@ const PlayerStats = (props: any) => {
           <div className="flex w-full mb-2 mt-2">
             <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
               {' '}
-              {Number(playerData.values.economy[0]).toFixed(2)}
+              {Math.round(playerData.values.economy[0])}
             </p>
             <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
               FPts
@@ -333,7 +326,7 @@ const PlayerStats = (props: any) => {
                 Ceil Fpts
               </p>
               <p className="text-[#E4DAD7] text-center text-5xl font-bold">
-                {Number(playerData.values.ceil_value.toFixed(2))}
+                {Math.round(playerData.values.ceil_value)}
               </p>
             </div>
             <div className="bg-[#312D2C] w-full justify-center align-middle mt-2 mr-2 rounded-2xl flex flex-col">
@@ -341,7 +334,7 @@ const PlayerStats = (props: any) => {
                 Floor Fpts
               </p>
               <p className="text-[#E4DAD7] text-center text-5xl font-bold">
-                {Number(playerData.values.floor_value.toFixed(2))}
+                {Math.round(playerData.values.floor_value)}
               </p>
             </div>
             <div className="bg-[#312D2C] w-full mt-2 rounded-2xl flex flex-col">

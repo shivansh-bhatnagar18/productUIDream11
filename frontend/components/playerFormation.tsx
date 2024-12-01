@@ -25,8 +25,6 @@ const PlayerFormation = ({
   initial1,
   initial2,
   setCountSelected = () => {},
-  initial1,
-  initial2,
 }: PlayerFormationProps) => {
   return (
     <div className="flex flex-wrap justify-center z-50 relative">
