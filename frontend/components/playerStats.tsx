@@ -1,6 +1,5 @@
 'use client';
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   RadialBarChart,
   RadialBar,
@@ -64,6 +63,7 @@ const data = [
     fill: '#34C759',
   },
 ];
+
 interface AiAlerts {
   final_rating: number;
   insights: string[];
@@ -84,6 +84,8 @@ interface PlayerData {
     economy: number[];
     ceil_value: number;
     floor_value: number;
+    y_actual: number[];
+    y_pred: number[];
     [key: string]: any;
   };
   ai_alerts: AiAlerts;
@@ -94,42 +96,14 @@ const PlayerStats = (props: any) => {
   const [value, setValue] = useState<number>(2);
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [playerData, setPlayerData] = useState<PlayerData | null>(null);
-  interface AiAlerts {
-    final_rating: number;
-    insights: string[];
-    [key: string]: any;
-  }
+  const [aiAlerts, setAiAlerts] = useState<AiAlerts | null>(null);
   const [databar, setDatabar] = useState<any[]>([
-    {
-      name: 'Match 1',
-      actual: 0,
-      predictions: 0,
-    },
-    {
-      name: 'Match 2',
-      actual: 0,
-      predictions: 0,
-    },
-    {
-      name: 'Match 3',
-      actual: 0,
-      predictions: 0,
-    },
-    {
-      name: 'Match 4',
-      actual: 0,
-      predictions: 0,
-    },
-    {
-      name: 'Match 5',
-      actual: 0,
-      predictions: 0,
-    },
-    {
-      name: 'Match 6',
-      actual: 0,
-      predictions: 0,
-    }
+    { name: 'Match 1', actual: 0, predictions: 0 },
+    { name: 'Match 2', actual: 0, predictions: 0 },
+    { name: 'Match 3', actual: 0, predictions: 0 },
+    { name: 'Match 4', actual: 0, predictions: 0 },
+    { name: 'Match 5', actual: 0, predictions: 0 },
+    { name: 'Match 6', actual: 0, predictions: 0 },
   ]);
 
   useEffect(() => {
@@ -137,17 +111,30 @@ const PlayerStats = (props: any) => {
     const data = rowData.find((player: any) => player.name === playerName);
     console.log('Found player data:', data);
     setPlayerData(data);
-    console.log('Player data:', playerData);
     if (data) {
-      const updatedDatabar = databar.map((item, index) => ({
-        ...item,
-        actual: data.values.y_actual[index] || 0,
-        predictions: data.values.y_pred[index] || 0,
-      }));
-      setDatabar(updatedDatabar);
+      setAiAlerts(data.ai_alerts);
     }
   }, [rowData, playerName]);
-  console.log(playerData?.ai_alerts);
+
+  const updateDatabar = (y_actual: number[], y_pred: number[]) => {
+    const updatedDatabar = databar.map((item, index) => ({
+      ...item,
+      actual: y_actual[index] || 0,
+      predictions: y_pred[index] || 0,
+    }));
+    setDatabar(updatedDatabar);
+    return updatedDatabar;
+  };
+
+  useEffect(() => {
+    if (playerData) {
+      const updatedData = updateDatabar(
+        playerData.values.y_actual,
+        playerData.values.y_pred
+      );
+      console.log('Updated databar:', updatedData);
+    }
+  }, [playerData]);
 
   const [alertEng, setAlertEng] = useState<string>('');
   const [alertHindi, setAlertHindi] = useState<string>('');
@@ -205,7 +192,9 @@ const PlayerStats = (props: any) => {
           <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Batting First</p>
           <div className="flex w-full mb-2 mt-2">
             <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
-              {Math.round(playerData.values.batting_first_predicted_score[0])}
+              {Math.round(
+                playerData.values.batting_first_predicted_score[Number(match)]
+              )}
             </p>
             <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
               FPts
@@ -217,7 +206,9 @@ const PlayerStats = (props: any) => {
           <div className="flex w-full mb-2 mt-2">
             <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
               {' '}
-              {Math.round(playerData.values.chasing_first_predicted_score[0])}
+              {Math.round(
+                playerData.values.chasing_first_predicted_score[Number(match)]
+              )}
             </p>
             <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
               FPts
@@ -228,7 +219,7 @@ const PlayerStats = (props: any) => {
           <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Strike Rate</p>
           <div className="flex w-full mb-2 mt-2">
             <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
-            {Math.round(playerData.values.strike_rate[0])}
+              {Math.round(playerData.values.strike_rate[0])}
             </p>
             <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
               FPts
@@ -312,11 +303,11 @@ const PlayerStats = (props: any) => {
                 <Legend />
                 <Line
                   type="monotone"
-                  dataKey="pv"
+                  dataKey="predictions"
                   stroke="#367CEA"
                   activeDot={{ r: 8 }}
                 />
-                <Line type="monotone" dataKey="uv" stroke="#67B402" />
+                <Line type="monotone" dataKey="actual" stroke="#67B402" />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -326,7 +317,7 @@ const PlayerStats = (props: any) => {
                 Ceil Fpts
               </p>
               <p className="text-[#E4DAD7] text-center text-5xl font-bold">
-                {Math.round(playerData.values.ceil_value)}
+                {Number(playerData.values.ceil_value.toFixed(2))}
               </p>
             </div>
             <div className="bg-[#312D2C] w-full justify-center align-middle mt-2 mr-2 rounded-2xl flex flex-col">
@@ -334,7 +325,7 @@ const PlayerStats = (props: any) => {
                 Floor Fpts
               </p>
               <p className="text-[#E4DAD7] text-center text-5xl font-bold">
-                {Math.round(playerData.values.floor_value)}
+                {Number(playerData.values.floor_value.toFixed(2))}
               </p>
             </div>
             <div className="bg-[#312D2C] w-full mt-2 rounded-2xl flex flex-col">
@@ -352,7 +343,7 @@ const PlayerStats = (props: any) => {
             <div className="text-white text-lg ml-9">Alerts</div>
             <Rating
               name="read-only"
-              value={playerData.ai_alerts.final_rating}
+              value={aiAlerts?.final_rating || 0}
               readOnly
             />
             <div className="flex justify-around gap-2 ">
@@ -386,16 +377,16 @@ const PlayerStats = (props: any) => {
             />
           </div>
           {isClicked
-            ? alertHindi
-                .split('\n')
-                .map((line, index) => (
-                  <p className="text-white text-md ml-20">{line}</p>
-                ))
-            : alertEng
-                .split('\n')
-                .map((line, index) => (
-                  <p className="text-white text-md ml-20">{line}</p>
-                ))}
+            ? alertHindi.split('\n').map((line, index) => (
+                <p key={index} className="text-white text-md ml-20">
+                  {line}
+                </p>
+              ))
+            : alertEng.split('\n').map((line, index) => (
+                <p key={index} className="text-white text-md ml-20">
+                  {line}
+                </p>
+              ))}
         </div>
       </div>
     </div>
