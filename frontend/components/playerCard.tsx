@@ -122,7 +122,9 @@ const PlayerCard = ({ playerName }: PlayerCardProps) => {
       </div>
       <div className="bg-white bg-opacity-20 w-auto h-[60%] m-3 rounded-xl p-3">
         <p className="text-white text-md font-bold">FPts Prediction</p>
-        <p className="text-white text-2xl font-bold">30</p>
+        <p className="text-white text-2xl font-bold">
+          {Math.round(playerData?.values.y_pred[5] as number)}
+        </p>
         <div className="w-full h-40">
           {/* Responsive Container to auto-scale */}
           <ResponsiveContainer width="100%" height="100%">

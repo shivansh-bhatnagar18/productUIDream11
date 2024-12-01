@@ -125,7 +125,7 @@ const PlayerStats = (props: any) => {
         { name: 'Percentage', uv: 100, pv: 2400, fill: 'transparent' },
         {
           name: 'Percentage',
-          uv: playerData.values.score,
+          uv: Math.round(playerData.values.score),
           pv: 4567,
           fill: '#34C759',
         },
