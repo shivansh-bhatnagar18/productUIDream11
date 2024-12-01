@@ -1,20 +1,9 @@
 'use client';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-// import SearchDropdown from "../../components/searchDropdown";
-import { Button } from '@mui/material';
-import Link from 'next/link';
-import Image from 'next/image';
 import LoadingBar from '@/components/LoadingBar';
-import Field from '@/components/field';
-import PlayerTable from '@/components/playerTable';
 import 'ag-grid-enterprise';
-import Navbar from '@/components/navbar';
 import PlayerCard from '@/components/playerCard';
-import PlayerStats from '@/components/playerStats';
 import CaptainTable from '@/components/captainTable';
 import Header from '@/components/header';
-import Papa from 'papaparse';
 import { useEffect, useState } from 'react';
 import TypeOfPlayerModal from '@/components/typeOfPlayerModal';
 
@@ -68,7 +57,6 @@ function page() {
           setViceCaptainData={setSelectedViceCaptain}
           setRowData={setRowData}
         />
-        {/* <PlayerTable /> */}
         <PlayerCard
           playerName={selectedViceCaptain || 'Vice Captain'}
           rank={2}

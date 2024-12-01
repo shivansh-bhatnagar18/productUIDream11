@@ -1,18 +1,13 @@
 'use client';
 import { Button } from '@mui/material';
-import Link from 'next/link';
-import Image from 'next/image';
 import LoadingBar from '@/components/LoadingBar';
 import Field from '@/components/field';
 import PlayerTable from '@/components/playerTable';
 import 'ag-grid-enterprise';
-import Navbar from '@/components/navbar';
 import Header from '@/components/header';
 import Papa from 'papaparse';
 import { useEffect, useState } from 'react';
 import BattingFirstModal from '@/components/battingFirstModal';
-import { url } from 'inspector';
-import { get } from 'http';
 
 export const readCSVData = (): Promise<any[]> => {
   return new Promise((resolve, reject) => {

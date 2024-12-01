@@ -3,7 +3,7 @@ import Image from 'next/image';
 function Navbar() {
   return (
     <>
-      <nav className="h-[64px] min-w-full bg-[#0D0402] flex justify-between px-5">
+      <nav className="h-[64px] min-w-full bg-transparent flex justify-between px-5">
         <div className="flex justify-start items-center gap-x-[28px] my-auto h-full  ">
           <Image
             src="/logomark.svg"

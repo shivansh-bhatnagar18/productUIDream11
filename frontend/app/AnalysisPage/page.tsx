@@ -1,6 +1,5 @@
 'use client';
 import { Button } from '@mui/material';
-import Link from 'next/link';
 import 'ag-grid-enterprise';
 import Navbar from '@/components/navbar';
 import Transaction from '@/components/Transaction';
@@ -123,8 +122,8 @@ function page() {
       </div>
       <div className="flex w-[95%] mt-10 gap-5">
         <div className="flex flex-wrap gap-5">
-          <div className="w-full h-80 justify-center items-center border-white border-[1px] border-solid border-opacity-5 rounded-3xl p-9 bg-[#2A1A1A]">
-            <div className="h-full flex border-[1px] border-white border-solid border-opacity-5 rounded-2xl bg-[#3E3030]">
+          <div className="w-full h-80 justify-center items-center border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white shadow-inner shadow-white rounded-3xl p-9 bg-[#2A1A1A]">
+            <div className="h-full flex border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white shadow-inner shadow-white rounded-2xl bg-[#3E3030]">
               <div className="w-full h-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>

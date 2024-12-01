@@ -1,6 +1,5 @@
 'use client';
 import React, { useState } from 'react';
-import { Button } from '@mui/material';
 
 function Models(props: any) {
   const { classname } = props;
@@ -23,7 +22,7 @@ function Models(props: any) {
 
   return (
     <div
-      className={`flex flex-col w-full h-full justify-center rounded-3xl align-middle border-white bg-[#2E1919] border-[1px] border-opacity-5 ${classname}`}
+      className={`flex flex-col w-full h-full justify-center rounded-3xl align-middle bg-[#2E1919] ${classname} border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white shadow-inner shadow-white`}
     >
       <div className="w-full font-bold text-4xl text-center pb-3 mt-3">
         Models
@@ -32,7 +31,7 @@ function Models(props: any) {
         {models.map((model) => (
           <div
             key={model.id}
-            className={`justify-between items-center  align-middle flex py-4 px-5 mx-4 mb-2 mt-2 gap-3 border-[1px] rounded-xl bg-[#413030] ${
+            className={`justify-between items-center  align-middle flex py-4 px-5 mx-4 mb-2 mt-2 gap-3 border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white shadow-inner shadow-white rounded-xl bg-[#413030] ${
               selectedModel === model.id
                 ? 'border-white'
                 : 'border-white border-opacity-30'

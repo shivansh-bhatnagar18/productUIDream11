@@ -6,7 +6,7 @@ function Transaction(props: any) {
   const { classname } = props;
   return (
     <div
-      className={`flex flex-col w-full h-full justify-center border-white rounded-3xl align-middle bg-[#2E1919] border-[1px] border-opacity-5 ${classname}`}
+      className={`flex flex-col w-full h-full justify-center border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white shadow-inner shadow-white rounded-3xl align-middle bg-[#2E1919] ${classname}`}
     >
       <div className="w-full font-bold text-3xl text-center pb-3 mt-3 border-white border-opacity-5 border-b-2">
         Transaction
