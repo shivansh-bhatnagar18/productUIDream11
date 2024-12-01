@@ -141,7 +141,7 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
 
   return (
     <div className="w-full">
-      <div style={{ width: '100%', height: '100%' }}>
+      <div style={{ width: '100%', height: '100%' }} className=' rounded-md border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white '>
         <AgGridReact
           rowData={rowData}
           columnDefs={columnDefs}

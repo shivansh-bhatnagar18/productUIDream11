@@ -81,7 +81,7 @@ function page() {
         {/* <PlayerTable /> */}
         <PlayerCard playerName={toComparePlayer} rank={2} />
       </div>
-      <div className="flex w-[95%] mt-10">
+      <div className="flex w-[95%] mt-10 border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white shadow-inner shadow-white rounded-2xl ">
         <PlayerStats
           rowData={rowData}
           playerName={selectedCaptain}

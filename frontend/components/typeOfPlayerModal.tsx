@@ -167,7 +167,7 @@ export default function TypeOfPlayerModal({
         </Fade>
       </Modal>
       {showRecommendations && (
-        <div className="bg-white bg-opacity-10 rounded-xl border-2 border-white p-10 flex flex-col items-center mt-24">
+        <div className="bg-white bg-opacity-10 rounded-xl border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white shadow-inner shadow-white p-10 flex flex-col items-center mt-24">
           <p className="text-white text-2xl mb-10">
             Here are our top 3 recommendations
           </p>

@@ -115,23 +115,26 @@ const PlayerCard = ({ playerName, rank }: PlayerCardProps) => {
   }, [playerName]);
 
   return (
-    <div className="bg-white bg-opacity-10 rounded-xl border-2 border-white max-w-80">
-      <div className="bg-[#0D0402] w-auto h-[30%] m-3 rounded-xl flex gap-2">
+    <div className="bg-white bg-opacity-10 rounded-xl border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white shadow-inner shadow-white max-w-80">
+      <div className="bg-gradient-to-tr from-black from-10% via-[#1B0303] via-30% to-[#411308] to-90% w-auto h-[30%] m-3 rounded-xl flex gap-2">
         <img
           src={playerImgSrc}
           alt="player"
           className="w-[45%] h-[90%] rounded-xl"
         />
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col text-center justify-center gap-2">
           <div className="flex flex-col justify-center">
-            <p className="text-white text-md font-bold">{playerName}</p>
-            <p className="text-white text-xs">
+            <p className="text-white text-xl font-bold">{playerName}</p>
+            <p className="text-white text-left font-bold text-xs">
               {playerPosition}|{playerBattingStyle}|{playerBowlingStyle}
             </p>
-            <p className="text-white text-sm font-bold">{playerCountry}</p>
           </div>
-          <div className="flex flex-col">
-            <p className="text-white text-md font-bold">Rank: {rank}</p>
+          <div className='flex justify-between'>
+            <p className="text-white text-sm text-left font-bold">{playerCountry}</p>
+            <div className='flex flex-col text-right pr-4 pb-2'>
+            <p className="text-white text-4xl font-bold">{rank}</p>
+            <p className="text-white text-xs ">Matchup rank</p>
+            </div>
           </div>
         </div>
       </div>
