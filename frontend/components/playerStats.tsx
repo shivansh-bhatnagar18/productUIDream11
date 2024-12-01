@@ -49,28 +49,13 @@ const data01 = [
   },
 ];
 
-const data = [
-  {
-    name: 'Percentage',
-    uv: 100,
-    pv: 2400,
-    fill: 'transparent',
-  },
-  {
-    name: 'Percentage',
-    uv: 72,
-    pv: 4567,
-    fill: '#34C759',
-  },
-];
-
 interface AiAlerts {
   final_rating: number;
   insights: string[];
   [key: string]: any;
 }
 
-interface PlayerData {
+export interface PlayerData {
   name: string;
   imageSrc: string;
   isSelected: boolean;
@@ -105,6 +90,10 @@ const PlayerStats = (props: any) => {
     { name: 'Match 5', actual: 0, predictions: 0 },
     { name: 'Match 6', actual: 0, predictions: 0 },
   ]);
+  const [pitchData, setPitchData] = useState<any[]>([
+    { name: 'Percentage', uv: 100, pv: 2400, fill: 'transparent' },
+    { name: 'Percentage', uv: 72, pv: 4567, fill: '#34C759' },
+  ]);
 
   useEffect(() => {
     console.log('rowData:', rowData);
@@ -132,7 +121,16 @@ const PlayerStats = (props: any) => {
         playerData.values.y_actual,
         playerData.values.y_pred
       );
-      console.log('Updated databar:', updatedData);
+      const updatedPitchData = [
+        { name: 'Percentage', uv: 100, pv: 2400, fill: 'transparent' },
+        {
+          name: 'Percentage',
+          uv: playerData.values.score,
+          pv: 4567,
+          fill: '#34C759',
+        },
+      ];
+      setPitchData(updatedPitchData);
     }
   }, [playerData]);
 
@@ -192,9 +190,7 @@ const PlayerStats = (props: any) => {
           <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Batting First</p>
           <div className="flex w-full mb-2 mt-2">
             <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
-              {Math.round(
-                playerData.values.batting_first_predicted_score[Number(match)]
-              )}
+              {Math.round(playerData.values.batting_first_predicted_score[3])}
             </p>
             <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
               FPts
@@ -206,9 +202,7 @@ const PlayerStats = (props: any) => {
           <div className="flex w-full mb-2 mt-2">
             <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
               {' '}
-              {Math.round(
-                playerData.values.chasing_first_predicted_score[Number(match)]
-              )}
+              {Math.round(playerData.values.chasing_first_predicted_score[3])}
             </p>
             <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
               FPts
@@ -249,7 +243,7 @@ const PlayerStats = (props: any) => {
               width={200}
               height={100}
               outerRadius="80%"
-              data={data}
+              data={pitchData}
               startAngle={180}
               endAngle={0}
             >

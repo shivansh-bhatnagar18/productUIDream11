@@ -67,10 +67,7 @@ function page() {
         <LoadingBar count={countSelected} />
       </div>
       <div className="flex w-[95%] mt-10 gap-5">
-        <PlayerCard
-          playerName={Array.isArray(name) ? name[0] : name || ''}
-          rank={1}
-        />
+        <PlayerCard playerName={Array.isArray(name) ? name[0] : name || ''} />
         <CaptainTable
           rowData={rowData}
           setCaptainData={setSelectedCaptain}
@@ -79,7 +76,7 @@ function page() {
           setToComparePlayer={setToComparePlayer}
         />
         {/* <PlayerTable /> */}
-        <PlayerCard playerName={toComparePlayer} rank={2} />
+        <PlayerCard playerName={toComparePlayer} />
       </div>
       <div className="flex w-[95%] mt-10 border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white shadow-inner shadow-white rounded-2xl ">
         <PlayerStats
