@@ -95,7 +95,7 @@ const PlayerCard = ({ playerName }: PlayerCardProps) => {
   };
 
   return (
-    <div className="bg-white bg-opacity-10 rounded-xl border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white shadow-inner shadow-white max-w-80">
+    <div className="bg-white bg-opacity-10 rounded-xl border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white shadow-inner shadow-white max-w-80 min-w-80">
       <div className="bg-gradient-to-tr from-black from-10% via-[#1B0303] via-30% to-[#411308] to-90% w-auto h-[30%] m-3 rounded-xl flex gap-2">
         <img
           src={playerImgSrc}
