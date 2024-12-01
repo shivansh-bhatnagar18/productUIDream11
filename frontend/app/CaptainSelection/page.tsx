@@ -47,7 +47,6 @@ function page() {
       </div>
       <div className="flex w-[95%] mt-10 gap-5">
         <PlayerCard playerName={selectedCaptain || 'Captain Default'} />
-        {/* <div className="h-[30%] w-[30%]"></div> */}
         <CaptainTable
           rowData={rowData}
           setCaptainData={setSelectedCaptain}
