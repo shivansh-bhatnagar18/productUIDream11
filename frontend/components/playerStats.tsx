@@ -111,6 +111,7 @@ const PlayerStats = (props: any) => {
       actual: y_actual[index] || 0,
       predictions: y_pred[index] || 0,
     }));
+    updatedDatabar[5].actual = null;
     setDatabar(updatedDatabar);
     return updatedDatabar;
   };
