@@ -19,7 +19,8 @@ function page() {
     null
   );
   const [countSelected, setCountSelected] = useState<number>(0);
-  const [toComparePlayer, setToComparePlayer] = useState<string>(name || '');
+  const [toComparePlayer, setToComparePlayer] =
+    useState<string>('Compare Player');
   const [initial1, setInitial1] = useState<string>('');
   const [initial2, setInitial2] = useState<string>('');
   const [match, setMatch] = useState<string>('');
@@ -81,7 +82,7 @@ function page() {
       <div className="flex w-[95%] mt-10 border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white shadow-inner shadow-white rounded-2xl ">
         <PlayerStats
           rowData={rowData}
-          playerName={selectedCaptain}
+          playerName={Array.isArray(name) ? name[0] : name || ''}
           match={match}
           classname="rounded-l-2xl border-x-2"
         />

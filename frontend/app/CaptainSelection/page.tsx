@@ -29,6 +29,23 @@ function page() {
   }, []);
 
   useEffect(() => {
+    if (
+      typeof window !== 'undefined' &&
+      localStorage.getItem('captain') &&
+      localStorage.getItem('viceCaptain')
+    ) {
+      const captain = localStorage.getItem('captain');
+      if (captain?.trim() !== '') {
+        setSelectedCaptain(captain?.replace(/"/g, ''));
+      }
+      const viceCaptain = localStorage.getItem('viceCaptain');
+      if (viceCaptain?.trim() !== '') {
+        setSelectedViceCaptain(viceCaptain?.replace(/"/g, ''));
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     const teamData = JSON.parse(
       localStorage.getItem('selectedRowData') || '[]'
     );
