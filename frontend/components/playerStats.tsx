@@ -177,7 +177,139 @@ const PlayerStats = (props: any) => {
   };
 
   if (!playerData) {
-    return <div>Player not found</div>;
+    return (
+      <div
+        className={`bg-gray-600 bg-opacity-10 border-y-2 border-gray-600 border-opacity-60 flex flex-col w-full ${classname}`}
+      >
+        <div className="w-auto h-[20%] mx-3 mt-3 flex gap-2">
+          <div className="bg-[#312D2C] mr-2 w-[25%] rounded-2xl flex flex-col">
+            <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Batting First</p>
+            <div className="flex w-full mb-2 mt-2">
+              <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">0</p>
+              <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
+                FPts
+              </p>
+            </div>
+          </div>
+          <div className="bg-[#312D2C] mr-2 w-[25%] rounded-2xl flex flex-col">
+            <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Chasing</p>
+            <div className="flex w-full mb-2 mt-2">
+              <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">0</p>
+              <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
+                FPts
+              </p>
+            </div>
+          </div>
+          <div className="bg-[#312D2C] mr-2 w-[25%] rounded-2xl flex flex-col">
+            <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Strike Rate</p>
+            <div className="flex w-full mb-2 mt-2">
+              <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">0</p>
+              <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
+                FPts
+              </p>
+            </div>
+          </div>
+          <div className="bg-[#312D2C] w-[25%] rounded-2xl flex flex-col">
+            <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Economy Rate</p>
+            <div className="flex w-full mb-2 mt-2">
+              <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">0</p>
+              <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
+                FPts
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="w-auto h-[60%] m-3 rounded-2xl flex gap-2">
+          <div className="w-[60%] rounded-xl flex flex-col gap-2">
+            <div className="bg-[#312D2C] mt-1 mr-2 h-[50%] rounded-xl flex flex-col">
+              <p className="text-[#E4DAD7] text-lg ml-2 mt-2 mb-2 font-bold pl-3">
+                Pitch Performance Prediction
+              </p>
+              <RadialBarChart
+                width={200}
+                height={100}
+                outerRadius="80%"
+                startAngle={180}
+                endAngle={0}
+              >
+                <RadialBar
+                  label={{ fill: '#666', position: 'insideStart' }}
+                  background
+                  dataKey="uv"
+                />
+              </RadialBarChart>
+            </div>
+            <div className="bg-[#312D2C] h-[50%] mt-2 mr-2 rounded-2xl flex flex-col pb-3">
+              <p className="text-[#E4DAD7] text-lg ml-2 mt-2 mb-2 font-bold pl-3">
+                Relative FPts
+              </p>
+              <PieChart width={200} height={100}>
+                <Pie
+                  data={data01}
+                  dataKey="value"
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={50}
+                  fill="#36D25D"
+                />
+              </PieChart>
+            </div>
+          </div>
+          <div className="w-full h-auto rounded-xl mt-1 flex flex-col gap-2">
+            <div className="bg-[#312D2C] h-full rounded-2xl flex flex-col gap-2">
+              <p className="text-[#E4DAD7] text-lg ml-2 mt-2 font-bold pl-2">
+                Performance Prediction
+              </p>
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart
+                  width={500}
+                  height={300}
+                  data={databar}
+                  margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                >
+                  <XAxis dataKey="name" stroke="white" />
+                  <YAxis stroke="white" />
+                  <Tooltip />
+                  <Legend />
+                  <Line
+                    type="monotone"
+                    dataKey="predictions"
+                    stroke="#367CEA"
+                    activeDot={{ r: 8 }}
+                  />
+                  <Line type="monotone" dataKey="actual" stroke="#67B402" />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="rounded-xl flex gap-2">
+              <div className="bg-[#312D2C] w-full justify-center align-middle mt-2 mr-2 rounded-2xl flex flex-col">
+                <p className="text-[#E4DAD7] text-center text-lg mx-3">
+                  Ceil Fpts
+                </p>
+                <p className="text-[#E4DAD7] text-center text-5xl font-bold">
+                  0
+                </p>
+              </div>
+              <div className="bg-[#312D2C] w-full justify-center align-middle mt-2 mr-2 rounded-2xl flex flex-col">
+                <p className="text-[#E4DAD7] text-center text-lg mx-3">
+                  Floor Fpts
+                </p>
+                <p className="text-[#E4DAD7] text-center text-5xl font-bold">
+                  0
+                </p>
+              </div>
+              <div className="bg-[#312D2C] w-full mt-2 rounded-2xl flex flex-col">
+                <p className="text-[#E4DAD7] text-lg ml-4 mt-2 mb-2">Risk</p>
+                <p className="text-white mx-4 rounded-[3px] text-center text-2xl bg-[#D83D3D] font-bold mb-2 px-7">
+                  High
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
   console.log(playerData);
   console.log(rowData);

@@ -176,6 +176,7 @@ export default function TypeOfPlayerModal({
               <div
                 key={index}
                 onClick={() => {
+                  localStorage.setItem('captain', player.name);
                   const params = new URLSearchParams({
                     match: `${initial1} vs ${initial2}`,
                     playerName: player.name,
