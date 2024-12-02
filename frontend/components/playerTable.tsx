@@ -36,6 +36,7 @@ interface PlayerTableProps {
   setCountSelected: React.Dispatch<React.SetStateAction<number>>;
   setRowData: React.Dispatch<React.SetStateAction<any[]>>;
   setToComparePlayer: React.Dispatch<React.SetStateAction<string>>;
+  reverse?: boolean;
 }
 
 const PlayerTable: React.FC<PlayerTableProps> = ({
@@ -44,6 +45,7 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
   setSelectedRowData,
   setCountSelected,
   setToComparePlayer,
+  reverse,
 }) => {
   const myTheme = themeQuartz.withParams({
     accentColor: '#D22A29',
@@ -71,7 +73,7 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
     localStorage.setItem('rowData', JSON.stringify(rowData));
     localStorage.setItem('selectedRowData', JSON.stringify(selectedRowsFinal));
   };
-
+  const reverseData = [...rowData].reverse();
   // Define columnDefs directly inside the component
   const columnDefs: (ColDef<any, any> | ColGroupDef<any>)[] = [
     {
@@ -141,9 +143,12 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
 
   return (
     <div className="w-full">
-      <div style={{ width: '100%', height: '100%' }} className=' rounded-md border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white '>
+      <div
+        style={{ width: '100%', height: '100%' }}
+        className=" rounded-md border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white "
+      >
         <AgGridReact
-          rowData={rowData}
+          rowData={reverse ? reverseData : rowData}
           columnDefs={columnDefs}
           theme={myTheme}
         />

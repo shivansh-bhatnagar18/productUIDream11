@@ -183,11 +183,7 @@ export default function TypeOfPlayerModal({
                   window.location.href = `/CaptainComparison/?${params.toString()}`;
                 }}
               >
-                <PlayerCard
-                  key={index}
-                  playerName={player.name}
-                  rank={index + 1}
-                />
+                <PlayerCard key={index} playerName={player.name} />
               </div>
             ))}
           </div>
