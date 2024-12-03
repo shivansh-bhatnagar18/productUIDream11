@@ -171,7 +171,7 @@ export default function Page() {
         />
       </div>
       <div className="flex flex-row gap-4">
-        <Button
+      <Button
           type="submit"
           variant="contained"
           color="secondary"
@@ -180,7 +180,8 @@ export default function Page() {
         >
           Analyse My Pick
         </Button>
-        <BattingFirstModal
+        {
+          countSelected !== 11 && <BattingFirstModal
           rowData={rowData}
           setRowData={setRowData}
           setSelectedRowData={setSelectedRowData}
@@ -188,6 +189,7 @@ export default function Page() {
           initial1={initial1}
           initial2={initial2}
         />
+        }
         <Button
           type="button"
           variant="contained"
