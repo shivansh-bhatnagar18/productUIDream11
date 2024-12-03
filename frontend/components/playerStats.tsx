@@ -94,13 +94,11 @@ const PlayerStats = (props: any) => {
   if (rowData && rowData.length > 0) {
     const sortedRowData = sortRowDataByScore(rowData);
     console.log('Sorted rowData:', sortedRowData);
-
     let sum = 0;
     for (let i = 0; i < Math.min(11, sortedRowData.length); i++) {
       sum += sortedRowData[i].values.score;
     }
     setTotal(sum);
-
     const data = sortedRowData.find((player: any) => player.name === playerName);
     console.log('Found player data:', data);
     setPlayerData(data);
@@ -142,17 +140,17 @@ const PlayerStats = (props: any) => {
   const [alertEng, setAlertEng] = useState<string>('Loading...');
   const [alertHindi, setAlertHindi] = useState<string>('Loading...');
 
-  useEffect(() => {
-    if (aiAlerts) {
-      setAlertEng(aiAlerts.insights.join('\n'));
-      const formattedInsights = aiAlerts.insights
-        .map((insight) =>
-          insight.split('\n')[0].split(':').slice(1).join(':').trim()
-        )
-        .join('\n');
-      setAlertEng(formattedInsights);
-    }
-  }, [aiAlerts]);
+  // useEffect(() => {
+  //   if (aiAlerts) {
+  //     setAlertEng(aiAlerts.insights.join('\n'));
+  //     const formattedInsights = aiAlerts.insights
+  //       .map((insight) =>
+  //         insight.split('\n')[0].split(':').slice(1).join(':').trim()
+  //       )
+  //       .join('\n');
+  //     setAlertEng(formattedInsights);
+  //   }
+  // }, [aiAlerts]);
 
   useEffect(() => {
     if (aiAlerts) {
@@ -164,9 +162,10 @@ const PlayerStats = (props: any) => {
 
   useEffect(() => {
     if (playerData && total) {
-      let endAngle = (playerData.values.score/100) * 360
+      console.log(total)
+      let endAngle = (playerData.values.score/total)*100
       setEndAngle(endAngle)
-      setPieData([{ name: playerName, value: playerData.values.score}, { name: playerName, value: 100 - playerData.values.score , color: '#312d2c', stroke: 'transparent', }]);
+      setPieData([{ name: playerName, value: endAngle}, { name: playerName, value: 100 - endAngle , color: '#312d2c', stroke: 'transparent', }]);
     }
   }, [playerData, total]);
 
@@ -280,6 +279,7 @@ const PlayerStats = (props: any) => {
               width={250}
                 series={[
                   {
+                    color: '#34C759',
                     data: pieData,
                     innerRadius: 20,
                     outerRadius: 50,
@@ -289,7 +289,6 @@ const PlayerStats = (props: any) => {
                     endAngle: 360,
                     cx: 120,
                     cy: 80,
-                    
                   }]}
               />            
             </div>
