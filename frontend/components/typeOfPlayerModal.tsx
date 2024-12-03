@@ -51,9 +51,7 @@ export default function TypeOfPlayerModal({
 
   return (
     <div>
-      <div className="flex flex-row justify-center mt-10 gap-10">
-        
-      </div>
+      <div className="flex flex-row justify-center mt-10 gap-10"></div>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -194,12 +192,11 @@ export default function TypeOfPlayerModal({
                 <PlayerCard key={index} playerName={player.name} />
               </div>
             ))}
-            
           </div>
         </div>
       )}
       {showNext && <MatterModal player={typeOfPlayer} />}
-      <div className='justify-center flex w-full'>
+      <div className="justify-center flex w-full">
         <Button
           type="button"
           variant="contained"

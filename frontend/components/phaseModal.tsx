@@ -91,7 +91,7 @@ export default function PhaseModal({ matter, player }: PhaseModalProps) {
                 className="bg-white bg-opacity-20 w-[35%] rounded-xl flex flex-col items-center py-2 "
                 onClick={() => {
                   handleClick('Power Play');
-                  setShowRecommendations(true)
+                  setShowRecommendations(true);
                 }}
               >
                 <Image src="/power.png" width={'72'} height={'72'} alt="/" />
@@ -102,7 +102,7 @@ export default function PhaseModal({ matter, player }: PhaseModalProps) {
                 className="bg-white bg-opacity-20 w-[35%] rounded-xl flex flex-col items-center py-2"
                 onClick={() => {
                   handleClick('Middle Overs');
-                  setShowRecommendations(true)
+                  setShowRecommendations(true);
                 }}
               >
                 <Image src="/middle.png" width={'72'} height={'72'} alt="/" />
@@ -113,7 +113,7 @@ export default function PhaseModal({ matter, player }: PhaseModalProps) {
                 className="bg-white bg-opacity-20 w-[35%] rounded-xl flex flex-col items-center py-2"
                 onClick={() => {
                   handleClick('Death Overs');
-                  setShowRecommendations(true)
+                  setShowRecommendations(true);
                 }}
               >
                 <Image src="/death.png" width={'72'} height={'72'} alt="/" />
@@ -124,31 +124,30 @@ export default function PhaseModal({ matter, player }: PhaseModalProps) {
                 className="bg-white bg-opacity-20 w-[35%] rounded-xl flex flex-col items-center py-2"
                 onClick={() => {
                   handleClick("Can't Say");
-                  setShowRecommendations(true)
+                  setShowRecommendations(true);
                 }}
               >
                 <Image src="/think.png" width={'72'} height={'72'} alt="/" />
                 <p className="text-white text-lg ml-2 mt-2">Can't Say</p>
                 {/* <p className="text-white text-5xl font-bold ml-2">30</p> */}
               </div>
-              
             </div>
           </Box>
         </Fade>
       </Modal>
       {showRecommendations && (
-                <div className="bg-white bg-opacity-10 rounded-xl border-2 border-white p-10 flex flex-col items-center mt-5">
-                  <p className="text-white text-2xl mb-10">
-                    Here are our top 3 recommendations
-                  </p>
-                  <div className="flex gap-10">
-                    <PlayerCard playerName="Virat Kohli"/>
-                    <PlayerCard playerName="Rohit Sharma" />
-                    <PlayerCard playerName="Jasprit Bumrah" />
-                  <div />
-                </div>
-                </div>
-        )}
+        <div className="bg-white bg-opacity-10 rounded-xl border-2 border-white p-10 flex flex-col items-center mt-5">
+          <p className="text-white text-2xl mb-10">
+            Here are our top 3 recommendations
+          </p>
+          <div className="flex gap-10">
+            <PlayerCard playerName="Virat Kohli" />
+            <PlayerCard playerName="Rohit Sharma" />
+            <PlayerCard playerName="Jasprit Bumrah" />
+            <div />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
