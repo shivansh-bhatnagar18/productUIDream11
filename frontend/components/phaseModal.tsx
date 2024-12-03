@@ -55,6 +55,9 @@ export default function PhaseModal({ matter, player }: PhaseModalProps) {
         slotProps={{
           backdrop: {
             timeout: 500,
+            sx: {
+              backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            },
           },
         }}
       >

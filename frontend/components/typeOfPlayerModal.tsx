@@ -64,6 +64,9 @@ export default function TypeOfPlayerModal({
         slotProps={{
           backdrop: {
             timeout: 500,
+            sx: {
+              backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            },
           },
         }}
       >
