@@ -21,16 +21,16 @@ const Header = ({ initial1, initial2 }: HeaderProps) => {
             <p className="text-white text-xl font-thin leading-[ 283.333%] tracking-[-0.6px] mt-3">
               Maximum of 10 players from one team
             </p>
-            <div className="flex w-full px-10  justify-between">
+            <div className="flex w-full px-10 justify-center">
               {/* players div */}
-              <div className="flex flex-col">
+              {/* <div className="flex flex-col">
                 <h3 className="text-[#EBEBF599] text-lg font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
                   Players
                 </h3>
                 <p className="text-white text-2xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
                   11 <span className="text-[#EBEBF599] text-lg">/11</span>
                 </p>
-              </div>
+              </div> */}
               <div className="flex items-center justify-between min-w-[50%] max-w-[50%] ">
                 {/* Team 1 */}
                 <div className="flex items-center gap-10 w-[40%]">
@@ -70,14 +70,14 @@ const Header = ({ initial1, initial2 }: HeaderProps) => {
                 </div>
               </div>
               {/* credits div */}
-              <div className="flex flex-col">
+              {/* <div className="flex flex-col">
                 <h3 className="text-[#EBEBF599] text-lg font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
                   Credits Used
                 </h3>
                 <p className="text-white text-2xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
                   11
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
