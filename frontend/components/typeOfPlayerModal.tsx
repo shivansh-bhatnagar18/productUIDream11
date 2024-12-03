@@ -183,7 +183,35 @@ export default function TypeOfPlayerModal({
                   });
                   window.location.href = `/CaptainComparison/?${params.toString()}`;
                 }}
+                className="flex flex-col relative"
               >
+                {index === 0 && (
+                  <Image
+                    src="/first.png"
+                    width={'72'}
+                    height={'72'}
+                    alt="/"
+                    className="absolute -top-5 -left-5 z-100"
+                  />
+                )}
+                {index === 1 && (
+                  <Image
+                    src="/second.png"
+                    width={'72'}
+                    height={'72'}
+                    alt="/"
+                    className="absolute -top-5 -left-5 z-100"
+                  />
+                )}
+                {index === 2 && (
+                  <Image
+                    src="/third.png"
+                    width={'72'}
+                    height={'72'}
+                    alt="/"
+                    className="absolute -top-5 -left-5 z-100"
+                  />
+                )}
                 <PlayerCard key={index} playerName={player.name} />
               </div>
             ))}
