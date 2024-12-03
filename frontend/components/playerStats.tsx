@@ -243,17 +243,19 @@ const PlayerStats = (props: any) => {
               <p className="text-[#E4DAD7] text-lg ml-2 mt-2 mb-2 font-bold pl-3">
                 Relative FPts
               </p>
-              <PieChart width={200} height={100}>
-                <Pie
-                  data={data01}
-                  dataKey="value"
-                  nameKey="name"
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={50}
-                  fill="#36D25D"
-                />
-              </PieChart>
+              <div className="scale-90 h-full w-full flex items-center justify-center">
+                <PieChart width={200} height={100}>
+                  <Pie
+                    data={data01}
+                    dataKey="value"
+                    nameKey="name"
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={50}
+                    fill="#36D25D"
+                  />
+                </PieChart>
+              </div>
             </div>
           </div>
           <div className="w-full h-auto rounded-xl mt-1 flex flex-col gap-2">
@@ -287,7 +289,7 @@ const PlayerStats = (props: any) => {
                 <p className="text-[#E4DAD7] text-center text-lg mx-3">
                   Ceil Fpts
                 </p>
-                <p className="text-[#E4DAD7] text-center text-5xl font-bold">
+                <p className="text-[#E4DAD7] text-center text-3xl font-bold">
                   0
                 </p>
               </div>
@@ -295,7 +297,7 @@ const PlayerStats = (props: any) => {
                 <p className="text-[#E4DAD7] text-center text-lg mx-3">
                   Floor Fpts
                 </p>
-                <p className="text-[#E4DAD7] text-center text-5xl font-bold">
+                <p className="text-[#E4DAD7] text-center text-3xl font-bold">
                   0
                 </p>
               </div>
@@ -372,39 +374,42 @@ const PlayerStats = (props: any) => {
             <p className="text-[#E4DAD7] text-lg ml-2 mt-2 mb-2 font-bold pl-3">
               Pitch Performance Prediction
             </p>
-            <RadialBarChart
-              width={200}
-              height={100}
-              outerRadius="80%"
-              data={pitchData}
-              startAngle={180}
-              endAngle={0}
-            >
-              <RadialBar
-                // minAngle={15}
-                label={{ fill: '#666', position: 'insideStart' }}
-                background
-                // clockWise={true}
-                dataKey="uv"
-              />
-            </RadialBarChart>
+            <div className="scale-[250%] mt-10 h-full w-full items-center justify-center">
+              <RadialBarChart
+                width={250}
+                height={100}
+                outerRadius="80%"
+                data={pitchData}
+                startAngle={180}
+                endAngle={0}
+              >
+                <RadialBar
+                  // minAngle={15}
+                  label={{ fill: '#666', position: 'insideStart' }}
+                  background
+                  // clockWise={true}
+                  dataKey="uv"
+                />
+              </RadialBarChart>
+            </div>
           </div>
           <div className="bg-[#312D2C] h-[50%] mt-2 mr-2 rounded-2xl flex flex-col pb-3">
             <p className="text-[#E4DAD7] text-lg ml-2 mt-2 mb-2 font-bold pl-3">
               Relative FPts
             </p>
-            <PieChart width={200} height={100}>
-              <Pie
-                data={data01}
-                dataKey="value"
-                nameKey="name"
-                cx="50%"
-                cy="50%"
-                outerRadius={50}
-                fill="#36D25D"
-              />
-              {/* <Pie data={data02} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={60} outerRadius={80} fill="#82ca9d" label /> */}
-            </PieChart>
+            <div className="scale-90 h-full w-full flex items-center justify-center">
+              <PieChart width={200} height={100}>
+                <Pie
+                  data={data01}
+                  dataKey="value"
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={50}
+                  fill="#36D25D"
+                />
+              </PieChart>
+            </div>
           </div>
         </div>
         <div className="w-full h-auto rounded-xl mt-1 flex flex-col gap-2">
@@ -443,7 +448,7 @@ const PlayerStats = (props: any) => {
               <p className="text-[#E4DAD7] text-center text-lg mx-3">
                 Ceil Fpts
               </p>
-              <p className="text-[#E4DAD7] text-center text-5xl font-bold">
+              <p className="text-[#E4DAD7] text-center text-4xl font-bold">
                 {Number(playerData.values.ceil_value.toFixed(2))}
               </p>
             </div>
@@ -451,7 +456,7 @@ const PlayerStats = (props: any) => {
               <p className="text-[#E4DAD7] text-center text-lg mx-3">
                 Floor Fpts
               </p>
-              <p className="text-[#E4DAD7] text-center text-5xl font-bold">
+              <p className="text-[#E4DAD7] text-center text-4xl font-bold">
                 {Number(playerData.values.floor_value.toFixed(2))}
               </p>
             </div>
