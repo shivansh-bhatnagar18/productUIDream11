@@ -1,9 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SendIcon from '@/public/icons/sendIcon';
 import Message from './Message';
+import { ClipLoader } from 'react-spinners';
 
 interface ChatMessage {
   text: string;
@@ -15,6 +16,7 @@ interface ChatbotProps {
   setChatbotOpen: (open: boolean) => void;
   sendChatMessage: (message: string) => void;
   setMessages: (messages: ChatMessage[]) => void;
+  loading?: boolean;
 }
 
 const Chatbot: React.FC<ChatbotProps> = ({
@@ -22,6 +24,7 @@ const Chatbot: React.FC<ChatbotProps> = ({
   setChatbotOpen,
   sendChatMessage,
   setMessages,
+  loading,
 }) => {
   const [inputValue, setInputValue] = useState('');
 
@@ -29,10 +32,22 @@ const Chatbot: React.FC<ChatbotProps> = ({
     e.preventDefault();
     if (inputValue.trim()) {
       sendChatMessage(inputValue);
-      setInputValue('');
     }
+    setInputValue('');
   };
 
+  const endRef = React.useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      scrollToBottom();
+    }, 300);
+    return () => clearTimeout(timeoutId);
+  }, [messages]);
+  const scrollToBottom = () => {
+    if (endRef.current) {
+      endRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   return (
     <div className="w-full h-full bg-[#1a0c0b] rounded-3xl shadow-lg flex flex-col">
       {/* Header */}
@@ -55,7 +70,7 @@ const Chatbot: React.FC<ChatbotProps> = ({
       </div>
 
       {/* Chat Area */}
-      <div className="flex-1 overflow-y-auto p-4 bg-[#120707]">
+      <div className="flex-1 overflow-y-auto py-4 px-2 bg-[#120707]">
         {messages.map((message, index) => (
           <Message
             key={index}
@@ -63,6 +78,10 @@ const Chatbot: React.FC<ChatbotProps> = ({
             isSender={message.isSender}
           />
         ))}
+        <div
+          className={`mt-1 h-[0.01px] bg-none bottom-0 w-full `}
+          ref={endRef}
+        ></div>
       </div>
 
       {/* Input Area */}
@@ -77,12 +96,18 @@ const Chatbot: React.FC<ChatbotProps> = ({
             className="w-full bg-transparent text-[#e4d9d7] text-[16px] font-normal font-['Plus Jakarta Sans'] focus:outline-none"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
+            disabled={loading}
           />
           <button
             type="submit"
             className="w-8 h-8 flex justify-center items-center"
+            disabled={loading}
           >
-            <SendIcon className="fill-[#e4d9d7]" />
+            {!loading ? (
+              <SendIcon className="fill-[#e4d9d7]" />
+            ) : (
+              <ClipLoader color="#e4d9d7" size={20} />
+            )}
           </button>
         </form>
       </div>

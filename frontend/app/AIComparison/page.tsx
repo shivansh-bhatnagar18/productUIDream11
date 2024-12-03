@@ -11,7 +11,7 @@ import PlayerTable from '@/components/playerTable';
 import 'ag-grid-enterprise';
 import Navbar from '@/components/navbar';
 import PlayerCard from '@/components/playerCard';
-import PlayerStats from '@/components/playerStats';
+import PlayerStats, { PlayerData } from '@/components/playerStats';
 import Header from '@/components/header';
 import Papa from 'papaparse';
 import { useEffect, useState } from 'react';
@@ -27,12 +27,31 @@ function Page() {
   const [toComparePlayer, setToComparePlayer] = useState<string>(name || '');
   const [initial1, setInitial1] = useState<string>('');
   const [initial2, setInitial2] = useState<string>('');
+  const [match, setMatch] = useState<string>('');
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const match = new URLSearchParams(window.location.search).get(
         'match'
       ) as string;
+      const getMatch = () => {
+        switch (match) {
+          case 'CSK vs PW':
+            return '1';
+          case 'AUS vs PAK':
+            return '2';
+          case 'ENG vs SA':
+            return '3';
+          default:
+            return -1;
+        }
+      };
+      if (getMatch() === -1) {
+        console.log('Invalid match');
+        window.location.href = '/'; // navigate to error page!
+        // add error popup here
+      }
+      setMatch(getMatch() as string);
       if (match) {
         const [team1, team2] = match.split(' vs ');
         setInitial1(team1);
@@ -47,6 +66,13 @@ function Page() {
     const count = playerData.filter((player: any) => player.isSelected).length;
     setCountSelected(count);
   }, []);
+
+  const getPlayerId = (playerName: string) => {
+    const data = JSON.parse(localStorage.getItem('rowData') || '[]');
+    const player = data.find((player: any) => player.name === playerName);
+    console.log(player);
+    return player ? player.id : '';
+  };
 
   return (
     <div className="flex flex-col items-center bg-[#0D0402]  min-h-screen max-w-screen min-w-screen overflow-x-hidden">
@@ -89,7 +115,11 @@ function Page() {
       >
         Preview
       </Button>
-      <ChatbotWrapper />
+      <ChatbotWrapper
+        player1_id={getPlayerId(Array.isArray(name) ? name[0] : name || '')}
+        player2_id={getPlayerId(toComparePlayer)}
+        match_no={match}
+      />
     </div>
   );
 }
