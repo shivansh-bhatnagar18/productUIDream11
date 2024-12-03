@@ -205,7 +205,10 @@ export default function TypeOfPlayerModal({
           onClick={() => {
             localStorage.setItem('rowData', JSON.stringify(rowData));
             console.log('rowData', rowData);
-            window.location.href = '/';
+            const params = new URLSearchParams({
+              match: `${initial1} vs ${initial2}`,
+            });
+            window.location.href = `/PlayerSelection/?${params.toString()}`;
           }}
         >
           Save
