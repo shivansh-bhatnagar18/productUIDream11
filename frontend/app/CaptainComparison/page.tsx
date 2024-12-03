@@ -1,7 +1,6 @@
 'use client';
 
 import { Button } from '@mui/material';
-import LoadingBar from '@/components/LoadingBar';
 import 'ag-grid-enterprise';
 import PlayerCard from '@/components/playerCard';
 import PlayerStats from '@/components/playerStats';
@@ -9,6 +8,7 @@ import Header from '@/components/header';
 import CaptainTable from '@/components/captainTable';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import CaptainSelectionHeader from '@/components/CaptainSelectionHeader';
 
 function page() {
   const searchParams = useSearchParams();
@@ -64,8 +64,8 @@ function page() {
     <div className="flex flex-col items-center bg-[#0D0402] min-h-screen max-w-screen min-w-screen overflow-x-hidden">
       <Header initial1={initial1} initial2={initial2} />
       {/* team selection divs */}
-      <div className="max-w-[50%] min-w-[50%] mx-auto mt-8">
-        <LoadingBar count={countSelected} />
+      <div className="max-w-[60%] min-w-[60%] mx-auto mt-6">
+        <CaptainSelectionHeader />
       </div>
       <div className="flex w-[95%] mt-10 gap-5">
         <PlayerCard playerName={Array.isArray(name) ? name[0] : name || ''} />
