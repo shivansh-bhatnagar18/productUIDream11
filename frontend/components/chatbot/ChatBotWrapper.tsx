@@ -20,7 +20,8 @@ const ChatbotWrapper: React.FC<ChatbotWrapperProps> = ({
   const [messages, setMessages] = useState<MessageProps[]>([]);
   const [chatbotOpen, setChatbotOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-
+  const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+  console.log('BASE_URL', BASE_URL);
   const sendChatMessage = async (message: string) => {
     setMessages((prevMessages) => [
       ...prevMessages,
@@ -29,7 +30,7 @@ const ChatbotWrapper: React.FC<ChatbotWrapperProps> = ({
     setLoading(true);
     if (player1_id != '' && player2_id != '') {
       try {
-        const response = await axios.post('http://127.0.0.1:5000/api/chat', {
+        const response = await axios.post(`${BASE_URL}/chat`, {
           player1_id: `${player1_id}`,
           player2_id: `${player2_id}`,
           user_query: `${message}`,
