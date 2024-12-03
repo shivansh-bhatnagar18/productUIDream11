@@ -32,7 +32,6 @@ export default function MatterModal({ player }: MatterModalProps) {
   const [open, setOpen] = React.useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [showRecommendations, setShowRecommendations] = React.useState(false);
   const [showNext, setShowNext] = React.useState(false);
   const [matter, setMatter] = React.useState('');
 
@@ -54,7 +53,10 @@ export default function MatterModal({ player }: MatterModalProps) {
         slots={{ backdrop: Backdrop }}
         slotProps={{
           backdrop: {
-            timeout: 500,
+            timeout: 10,
+            sx: {
+              backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            },
           },
         }}
       >
@@ -118,7 +120,6 @@ export default function MatterModal({ player }: MatterModalProps) {
           </Box>
         </Fade>
       </Modal>
-      
       {showNext && <PhaseModal matter={matter} player={player} />}
     </div>
   );
