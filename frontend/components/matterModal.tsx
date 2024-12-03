@@ -32,7 +32,7 @@ export default function MatterModal({ player }: MatterModalProps) {
   const [open, setOpen] = React.useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [showRecommendations, setShowRecommendations] = React.useState(true);
+  const [showRecommendations, setShowRecommendations] = React.useState(false);
   const [showNext, setShowNext] = React.useState(false);
   const [matter, setMatter] = React.useState('');
 
@@ -118,19 +118,7 @@ export default function MatterModal({ player }: MatterModalProps) {
           </Box>
         </Fade>
       </Modal>
-      {showRecommendations && (
-        <div className="bg-white bg-opacity-10 rounded-xl border-2 border-white p-10 flex flex-col items-center mt-24">
-          <p className="text-white text-2xl mb-10">
-            Here are our top 3 recommendations
-          </p>
-          <div className="flex gap-10">
-            <PlayerCard playerName="Virat Kohli" rank={1} />
-            <PlayerCard playerName="Rohit Sharma" rank={2} />
-            <PlayerCard playerName="Jasprit Bumrah" rank={3} />
-            <div />
-          </div>
-        </div>
-      )}
+      
       {showNext && <PhaseModal matter={matter} player={player} />}
     </div>
   );
