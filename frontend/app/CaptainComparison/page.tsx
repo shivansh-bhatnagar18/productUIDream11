@@ -9,6 +9,7 @@ import CaptainTable from '@/components/captainTable';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import CaptainSelectionHeader from '@/components/CaptainSelectionHeader';
+import ChatbotWrapper from '@/components/chatbot/ChatBotWrapper';
 
 function page() {
   const searchParams = useSearchParams();
@@ -104,6 +105,7 @@ function page() {
       >
         Preview
       </Button>
+      <ChatbotWrapper />
     </div>
   );
 }

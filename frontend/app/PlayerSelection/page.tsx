@@ -8,6 +8,7 @@ import Header from '@/components/header';
 import Papa from 'papaparse';
 import { useEffect, useState } from 'react';
 import BattingFirstModal from '@/components/battingFirstModal';
+import ChatbotWrapper from '@/components/chatbot/ChatBotWrapper';
 
 export const readCSVData = (): Promise<any[]> => {
   return new Promise((resolve, reject) => {
@@ -204,6 +205,7 @@ export default function Page() {
         >
           Next
         </Button>
+        <ChatbotWrapper />
       </div>
     </div>
   );
