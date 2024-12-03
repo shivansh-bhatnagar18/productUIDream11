@@ -138,6 +138,8 @@ export default function Page() {
                   return {};
                 }
               })(),
+              isLocked: false,
+              isExcluded: false,
             };
           });
           setRowData(playerData);

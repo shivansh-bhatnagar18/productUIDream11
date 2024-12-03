@@ -524,12 +524,12 @@ const PlayerStats = (props: any) => {
           </div>
           {isClicked
             ? alertHindi.split('\n').map((line, index) => (
-                <p key={index} className="text-white text-md ml-10">
+                <p key={index} className="text-white text-sm ml-10">
                   • {line}
                 </p>
               ))
             : alertEng.split('\n').map((line, index) => (
-                <p key={index} className="text-white text-md ml-10">
+                <p key={index} className="text-white text-sm ml-10">
                   • {line}
                 </p>
               ))}

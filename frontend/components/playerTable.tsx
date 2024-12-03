@@ -73,6 +73,29 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
     localStorage.setItem('rowData', JSON.stringify(rowData));
     localStorage.setItem('selectedRowData', JSON.stringify(selectedRowsFinal));
   };
+
+  const handleLockedClick = (key: number) => {
+    rowData[key].isLocked = !rowData[key].isLocked;
+    if (rowData[key].isLocked) {
+      rowData[key].isSelected = true;
+    }
+    setRowData([...rowData]);
+    const updatedSelectedRows = rowData.filter((row) => row.isSelected);
+    setSelectedRowData(updatedSelectedRows);
+    setCountSelected(updatedSelectedRows.length);
+    localStorage.setItem('rowData', JSON.stringify(rowData));
+    localStorage.setItem(
+      'selectedRowData',
+      JSON.stringify(updatedSelectedRows)
+    );
+  };
+
+  const handleExcludeClick = (key: number) => {
+    rowData[key].isExclude = !rowData[key].isExclude;
+    setRowData([...rowData]);
+    localStorage.setItem('rowData', JSON.stringify(rowData));
+  };
+
   const reverseData = [...rowData].reverse();
   // Define columnDefs directly inside the component
   const columnDefs: (ColDef<any, any> | ColGroupDef<any>)[] = [
@@ -114,9 +137,29 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
       cellRenderer: (params: any) => {
         if (!params.data) return null;
         return (
-          <div>
-            <CloseIcon />
-            <LockOpenIcon />
+          <div className="flex gap-2">
+            <div
+              onClick={() => handleLockedClick(params.data.key)}
+              className={`w-6 h-6 flex items-center justify-center rounded-full transition-colors ${
+                params.data.isLocked ? ' text-red-800' : ' text-white'
+              }`}
+            >
+              <LockOpenIcon
+                className={params.data.isLocked ? 'text-red-800' : 'text-white'}
+              />
+            </div>
+            <div
+              onClick={() => handleExcludeClick(params.data.key)}
+              className={`w-6 h-6 flex items-center justify-center rounded-full transition-colors ${
+                params.data.isExclude ? ' text-green-800' : ' text-white'
+              }`}
+            >
+              <CloseIcon
+                className={
+                  params.data.isExclude ? 'text-green-800' : 'text-white'
+                }
+              />
+            </div>
           </div>
         );
       },

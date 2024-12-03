@@ -45,10 +45,13 @@ export default function BattingFirstModal({
   const handleClose = () => setOpen(false);
 
   const handleClick = () => {
-    const updatedRowData = rowData.map((player, index) => ({
-      ...player,
-      isSelected: index < 11 ? true : false,
-    }));
+    const lockedPlayers = rowData.filter((player) => player.isLocked);
+    const remainingSlots = 11 - lockedPlayers.length;
+    rowData
+      .filter((player) => !player.isLocked && !player.isExclude)
+      .slice(0, remainingSlots)
+      .forEach((player) => (player.isSelected = true));
+    const updatedRowData = [...rowData];
     setRowData(updatedRowData);
     setSelectedRowData(updatedRowData.filter((player) => player.isSelected));
     localStorage.setItem('rowData', JSON.stringify(updatedRowData));
