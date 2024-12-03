@@ -32,7 +32,7 @@ export const readCSVData = (): Promise<any[]> => {
       // add error popup here
     }
     const idx = getMatch();
-    fetch(`/file_${idx}.csv`)
+    fetch(`/file_${idx}_modified.csv`)
       .then((response) => response.text())
       .then((data) => {
         Papa.parse(data, {
@@ -131,7 +131,7 @@ export default function Page() {
               })(),
               ai_alerts: (() => {
                 try {
-                  const fixedJSONString = row['ai_alerts'].replace(/'/g, '"');
+                  const fixedJSONString = row['ai_alerts'];
                   return JSON.parse(fixedJSONString);
                 } catch (e) {
                   console.error('Error parsing JSON:', e);
