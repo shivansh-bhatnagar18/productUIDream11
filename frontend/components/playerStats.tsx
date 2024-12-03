@@ -16,6 +16,7 @@ import {
 } from 'recharts';
 import Rating from '@mui/material/Rating';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import GraphModal from './graphModal';
 
 interface Props {
   rowData: any[];
@@ -169,15 +170,25 @@ const PlayerStats = (props: any) => {
         className={`bg-gray-600 bg-opacity-10 border-y-2 border-gray-600 border-opacity-60 flex flex-col w-full ${classname}`}
       >
         <div className="w-auto h-[20%] mx-3 mt-3 flex gap-2">
-          <div className="bg-[#312D2C] mr-2 w-[25%] rounded-2xl flex flex-col">
-            <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Batting First</p>
-            <div className="flex w-full mb-2 mt-2">
-              <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">0</p>
-              <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
-                FPts
-              </p>
-            </div>
-          </div>
+          <GraphModal
+            Component={() => (
+              <div className="bg-[#312D2C] mr-2 w-[25%] rounded-2xl flex flex-col">
+                <p className="text-[#E4DAD7] text-lg ml-5 mt-2">
+                  Batting First
+                </p>
+                <div className="flex w-full mb-2 mt-2">
+                  <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
+                    0
+                  </p>
+                  <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
+                    FPts
+                  </p>
+                </div>
+              </div>
+            )}
+            Heading="Batting First"
+            data={randomdata}
+          />
           <div className="bg-[#312D2C] mr-2 w-[25%] rounded-2xl flex flex-col">
             <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Chasing</p>
             <div className="flex w-full mb-2 mt-2">
@@ -309,29 +320,45 @@ const PlayerStats = (props: any) => {
       className={`bg-gray-600 bg-opacity-10 border-y-2 border-gray-600 border-opacity-60 flex flex-col w-full ${classname}`}
     >
       <div className="w-auto h-[20%] mx-3 mt-3 flex gap-2">
-        <div className="bg-[#312D2C] mr-2 w-[25%] rounded-2xl flex flex-col">
-          <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Batting First</p>
-          <div className="flex w-full mb-2 mt-2">
-            <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
-              {Math.round(playerData.values.batting_first_predicted_score[3])}
-            </p>
-            <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
-              FPts
-            </p>
-          </div>
-        </div>
-        <div className="bg-[#312D2C] mr-2 w-[25%] rounded-2xl flex flex-col">
-          <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Chasing</p>
-          <div className="flex w-full mb-2 mt-2">
-            <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
-              {' '}
-              {Math.round(playerData.values.chasing_first_predicted_score[3])}
-            </p>
-            <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
-              FPts
-            </p>
-          </div>
-        </div>
+        <GraphModal
+          Component={() => (
+            <div className="bg-[#312D2C] mr-2 w-full rounded-2xl flex flex-col">
+              <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Batting First</p>
+              <div className="flex w-full mb-2 mt-2">
+                <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
+                  {Math.round(
+                    playerData.values.batting_first_predicted_score[0]
+                  )}
+                </p>
+                <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
+                  FPts
+                </p>
+              </div>
+            </div>
+          )}
+          Heading="Batting First"
+          data={playerData.values.batting_first_predicted_score}
+        />
+        <GraphModal
+          Component={() => (
+            <div className="bg-[#312D2C] mr-2 w-full rounded-2xl flex flex-col">
+              <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Chasing</p>
+              <div className="flex w-full mb-2 mt-2">
+                <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
+                  {' '}
+                  {Math.round(
+                    playerData.values.chasing_first_predicted_score[3]
+                  )}
+                </p>
+                <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
+                  FPts
+                </p>
+              </div>
+            </div>
+          )}
+          Heading="Chasing"
+          data={playerData.values.chasing_first_predicted_score}
+        />
         <div className="bg-[#312D2C] mr-2 w-[25%] rounded-2xl flex flex-col">
           <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Strike Rate</p>
           <div className="flex w-full mb-2 mt-2">

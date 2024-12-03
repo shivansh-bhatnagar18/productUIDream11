@@ -1,4 +1,4 @@
-import * as React from 'react';
+// import * as React from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -6,6 +6,17 @@ import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Image from 'next/image';
+import React, { PureComponent } from 'react';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts';
 
 const style = {
   position: 'absolute',
@@ -24,54 +35,50 @@ const style = {
 };
 
 interface Props {
-  rowData: any[];
-  setRowData: React.Dispatch<React.SetStateAction<any[]>>;
-  setSelectedRowData: React.Dispatch<React.SetStateAction<any[]>>;
-  setCountSelected: React.Dispatch<React.SetStateAction<number>>;
-  initial1: string;
-  initial2: string;
   Component: React.FC;
-  playerName: string;
+  data: any;
   Heading: string;
 }
 
-export default function BattingFirstModal({
-  rowData,
-  setRowData,
-  setCountSelected,
-  setSelectedRowData,
-  initial1,
-  initial2,
-  Component,
-  Heading,
-  playerName,
-}: Props) {
+export default function GraphModal({ Component, Heading, data }: Props) {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const [finaldata, setFinalData] = React.useState(data);
+  const handleOpen = () => {
+    const newdata = [
+      { name: 'Match 1', uv: data[0] },
+      { name: 'Match 2', uv: data[1] },
+      { name: 'Match 3', uv: data[2] },
+      { name: 'Match 4', uv: data[3] },
+    ];
+    setFinalData(newdata);
+    setOpen(true);
+  };
   const handleClose = () => setOpen(false);
 
-  const handleClick = () => {
-    const lockedPlayers = rowData.filter((player) => player.isLocked);
-    const remainingSlots = 11 - lockedPlayers.length;
-    rowData
-      .filter((player) => !player.isLocked && !player.isExclude)
-      .slice(0, remainingSlots)
-      .forEach((player) => (player.isSelected = true));
-    const updatedRowData = [...rowData];
-    setRowData(updatedRowData);
-    setSelectedRowData(updatedRowData.filter((player) => player.isSelected));
-    localStorage.setItem('rowData', JSON.stringify(updatedRowData));
-    localStorage.setItem(
-      'selectedRowData',
-      JSON.stringify(updatedRowData.filter((player) => player.isSelected))
-    );
-    setCountSelected(11);
-    handleClose();
-  };
+  //   const handleClick = () => {
+  //     const lockedPlayers = rowData.filter((player) => player.isLocked);
+  //     const remainingSlots = 11 - lockedPlayers.length;
+  //     rowData
+  //       .filter((player) => !player.isLocked && !player.isExclude)
+  //       .slice(0, remainingSlots)
+  //       .forEach((player) => (player.isSelected = true));
+  //     const updatedRowData = [...rowData];
+  //     setRowData(updatedRowData);
+  //     setSelectedRowData(updatedRowData.filter((player) => player.isSelected));
+  //     localStorage.setItem('rowData', JSON.stringify(updatedRowData));
+  //     localStorage.setItem(
+  //       'selectedRowData',
+  //       JSON.stringify(updatedRowData.filter((player) => player.isSelected))
+  //     );
+  //     setCountSelected(11);
+  //     handleClose();
+  //   };
 
   return (
     <div>
-      <Component />
+      <div onClick={handleOpen}>
+        <Component />
+      </div>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -82,48 +89,44 @@ export default function BattingFirstModal({
         slotProps={{
           backdrop: {
             timeout: 500,
+            sx: {
+              backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            },
           },
         }}
       >
         <Fade in={open}>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h2">
-              Which team do you think will be batting first?
+              {Heading}
             </Typography>
-            <div className="h-[35%] rounded-xl flex gap-2 w-full mt-10">
-              <div
-                className="bg-white bg-opacity-20 grow rounded-xl flex flex-col items-center py-2"
-                onClick={handleClick}
-              >
-                <Image
-                  src={`/teamlogos/${initial1}.svg`}
-                  width={'72'}
-                  height={'72'}
-                  alt="/"
-                  className="rounded-full w-34 h-34"
-                />
-                <p className="text-white text-lg ml-2 mt-2">{initial1}</p>
-              </div>
-              <div
-                className="bg-white bg-opacity-20 w-[35%] rounded-xl flex flex-col items-center py-2"
-                onClick={handleClick}
-              >
-                <Image
-                  src={`/teamlogos/${initial2}.svg`}
-                  width={'72'}
-                  height={'72'}
-                  alt="/"
-                  className="rounded-full w-34 h-34"
-                />
-                <p className="text-white text-lg ml-2 mt-2">{initial2}</p>
-              </div>
-              <div
-                className="bg-white bg-opacity-20 w-[35%] rounded-xl flex flex-col items-center py-2"
-                onClick={handleClick}
-              >
-                <Image src="/think.png" width={'72'} height={'72'} alt="/" />
-                <p className="text-white text-lg ml-2 mt-2">Can't Say</p>
-              </div>
+            <div className="h-[200px] rounded-xl flex gap-2 w-[500px] -ml-5">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart
+                  width={500}
+                  height={300}
+                  data={finaldata}
+                  margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                >
+                  {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                  <XAxis dataKey="name" stroke="white" />
+                  <YAxis stroke="white" />
+                  <Tooltip />
+                  {/* <Legend /> */}
+                  <Line
+                    type="monotone"
+                    dataKey="pv"
+                    stroke="#8884d8"
+                    activeDot={{ r: 8 }}
+                  />
+                  <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+                </LineChart>
+              </ResponsiveContainer>
             </div>
           </Box>
         </Fade>
