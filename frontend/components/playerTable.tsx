@@ -138,7 +138,8 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
       field: 'Points',
       valueFormatter: (params: any) => {
         if (!params.data) return '';
-        return Math.round(params.data.values.score).toString();
+        const yPred = params.data.values.y_pred;
+        return Array.isArray(yPred) && yPred.length > 5 ? Math.round(yPred[5]).toString() : '';
       },
       flex: 1,
     },
