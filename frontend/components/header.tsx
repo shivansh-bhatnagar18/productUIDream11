@@ -70,14 +70,24 @@ const Header = ({ initial1, initial2 }: HeaderProps) => {
                 </div>
               </div>
               {/* credits div */}
-              {/* <div className="flex flex-col">
-                <h3 className="text-[#EBEBF599] text-lg font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
+            </div>
+            <div className="flex flex-col absolute right-0 w-[22%]">
+              {/* <h3 className="text-[#EBEBF599] text-lg font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
                   Credits Used
                 </h3>
                 <p className="text-white text-2xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
                   11
-                </p>
-              </div> */}
+                </p> */}
+              <img
+                src="/videos/mascot.gif" // Path relative to the 'public' folder
+                alt="Mascot GIF"
+                style={{
+                  maxWidth: '100%',
+                  height: 'auto',
+                  borderRadius: '10px',
+                  marginTop: '20px',
+                }}
+              />
             </div>
           </div>
         </div>

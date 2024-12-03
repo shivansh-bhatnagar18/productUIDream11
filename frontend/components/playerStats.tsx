@@ -482,7 +482,7 @@ const PlayerStats = (props: any) => {
       </div>
       <div className="bg-[#312D2C] w-auto h-[30%] mb-3 mt-1 mx-3 rounded-2xl flex flex-col gap-2">
         <div className="flex flex-col justify-between my-5">
-          <div className="flex justify-between">
+          <div className="flex justify-between mb-5">
             <div className="text-white text-lg ml-9">Alerts</div>
             <Rating
               name="read-only"
@@ -524,13 +524,13 @@ const PlayerStats = (props: any) => {
           </div>
           {isClicked
             ? alertHindi.split('\n').map((line, index) => (
-                <p key={index} className="text-white text-md ml-20">
-                  {line}
+                <p key={index} className="text-white text-md ml-10">
+                  • {line}
                 </p>
               ))
             : alertEng.split('\n').map((line, index) => (
-                <p key={index} className="text-white text-md ml-20">
-                  {line}
+                <p key={index} className="text-white text-md ml-10">
+                  • {line}
                 </p>
               ))}
         </div>
