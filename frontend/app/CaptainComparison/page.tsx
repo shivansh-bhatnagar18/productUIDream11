@@ -61,6 +61,13 @@ function page() {
     setRowData(data);
   }, []);
 
+  const getPlayerId = (playerName: string) => {
+    const data = JSON.parse(localStorage.getItem('rowData') || '[]');
+    const player = data.find((player: any) => player.name === playerName);
+    console.log(player);
+    return player ? player.id : '';
+  };
+
   return (
     <div className="flex flex-col items-center bg-[#0D0402] min-h-screen max-w-screen min-w-screen overflow-x-hidden">
       <Header initial1={initial1} initial2={initial2} />
@@ -105,7 +112,11 @@ function page() {
       >
         Preview
       </Button>
-      <ChatbotWrapper />
+      <ChatbotWrapper
+        player1_id={getPlayerId(Array.isArray(name) ? name[0] : name || '')}
+        player2_id={getPlayerId(toComparePlayer)}
+        match_no={match}
+      />
     </div>
   );
 }

@@ -115,6 +115,7 @@ export default function Page() {
             );
             return {
               key: index,
+              id: row['player_id'],
               name: row['player'],
               imageSrc: playerImage ? playerImage.image_path : '',
               isSelected: false,
