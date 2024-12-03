@@ -30,39 +30,19 @@ const ChatbotWrapper: React.FC<ChatbotWrapperProps> = ({
       { text: message, isSender: true },
     ]);
     setLoading(true);
-    if (compare) {
-      if (player1_id != '' && player2_id != '') {
-        try {
-          const response = await axios.post(`${BASE_URL}/chat`, {
-            player1_id: `${player1_id}`,
-            player2_id: `${player2_id}`,
-            user_query: `${message}`,
-            match_no: Number(match_no),
-          });
-          setMessages((prevMessages) => [
-            ...prevMessages,
-            { text: response.data.response, isSender: false },
-          ]);
-        } catch (error) {
-          console.error(error);
-        }
-      } else {
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          { text: 'Please select two players to compare', isSender: false },
-        ]);
-      }
+    if (compare && player1_id != '' && player2_id != '') {
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { text: 'Please select two players to compare', isSender: false },
+      ]);
     } else {
       try {
-        const response = await axios.post(
-          'http://127.0.0.1:5000/api/gen_chat',
-          {
-            player1_id: `${player1_id}`,
-            player2_id: `${player2_id}`,
-            user_query: `${message}`,
-            match_no: Number(match_no),
-          }
-        );
+        const response = await axios.post('http://127.0.0.1:5000/api/chat', {
+          player1_id: `${player1_id}`,
+          player2_id: `${player2_id}`,
+          user_query: `${message}`,
+          match_no: match_no != '' ? Number(match_no) : '',
+        });
         setMessages((prevMessages) => [
           ...prevMessages,
           { text: response.data.response, isSender: false },
