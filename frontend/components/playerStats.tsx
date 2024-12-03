@@ -140,17 +140,17 @@ const PlayerStats = (props: any) => {
   const [alertEng, setAlertEng] = useState<string>('Loading...');
   const [alertHindi, setAlertHindi] = useState<string>('Loading...');
 
-  // useEffect(() => {
-  //   if (aiAlerts) {
-  //     setAlertEng(aiAlerts.insights.join('\n'));
-  //     const formattedInsights = aiAlerts.insights
-  //       .map((insight) =>
-  //         insight.split('\n')[0].split(':').slice(1).join(':').trim()
-  //       )
-  //       .join('\n');
-  //     setAlertEng(formattedInsights);
-  //   }
-  // }, [aiAlerts]);
+  useEffect(() => {
+    if (aiAlerts) {
+      setAlertEng(aiAlerts.insights.join('\n'));
+      const formattedInsights = aiAlerts.insights
+        .map((insight) =>
+          insight.split('\n')[0].split(':').slice(1).join(':').trim()
+        )
+        .join('\n');
+      setAlertEng(formattedInsights);
+    }
+  }, [aiAlerts]);
 
   useEffect(() => {
     if (aiAlerts) {
