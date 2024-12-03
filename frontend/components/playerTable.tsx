@@ -92,8 +92,18 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
 
   const handleExcludeClick = (key: number) => {
     rowData[key].isExclude = !rowData[key].isExclude;
+    if (rowData[key].isExclude) {
+      rowData[key].isSelected = false;
+    }
     setRowData([...rowData]);
+    const updatedSelectedRows = rowData.filter((row) => row.isSelected);
+    setCountSelected(updatedSelectedRows.length);
+    setSelectedRowData(updatedSelectedRows);
     localStorage.setItem('rowData', JSON.stringify(rowData));
+    localStorage.setItem(
+      'selectedRowData',
+      JSON.stringify(updatedSelectedRows)
+    );
   };
 
   const reverseData = [...rowData].reverse();
@@ -203,9 +213,11 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
 const ButtonRendererAdd = (props: any) => {
   const { data, handleButtonClick } = props;
   const clicked = data.isSelected;
+  const excluded = data.isExclude;
 
   return (
-    <button
+    excluded ? (<button
+      disabled
       onClick={() => handleButtonClick(data.key)}
       className={`w-6 h-6 flex items-center justify-center rounded-full text-white transition-colors ${
         clicked
@@ -214,7 +226,17 @@ const ButtonRendererAdd = (props: any) => {
       }`}
     >
       {clicked ? '-' : '+'}
-    </button>
+    </button>) :
+    (<button
+      onClick={() => handleButtonClick(data.key)}
+      className={`w-6 h-6 flex items-center justify-center rounded-full text-white transition-colors ${
+        clicked
+          ? 'bg-red-500 hover:bg-red-600'
+          : 'bg-green-500 hover:bg-green-600'
+      }`}
+    >
+      {clicked ? '-' : '+'}
+    </button>)
   );
 };
 

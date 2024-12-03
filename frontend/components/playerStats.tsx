@@ -5,8 +5,6 @@ import {
   RadialBar,
   Legend,
   Tooltip,
-  PieChart,
-  Pie,
   XAxis,
   YAxis,
   ResponsiveContainer,
@@ -16,6 +14,7 @@ import {
 } from 'recharts';
 import Rating from '@mui/material/Rating';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import { PieChart } from '@mui/x-charts/PieChart';
 import GraphModal from './graphModal';
 
 interface Props {
@@ -50,14 +49,22 @@ export interface PlayerData {
   ai_alerts: AiAlerts;
 }
 
+const sortRowDataByScore = (data: any[]) => {
+  return data
+    .filter((player) => player && player.values && player.values.score !== undefined)
+    .sort((a, b) => b.values.score - a.values.score);
+};
+
 const PlayerStats = (props: any) => {
   const { rowData, playerName, classname, match } = props;
+  const [total, setTotal] = useState<number>(0);
+  const [endAngle, setEndAngle] = useState<number>(0);
   const [value, setValue] = useState<number>(2);
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [playerData, setPlayerData] = useState<PlayerData | null>(null);
   const [aiAlerts, setAiAlerts] = useState<AiAlerts | null>(null);
   const [pieData, setPieData] = useState<any[]>([
-    { name: 'Group A', value: 70 },
+    { name: 'Group A', value: 100 },
   ]);
   const randomdata = [{ name: 'Group B', value: 100 }];
   const [databar, setDatabar] = useState<any[]>([
@@ -82,6 +89,26 @@ const PlayerStats = (props: any) => {
       setAiAlerts(data.ai_alerts);
     }
   }, [rowData, playerName]);
+
+  useEffect(() => {
+  if (rowData && rowData.length > 0) {
+    const sortedRowData = sortRowDataByScore(rowData);
+    console.log('Sorted rowData:', sortedRowData);
+
+    let sum = 0;
+    for (let i = 0; i < Math.min(11, sortedRowData.length); i++) {
+      sum += sortedRowData[i].values.score;
+    }
+    setTotal(sum);
+
+    const data = sortedRowData.find((player: any) => player.name === playerName);
+    console.log('Found player data:', data);
+    setPlayerData(data);
+    if (data) {
+      setAiAlerts(data.ai_alerts);
+    }
+  }
+}, [rowData, playerName]);
 
   const updateDatabar = (y_actual: number[], y_pred: number[]) => {
     const updatedDatabar = databar.map((item, index) => ({
@@ -126,9 +153,7 @@ const PlayerStats = (props: any) => {
       setAlertEng(formattedInsights);
     }
   }, [aiAlerts]);
-  // "Headline: Vettori to leave Australia Test coaching duties for IPL auction
-  // Sentiment: -1.00, Relevance: 2.54
-  // "
+
   useEffect(() => {
     if (aiAlerts) {
       setAlertHindi(
@@ -136,6 +161,14 @@ const PlayerStats = (props: any) => {
       );
     }
   }, [aiAlerts]);
+
+  useEffect(() => {
+    if (playerData && total) {
+      let endAngle = (playerData.values.score/100) * 360
+      setEndAngle(endAngle)
+      setPieData([{ name: playerName, value: playerData.values.score}, { name: playerName, value: 100 - playerData.values.score , color: '#312d2c', stroke: 'transparent', }]);
+    }
+  }, [playerData, total]);
 
   const handleSpeakerClickEnglish = () => {
     if (!alertEng) {
@@ -241,20 +274,25 @@ const PlayerStats = (props: any) => {
               <p className="text-[#E4DAD7] text-lg ml-2 mt-2 mb-2 font-bold pl-3">
                 Relative FPts
               </p>
-              <div className="scale-90 h-full w-full flex items-center justify-center">
-                <PieChart width={200} height={100}>
-                  <Pie
-                    data={pieData}
-                    dataKey="value"
-                    nameKey="name"
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={60}
-                    outerRadius={80}
-                    fill="#36D25D"
-                  />
-                </PieChart>
-              </div>
+              <div className="scale-90 h-full w-full flex items-end justify-center">
+              <PieChart
+              height={150}
+              width={250}
+                series={[
+                  {
+                    data: pieData,
+                    innerRadius: 20,
+                    outerRadius: 50,
+                    paddingAngle: 3,
+                    cornerRadius: 0,
+                    startAngle: 0,
+                    endAngle: 360,
+                    cx: 120,
+                    cy: 80,
+                    
+                  }]}
+              />            
+            </div>
             </div>
           </div>
           <div className="w-full h-auto rounded-xl mt-1 flex flex-col gap-2">
@@ -314,7 +352,6 @@ const PlayerStats = (props: any) => {
   }
   console.log(playerData);
   console.log(rowData);
-
   return (
     <div
       className={`bg-gray-600 bg-opacity-10 border-y-2 border-gray-600 border-opacity-60 flex flex-col w-full ${classname}`}
@@ -419,19 +456,24 @@ const PlayerStats = (props: any) => {
             <p className="text-[#E4DAD7] text-lg ml-2 mt-2 font-bold pl-3">
               Relative FPts
             </p>
-            <div className="scale-90 h-full w-full flex items-center justify-center">
-              <PieChart width={200} height={100}>
-                <Pie
-                  data={pieData}
-                  dataKey="value"
-                  nameKey="name"
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={50}
-                  fill="#36D25D"
-                />
-                <Cell fill="#34C759" />
-              </PieChart>
+            <div className="scale-90 h-full w-full flex items-end justify-center">
+              <PieChart
+              height={150}
+              width={250}
+                series={[
+                  {
+                    color: '#34C759',
+                    data: pieData,
+                    innerRadius: 20,
+                    outerRadius: 50,
+                    paddingAngle: 3,
+                    cornerRadius: 0,
+                    startAngle: 0,
+                    endAngle: 360,
+                    cx: 120,
+                    cy: 80,
+                  }]}
+              />            
             </div>
           </div>
         </div>

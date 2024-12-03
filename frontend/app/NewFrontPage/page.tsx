@@ -22,16 +22,11 @@ export default function Mainpage() {
     <div className="flex flex-col items-center bg-[#0D0402] min-h-screen max-w-screen min-w-screen pb-32">
       <Navbar />
       <div className="w-[80%] flex flex-col justify-center items-center">
-        <h1 className="text-white text-4xl font-normal leading-[141.667%] tracking-[-1.2px]">
-          Choose Match
-        </h1>
         <div className="w-full flex items-center justify-center mt-10">
           <div className="h-[2px] bg-white w-full blur-xs"></div>
-          <div className="flex items-center z-10">
-            <h2 className="text-white text-2xl font-normal leading-[141.667%] tracking-[-1.2px] bg-red-800 px-20 py-2 rounded-xl">
-              LIVE
-            </h2>
-          </div>
+            <h1 className="text-white w-full text-center text-4xl font-normal">
+                Choose Match
+            </h1>
           <div className="h-[2px] bg-white w-full blur-xs"></div>
         </div>
 
@@ -124,7 +119,7 @@ export default function Mainpage() {
               type="submit"
               variant="contained"
               color="secondary"
-              className="bg-[#2CA74B] font-bold w-28 m-6 rounded-xl"
+              className="bg-[#2CA74B] font-bold w-32 m-6 rounded-xl py-2 px-4"
               onClick={() =>
                 (window.location.href = '/PlayerSelection/?match=AUS vs PAK')
               }
@@ -136,7 +131,7 @@ export default function Mainpage() {
               type="submit"
               variant="contained"
               color="secondary"
-              className="bg-[#637d6a] font-bold w-28 m-6 rounded-xl"
+              className="bg-[#637d6a] font-bold w-32 m-6 rounded-xl py-2 px-8"
               onClick={() =>
                 (window.location.href = '/PlayerSelection/?match=AUS vs PAK')
               }
