@@ -466,7 +466,7 @@ const PlayerStats = (props: any) => {
       </div>
       <div className="bg-[#312D2C] w-auto h-[30%] mb-3 mt-1 mx-3 rounded-2xl flex flex-col gap-2">
         <div className="flex flex-col justify-between my-5">
-          <div className="flex justify-between">
+            <div className="flex justify-between">
             <div className="text-white text-lg ml-9">Alerts</div>
             <Rating
               name="read-only"
@@ -475,34 +475,35 @@ const PlayerStats = (props: any) => {
             />
             <div className="flex justify-around gap-2 ">
               <div
-                onClick={() => {
-                  setIsClicked((prev) => {
-                    return !prev;
-                  });
-                }}
-                className={`${isClicked ? 'text-[#787878]' : 'text-white'}`}
+              onClick={() => {
+                setIsClicked((prev) => !prev);
+              }}
+              className={`${isClicked ? 'text-[#787878]' : 'text-white'}`}
               >
-                English
+              English
               </div>
               <div>|</div>
               <div
-                onClick={() => {
-                  setIsClicked((prev) => {
-                    return !prev;
-                  });
-                }}
-                className={`${isClicked ? 'text-white' : 'text-[#787878]'}`}
+              onClick={() => {
+                setIsClicked((prev) => !prev);
+              }}
+              className={`${isClicked ? 'text-white' : 'text-[#787878]'}`}
               >
-                हिन्दी
+              हिन्दी
               </div>
             </div>
             <VolumeUpIcon
               className="mr-5"
-              onClick={
-                isClicked ? handleSpeakerClickHindi : handleSpeakerClickEnglish
+              onClick={() => {
+              const synth = window.speechSynthesis;
+              if (synth.speaking) {
+                synth.cancel();
+              } else {
+                isClicked ? handleSpeakerClickHindi() : handleSpeakerClickEnglish();
               }
+              }}
             />
-          </div>
+            </div>
           {isClicked
             ? alertHindi.split('\n').map((line, index) => (
                 <p key={index} className="text-white text-md ml-20">
