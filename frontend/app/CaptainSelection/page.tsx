@@ -6,6 +6,7 @@ import Header from '@/components/header';
 import { useEffect, useState } from 'react';
 import TypeOfPlayerModal from '@/components/typeOfPlayerModal';
 import CaptainSelectionHeader from '@/components/CaptainSelectionHeader';
+import ChatbotWrapper from '@/components/chatbot/ChatBotWrapper';
 
 function page() {
   const [rowData, setRowData] = useState<any[]>([]);
@@ -78,6 +79,7 @@ function page() {
         initial1={initial1}
         initial2={initial2}
       />
+      <ChatbotWrapper />
     </div>
   );
 }
