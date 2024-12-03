@@ -5,8 +5,6 @@ import {
   RadialBar,
   Legend,
   Tooltip,
-  PieChart,
-  Pie,
   XAxis,
   YAxis,
   ResponsiveContainer,
@@ -15,6 +13,7 @@ import {
   Cell,
 } from 'recharts';
 import Rating from '@mui/material/Rating';
+import { PieChart } from '@mui/x-charts/PieChart';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import GraphModal from './graphModal';
 
@@ -50,6 +49,10 @@ export interface PlayerData {
   ai_alerts: AiAlerts;
 }
 
+const sortRowDataByScore = (data: any[]) => {
+  return data.sort((a, b) => b.values.score - a.values.score);
+}
+
 const PlayerStats = (props: any) => {
   const { rowData, playerName, classname, match } = props;
   const [value, setValue] = useState<number>(2);
@@ -59,7 +62,6 @@ const PlayerStats = (props: any) => {
   const [pieData, setPieData] = useState<any[]>([
     { name: 'Group A', value: 70 },
   ]);
-  const randomdata = [{ name: 'Group B', value: 100 }];
   const [databar, setDatabar] = useState<any[]>([
     { name: 'Match 1', actual: 0, predictions: 0 },
     { name: 'Match 2', actual: 0, predictions: 0 },
@@ -74,8 +76,9 @@ const PlayerStats = (props: any) => {
   ]);
 
   useEffect(() => {
-    console.log('rowData:', rowData);
-    const data = rowData.find((player: any) => player.name === playerName);
+    const sortedRowData = sortRowDataByScore(rowData);
+    console.log('Sorted rowData:', sortedRowData);
+    const data = sortedRowData.find((player: any) => player.name === playerName);
     console.log('Found player data:', data);
     setPlayerData(data);
     if (data) {
@@ -126,9 +129,6 @@ const PlayerStats = (props: any) => {
       setAlertEng(formattedInsights);
     }
   }, [aiAlerts]);
-  // "Headline: Vettori to leave Australia Test coaching duties for IPL auction
-  // Sentiment: -1.00, Relevance: 2.54
-  // "
   useEffect(() => {
     if (aiAlerts) {
       setAlertHindi(
@@ -241,20 +241,25 @@ const PlayerStats = (props: any) => {
               <p className="text-[#E4DAD7] text-lg ml-2 mt-2 mb-2 font-bold pl-3">
                 Relative FPts
               </p>
-              <div className="scale-90 h-full w-full flex items-center justify-center">
-                <PieChart width={200} height={100}>
-                  <Pie
-                    data={pieData}
-                    dataKey="value"
-                    nameKey="name"
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={60}
-                    outerRadius={80}
-                    fill="#36D25D"
-                  />
-                </PieChart>
-              </div>
+              <div className="scale-90 h-full w-full flex items-end justify-center">
+              <PieChart
+              height={150}
+              width={250}
+                series={[
+                  {
+                    color: '#34C759',
+                    data: pieData,
+                    innerRadius: 20,
+                    outerRadius: 50,
+                    paddingAngle: 3,
+                    cornerRadius: 0,
+                    startAngle: 0,
+                    endAngle: 261,
+                    cx: 120,
+                    cy: 80,
+                  }]}
+              />            
+            </div>
             </div>
           </div>
           <div className="w-full h-auto rounded-xl mt-1 flex flex-col gap-2">
@@ -401,37 +406,39 @@ const PlayerStats = (props: any) => {
                 endAngle={0}
               >
                 <RadialBar
-                  // minAngle={15}
                   label={{
                     fill: '#312D2C',
                     position: 'insideStart',
                     fontSize: 8,
                   }}
                   background
-                  // clockWise={true}
                   dataKey="uv"
                 />
               </RadialBarChart>
             </div>
-            {/* <p className=''>High</p> */}
           </div>
           <div className="bg-[#312D2C] h-[50%] mt-2 mr-2 rounded-2xl flex flex-col pb-3">
             <p className="text-[#E4DAD7] text-lg ml-2 mt-2 font-bold pl-3">
               Relative FPts
             </p>
-            <div className="scale-90 h-full w-full flex items-center justify-center">
-              <PieChart width={200} height={100}>
-                <Pie
-                  data={pieData}
-                  dataKey="value"
-                  nameKey="name"
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={50}
-                  fill="#36D25D"
-                />
-                <Cell fill="#34C759" />
-              </PieChart>
+            <div className="scale-90 h-full w-full flex items-end justify-center">
+              <PieChart
+              height={150}
+              width={250}
+                series={[
+                  {
+                    color: '#34C759',
+                    data: pieData,
+                    innerRadius: 20,
+                    outerRadius: 50,
+                    paddingAngle: 3,
+                    cornerRadius: 0,
+                    startAngle: 0,
+                    endAngle: 261,
+                    cx: 120,
+                    cy: 80,
+                  }]}
+              />            
             </div>
           </div>
         </div>

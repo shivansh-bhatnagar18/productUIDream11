@@ -33,7 +33,7 @@ export const readCSVData = (): Promise<any[]> => {
       // add error popup here
     }
     const idx = getMatch();
-    fetch(`/file_${idx}_modified.csv`)
+    fetch(`/file_${idx}.csv`)
       .then((response) => response.text())
       .then((data) => {
         Papa.parse(data, {
@@ -132,15 +132,13 @@ export default function Page() {
               })(),
               ai_alerts: (() => {
                 try {
-                  const fixedJSONString = row['ai_alerts'];
+                  const fixedJSONString = row['ai_alerts'].replace(/'/g, '"');
                   return JSON.parse(fixedJSONString);
                 } catch (e) {
                   console.error('Error parsing JSON:', e);
                   return {};
                 }
               })(),
-              isLocked: false,
-              isExcluded: false,
             };
           });
           setRowData(playerData);
@@ -174,7 +172,7 @@ export default function Page() {
         />
       </div>
       <div className="flex flex-row gap-4">
-        <Button
+      <Button
           type="submit"
           variant="contained"
           color="secondary"
@@ -183,16 +181,16 @@ export default function Page() {
         >
           Analyse My Pick
         </Button>
-        {countSelected !== 11 && (
-          <BattingFirstModal
-            rowData={rowData}
-            setRowData={setRowData}
-            setSelectedRowData={setSelectedRowData}
-            setCountSelected={setCountSelected}
-            initial1={initial1}
-            initial2={initial2}
-          />
-        )}
+        {
+          countSelected !== 11 && <BattingFirstModal
+          rowData={rowData}
+          setRowData={setRowData}
+          setSelectedRowData={setSelectedRowData}
+          setCountSelected={setCountSelected}
+          initial1={initial1}
+          initial2={initial2}
+        />
+        }
         <Button
           type="button"
           variant="contained"
