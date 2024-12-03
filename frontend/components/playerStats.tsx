@@ -12,6 +12,7 @@ import {
   ResponsiveContainer,
   LineChart,
   Line,
+  Cell,
 } from 'recharts';
 import Rating from '@mui/material/Rating';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
@@ -21,34 +22,6 @@ interface Props {
   playerName: string;
   match: string;
 }
-
-const data01 = [
-  {
-    name: 'Group A',
-    value: 400,
-  },
-  {
-    name: 'Group B',
-    value: 300,
-  },
-  {
-    name: 'Group C',
-    value: 300,
-  },
-  {
-    name: 'Group D',
-    value: 200,
-  },
-  {
-    name: 'Group E',
-    value: 278,
-  },
-  {
-    name: 'Group F',
-    value: 189,
-  },
-];
-
 interface AiAlerts {
   final_rating: number;
   insights: string[];
@@ -82,6 +55,10 @@ const PlayerStats = (props: any) => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [playerData, setPlayerData] = useState<PlayerData | null>(null);
   const [aiAlerts, setAiAlerts] = useState<AiAlerts | null>(null);
+  const [pieData, setPieData] = useState<any[]>([
+    { name: 'Group A', value: 70 },
+  ]);
+  const randomdata = [{ name: 'Group B', value: 100 }];
   const [databar, setDatabar] = useState<any[]>([
     { name: 'Match 1', actual: 0, predictions: 0 },
     { name: 'Match 2', actual: 0, predictions: 0 },
@@ -91,7 +68,7 @@ const PlayerStats = (props: any) => {
     { name: 'Match 6', actual: 0, predictions: 0 },
   ]);
   const [pitchData, setPitchData] = useState<any[]>([
-    { name: 'Percentage', uv: 100, pv: 2400, fill: 'transparent' },
+    { name: 'Percentage', uv: 100, pv: 2400, fill: '#312D2C' },
     { name: 'Percentage', uv: 72, pv: 4567, fill: '#34C759' },
   ]);
 
@@ -123,11 +100,10 @@ const PlayerStats = (props: any) => {
         playerData.values.y_pred
       );
       const updatedPitchData = [
-        { name: 'Percentage', uv: 100, pv: 2400, fill: 'transparent' },
+        { name: 'Percentage', uv: 100, fill: '#312D2C' },
         {
           name: 'Percentage',
           uv: Math.round(playerData.values.score),
-          pv: 4567,
           fill: '#34C759',
         },
       ];
@@ -257,12 +233,13 @@ const PlayerStats = (props: any) => {
               <div className="scale-90 h-full w-full flex items-center justify-center">
                 <PieChart width={200} height={100}>
                   <Pie
-                    data={data01}
+                    data={pieData}
                     dataKey="value"
                     nameKey="name"
                     cx="50%"
                     cy="50%"
-                    outerRadius={50}
+                    innerRadius={60}
+                    outerRadius={80}
                     fill="#36D25D"
                   />
                 </PieChart>
@@ -282,7 +259,7 @@ const PlayerStats = (props: any) => {
                   margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                 >
                   <XAxis dataKey="name" stroke="white" />
-                  <YAxis stroke="white" />
+                  <YAxis stroke="" />
                   <Tooltip />
                   <Legend />
                   <Line
@@ -385,33 +362,40 @@ const PlayerStats = (props: any) => {
             <p className="text-[#E4DAD7] text-lg ml-2 mt-2 mb-2 font-bold pl-3">
               Pitch Performance Prediction
             </p>
+
             <div className="scale-[250%] mt-10 h-full w-full items-center justify-center">
               <RadialBarChart
                 width={250}
                 height={100}
-                outerRadius="80%"
+                innerRadius={20}
+                outerRadius={40}
                 data={pitchData}
                 startAngle={180}
                 endAngle={0}
               >
                 <RadialBar
                   // minAngle={15}
-                  label={{ fill: '#666', position: 'insideStart' }}
+                  label={{
+                    fill: '#312D2C',
+                    position: 'insideStart',
+                    fontSize: 8,
+                  }}
                   background
                   // clockWise={true}
                   dataKey="uv"
                 />
               </RadialBarChart>
             </div>
+            {/* <p className=''>High</p> */}
           </div>
           <div className="bg-[#312D2C] h-[50%] mt-2 mr-2 rounded-2xl flex flex-col pb-3">
-            <p className="text-[#E4DAD7] text-lg ml-2 mt-2 mb-2 font-bold pl-3">
+            <p className="text-[#E4DAD7] text-lg ml-2 mt-2 font-bold pl-3">
               Relative FPts
             </p>
             <div className="scale-90 h-full w-full flex items-center justify-center">
               <PieChart width={200} height={100}>
                 <Pie
-                  data={data01}
+                  data={pieData}
                   dataKey="value"
                   nameKey="name"
                   cx="50%"
@@ -419,6 +403,7 @@ const PlayerStats = (props: any) => {
                   outerRadius={50}
                   fill="#36D25D"
                 />
+                <Cell fill="#34C759" />
               </PieChart>
             </div>
           </div>
