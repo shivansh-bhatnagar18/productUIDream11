@@ -16,6 +16,7 @@ import Header from '@/components/header';
 import Papa from 'papaparse';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import ChatbotWrapper from '@/components/chatbot/ChatBotWrapper';
 
 function Page() {
   const searchParams = useSearchParams();
@@ -88,6 +89,7 @@ function Page() {
       >
         Preview
       </Button>
+      <ChatbotWrapper />
     </div>
   );
 }

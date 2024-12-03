@@ -17,6 +17,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import AnalysisTable from '@/components/AnalysisTable';
+import ChatbotWrapper from '@/components/chatbot/ChatBotWrapper';
 
 const data = [
   {
@@ -204,6 +205,7 @@ function page() {
           Preview
         </Button>
       </div>
+      <ChatbotWrapper />
     </div>
   );
 }
