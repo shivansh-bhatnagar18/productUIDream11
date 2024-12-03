@@ -116,6 +116,7 @@ function page() {
         player1_id={getPlayerId(Array.isArray(name) ? name[0] : name || '')}
         player2_id={getPlayerId(toComparePlayer)}
         match_no={match}
+        compare={true}
       />
     </div>
   );
