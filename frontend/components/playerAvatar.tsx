@@ -25,6 +25,7 @@ const PlayerComponent = ({
   initial2,
   setCountSelected,
 }: PlayerProps) => {
+  const player = rowData.find((row) => row.name === name);
   return (
     <div
       className="w-[20%] self-center flex flex-col relative m-2 bg-[#878789] rounded-full"
@@ -41,7 +42,7 @@ const PlayerComponent = ({
         localStorage.setItem('rowData', JSON.stringify(updatedRowData));
       }}
     >
-      <div className="flex flex-col z-100 justify-end items-cent</div>er ">
+      <div className="relative flex flex-col z-100 justify-end items-cent</div>er ">
         <p className="text-2xl font-bold text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0)] text-end w-fit px-3 rounded-3xl absolute bottom-3 -right-6">
           {points}
         </p>
@@ -49,6 +50,15 @@ const PlayerComponent = ({
         <p className="text-sm text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0)] leading-3 text-center absolute">
           {name}
         </p>
+        <div
+          className={`absolute rounded-full w-6 h-6 -top-1 -left-0 text-[0.5rem]   items-center justify-center  ${player && player?.isCaptain ? ' bg-green-500 flex' : player && player?.isViceCaptain ? 'flex  bg-yellow-500' : 'hidden'}`}
+        >
+          {player && player?.isCaptain
+            ? 'C'
+            : player && player?.isViceCaptain
+              ? 'VC'
+              : ''}
+        </div>
       </div>
     </div>
   );
