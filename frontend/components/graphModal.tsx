@@ -121,10 +121,10 @@ export default function GraphModal({ Component, Heading, data }: Props) {
                   <Line
                     type="monotone"
                     dataKey="pv"
-                    stroke="#8884d8"
+                    stroke="#D83D3D"
                     activeDot={{ r: 8 }}
                   />
-                  <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+                  <Line type="monotone" dataKey="uv" stroke="#D83D3D" />
                 </LineChart>
               </ResponsiveContainer>
             </div>

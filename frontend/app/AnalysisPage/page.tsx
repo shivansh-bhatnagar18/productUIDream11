@@ -6,6 +6,8 @@ import Transaction from '@/components/Transaction';
 import Models from '@/components/Models';
 import Papa from 'papaparse';
 import { useEffect, useState } from 'react';
+import Box from '@mui/material/Box';
+import { Heatmap } from '@mui/x-charts-pro/Heatmap';
 import {
   Radar,
   RadarChart,
@@ -54,6 +56,19 @@ const data = [
     fullMark: 150,
   },
 ];
+
+const dataheat = [
+  [0, 0, 10],
+  [0, 1, 20],
+  [0, 2, 40],
+  [0, 3, 90],
+  [0, 4, 70],
+  [1, 0, 30],
+  [1, 1, 50],
+  [1, 2, 10],
+  [1, 3, 70],
+  [1, 4, 40],
+]
 
 const readCSVData = (): Promise<any[]> => {
   return new Promise((resolve, reject) => {
@@ -141,20 +156,15 @@ function page() {
                 </ResponsiveContainer>
               </div>
               <div className="w-full h-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
-                    <PolarGrid />
-                    <PolarAngleAxis dataKey="subject" />
-                    <PolarRadiusAxis />
-                    <Radar
-                      name="Mike"
-                      dataKey="A"
-                      stroke="#D83D3D"
-                      fill="#D83D3D"
-                      fillOpacity={0.6}
-                    />
-                  </RadarChart>
-                </ResponsiveContainer>
+              <Box sx={{ width: '100%', maxWidth: 400 }}>
+                <Heatmap
+                  xAxis={[{ data: [1, 2] }]}
+                  yAxis={[{ data: ['A', 'B'] }]}
+                  series={[{ data: dataheat }]}
+                  margin={{ top: 5, right: 5, left: 20 }}
+                  height={300}
+                />
+              </Box>
               </div>
             </div>
           </div>
@@ -184,14 +194,14 @@ function page() {
             window.location.href = '/PlayerSelection';
           }}
         >
-          Preview
+          Next
         </Button>
         <Button
           type="button"
           variant="contained"
-          className="mt-10 mr-7 focus:border-2 text-[#525E74] hover:bg-[#959595] focus:border-[#525E74] focus:border-solid bg-[#B0AFAF] font-bold rounded-md"
+          className="mt-10 mr-7 focus:border-2 text-[#000] hover:bg-[#959595] focus:border-[#525E74] focus:border-solid bg-[#34C759] font-bold rounded-md"
         >
-          Next
+          Preview
         </Button>
       </div>
     </div>
