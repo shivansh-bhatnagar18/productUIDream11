@@ -52,31 +52,7 @@ export default function TypeOfPlayerModal({
   return (
     <div>
       <div className="flex flex-row justify-center mt-10 gap-10">
-        <Button
-          type="button"
-          variant="contained"
-          color="primary"
-          className="my-10 mx-5 bg-[#525E74]"
-          onClick={() => {
-            localStorage.setItem('rowData', JSON.stringify(rowData));
-            console.log('rowData', rowData);
-            window.location.href = '/';
-          }}
-        >
-          Save
-        </Button>
-        <Button
-          type="button"
-          variant="contained"
-          color="primary"
-          className="my-10 mx-5 bg-[#F69C2C]"
-          onClick={() => {
-            handleOpen();
-            setShowRecommendations(false);
-          }}
-        >
-          custom
-        </Button>
+        
       </div>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -167,7 +143,7 @@ export default function TypeOfPlayerModal({
         </Fade>
       </Modal>
       {showRecommendations && (
-        <div className="bg-white bg-opacity-10 rounded-xl border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white shadow-inner shadow-white p-10 flex flex-col items-center mt-24">
+        <div className="bg-white bg-opacity-10 rounded-xl border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white shadow-inner shadow-white p-10 flex flex-col items-center mt-5">
           <p className="text-white text-2xl mb-10">
             Here are our top 3 recommendations
           </p>
@@ -187,10 +163,38 @@ export default function TypeOfPlayerModal({
                 <PlayerCard key={index} playerName={player.name} />
               </div>
             ))}
+            
           </div>
         </div>
       )}
       {showNext && <MatterModal player={typeOfPlayer} />}
+      <div className='justify-center flex w-full'>
+        <Button
+          type="button"
+          variant="contained"
+          color="primary"
+          className="my-10 mx-5 bg-[#525E74]"
+          onClick={() => {
+            localStorage.setItem('rowData', JSON.stringify(rowData));
+            console.log('rowData', rowData);
+            window.location.href = '/';
+          }}
+        >
+          Save
+        </Button>
+        <Button
+          type="button"
+          variant="contained"
+          color="primary"
+          className="my-10 mx-5 bg-[#F69C2C]"
+          onClick={() => {
+            handleOpen();
+            setShowRecommendations(false);
+          }}
+        >
+          custom
+        </Button>
+      </div>
     </div>
   );
 }
