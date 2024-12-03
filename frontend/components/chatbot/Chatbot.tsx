@@ -4,7 +4,7 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import SendIcon from '@/public/icons/sendIcon';
 import Message from './Message';
-import { ClipLoader } from 'react-spinners';
+import { ClipLoader, PulseLoader } from 'react-spinners';
 
 interface ChatMessage {
   text: string;
@@ -27,6 +27,8 @@ const Chatbot: React.FC<ChatbotProps> = ({
   loading,
 }) => {
   const [inputValue, setInputValue] = useState('');
+  const [typingMessage, setTypingMessage] = useState('');
+  const [displayedMessage, setDisplayedMessage] = useState('');
 
   const handleSend = (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,11 +45,35 @@ const Chatbot: React.FC<ChatbotProps> = ({
     }, 300);
     return () => clearTimeout(timeoutId);
   }, [messages]);
+
   const scrollToBottom = () => {
     if (endRef.current) {
       endRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  useEffect(() => {
+    if (loading) {
+      setTypingMessage('AI is generating a response...');
+    } else {
+      setTypingMessage('');
+    }
+  }, [loading]);
+
+  useEffect(() => {
+    if (!loading && typingMessage) {
+      let index = 0;
+      const intervalId = setInterval(() => {
+        setDisplayedMessage((prev) => prev + typingMessage[index]);
+        index++;
+        if (index === typingMessage.length) {
+          clearInterval(intervalId);
+        }
+      }, 50);
+      return () => clearInterval(intervalId);
+    }
+  }, [loading, typingMessage]);
+
   return (
     <div className="w-full h-full bg-[#1a0c0b] rounded-3xl shadow-lg flex flex-col">
       {/* Header */}
@@ -78,6 +104,20 @@ const Chatbot: React.FC<ChatbotProps> = ({
             isSender={message.isSender}
           />
         ))}
+        {loading && (
+          <div className="flex justify-start px-4 py-2">
+            <div className="px-4 py-2 rounded-2xl max-w-[75%] bg-[#e0beb7]/10 text-[#e4d9d7] text-[16px] leading-[22px]">
+              <PulseLoader color="#e4d9d7" size={10} />
+            </div>
+          </div>
+        )}
+        {!loading && typingMessage && (
+          <div className="flex justify-start px-4 py-2">
+            <div className="px-4 py-2 rounded-2xl max-w-[75%] bg-[#e0beb7]/10 text-[#e4d9d7] text-[16px] leading-[22px]">
+              {displayedMessage}
+            </div>
+          </div>
+        )}
         <div
           className={`mt-1 h-[0.01px] bg-none bottom-0 w-full `}
           ref={endRef}
