@@ -28,7 +28,7 @@ const Match: React.FC<MatchProps> = ({
       }}
     >
       {/* Team 1 Info */}
-      <div className="flex flex-col items-center md:items-start w-full sm:w-[40%] text-center md:text-left">
+      <div className="flex flex-col items-center md:items-start w-full sm:w-[30%] text-center md:text-left">
         <Image
           src={`/teamlogos/${initial1}.svg`}
           width={'72'}
