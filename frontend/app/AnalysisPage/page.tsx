@@ -22,6 +22,7 @@ import {
 import AddTable from '@/components/AddTable';
 import RemoveTable from '@/components/RemoveTable';
 import ChatbotWrapper from '@/components/chatbot/ChatBotWrapper';
+import { rowData } from '@/types';
 
 const data_highestFantasyPoints = [
   {
@@ -235,7 +236,7 @@ const data04_highestPopularity = [
 ];
 
 function Page() {
-  const [rowData, setRowData] = useState<any[]>([]);
+  const [rowData, setRowData] = useState<rowData[]>([]);
   const [initial1, setInitial1] = useState<string>('');
   const [initial2, setInitial2] = useState<string>('');
   const [selectedModel, setSelectedModel] = useState<string>(
@@ -246,7 +247,9 @@ function Page() {
     const playerData = JSON.parse(localStorage.getItem('rowData') || '[]');
     setRowData(playerData);
     if (typeof window !== 'undefined') {
-      const match = new URLSearchParams(window.location.search).get('match') as string;
+      const match = new URLSearchParams(window.location.search).get(
+        'match'
+      ) as string;
       const [team1, team2] = match.split(' vs ');
       setInitial1(team1);
       setInitial2(team2);
@@ -371,7 +374,9 @@ function Page() {
               <AddTable
                 rowData={rowData.filter((row) => !row.isSelected)}
                 onRowClick={handleRowClick}
-                selectionLimitReached={rowData.filter((row) => row.isSelected).length >= 11}
+                selectionLimitReached={
+                  rowData.filter((row) => row.isSelected).length >= 11
+                }
               />
               <RemoveTable
                 rowData={rowData.filter((row) => row.isSelected)}
