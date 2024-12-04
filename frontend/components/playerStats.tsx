@@ -61,7 +61,6 @@ const PlayerStats = (props: any) => {
   const { rowData, playerName, classname, match } = props;
   const [total, setTotal] = useState<number>(0);
   const [endAngle, setEndAngle] = useState<number>(0);
-  const [value, setValue] = useState<number>(2);
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [playerData, setPlayerData] = useState<PlayerData | null>(null);
   const [aiAlerts, setAiAlerts] = useState<AiAlerts | null>(null);
@@ -170,12 +169,11 @@ const PlayerStats = (props: any) => {
       let endAngle = (playerData.values.score / total) * 100;
       setEndAngle(endAngle);
       setPieData([
-        { name: playerName, value: endAngle },
+        { name: playerName, value: endAngle, color: '#34C759' },
         {
           name: playerName,
           value: 100 - endAngle,
           color: '#312d2c',
-          stroke: 'transparent',
         },
       ]);
     }
@@ -231,6 +229,7 @@ const PlayerStats = (props: any) => {
               </div>
             )}
             Heading="Batting First"
+            description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut ea temporibus odio quaerat laudantium magnam repellat tempore, libero natus. Similique tempora consequatur velit facere quos aut cupiditate temporibus minima. Minima?"
             data={randomdata}
           />
           <div className="bg-[#312D2C] mr-2 w-[25%] rounded-2xl flex flex-col">
@@ -368,10 +367,10 @@ const PlayerStats = (props: any) => {
     <div
       className={`bg-gray-600 bg-opacity-10 border-y-2 border-gray-600 border-opacity-60 flex flex-col w-full ${classname}`}
     >
-      <div className="w-auto h-[20%] mx-3 mt-3 flex gap-2">
+      <div className="w-full justify-start h-[20%] mx-3 mt-3 flex gap-6">
         <GraphModal
           Component={() => (
-            <div className="bg-[#312D2C] mr-2 w-full rounded-2xl flex flex-col">
+            <div className="bg-[#312D2C] mr-2 px-3 w-full rounded-2xl flex flex-col">
               <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Batting First</p>
               <div className="flex w-full mb-2 mt-2">
                 <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
@@ -386,11 +385,12 @@ const PlayerStats = (props: any) => {
             </div>
           )}
           Heading="Batting First"
+          description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut ea temporibus odio quaerat laudantium magnam repellat tempore, libero natus. Similique tempora consequatur velit facere quos aut cupiditate temporibus minima. Minima?"
           data={playerData.values.batting_first_predicted_score}
         />
         <GraphModal
           Component={() => (
-            <div className="bg-[#312D2C] mr-2 w-full rounded-2xl flex flex-col">
+            <div className="bg-[#312D2C] mr-2 px-3 w-full rounded-2xl flex flex-col">
               <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Chasing</p>
               <div className="flex w-full mb-2 mt-2">
                 <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
@@ -406,9 +406,12 @@ const PlayerStats = (props: any) => {
             </div>
           )}
           Heading="Chasing"
+          description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut ea temporibus odio quaerat laudantium magnam repellat tempore, libero natus. Similique tempora consequatur velit facere quos aut cupiditate temporibus minima. Minima?"
           data={playerData.values.chasing_first_predicted_score}
         />
-        <div className="bg-[#312D2C] mr-2 w-[25%] rounded-2xl flex flex-col">
+        <GraphModal
+          Component={() => (
+            <div className="bg-[#312D2C] mr-2 px-3 w-full rounded-2xl flex flex-col">
           <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Strike Rate</p>
           <div className="flex w-full mb-2 mt-2">
             <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
@@ -419,7 +422,15 @@ const PlayerStats = (props: any) => {
             </p>
           </div>
         </div>
-        <div className="bg-[#312D2C] w-[25%] rounded-2xl flex flex-col">
+          )}
+          Heading="Strike Rate"
+          description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut ea temporibus odio quaerat laudantium magnam repellat tempore, libero natus. Similique tempora consequatur velit facere quos aut cupiditate temporibus minima. Minima?"
+          data={playerData.values.strike_rate}
+        />
+        
+        <GraphModal
+          Component={() => (
+            <div className="bg-[#312D2C] mr-2 px-3 w-full rounded-2xl flex flex-col">
           <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Economy Rate</p>
           <div className="flex w-full mb-2 mt-2">
             <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
@@ -431,6 +442,11 @@ const PlayerStats = (props: any) => {
             </p>
           </div>
         </div>
+          )}
+          Heading="Economy Rate"
+          description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut ea temporibus odio quaerat laudantium magnam repellat tempore, libero natus. Similique tempora consequatur velit facere quos aut cupiditate temporibus minima. Minima?"
+          data={playerData.values.economy}
+        />
       </div>
       <div className=" w-auto h-[60%] m-3 rounded-2xl flex gap-2">
         <div className="w-[60%] rounded-xl flex flex-col gap-2">
