@@ -4,26 +4,21 @@ import {
   ColDef,
   ColGroupDef,
   ModuleRegistry,
-  ValueGetterParams,
 } from '@ag-grid-community/core';
 import { AgGridReact } from '@ag-grid-community/react';
-// import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the Data Grid
-// import "ag-grid-community/styles/ag-theme-quartz.css";
-import React, { StrictMode, useEffect, useState } from 'react';
-import Papa from 'papaparse';
-import CloseIcon from '@mui/icons-material/Close';
-import LockOpenIcon from '@mui/icons-material/LockOpen';
+import React, { useState } from 'react';
 import 'ag-grid-enterprise';
 import { themeQuartz } from '@ag-grid-community/theming';
+import { rowData } from '@/types';
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
 interface CaptainTableProps {
-  rowData: any[];
-  setRowData: React.Dispatch<React.SetStateAction<any[]>>;
-  setCaptainData: React.Dispatch<React.SetStateAction<any[]>>;
-  setViceCaptainData: React.Dispatch<React.SetStateAction<any[]>>;
-  setToComparePlayer?: React.Dispatch<React.SetStateAction<any>>;
+  rowData: rowData[];
+  setRowData: React.Dispatch<React.SetStateAction<rowData[]>>;
+  setCaptainData: (captain: string) => void;            // Updated type
+  setViceCaptainData: (viceCaptain: string) => void;    // Updated type
+  setToComparePlayer?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const CaptainTable = ({
@@ -52,7 +47,7 @@ const CaptainTable = ({
   const handleCButtonClick = (key: number) => {
     setSelectedCKey((prevKey) => (prevKey === key ? null : key));
     const captain = rowData.find((row) => row.key === key);
-    setCaptainData(captain?.name || []);
+    setCaptainData(captain?.name || '');
     setRowData((prevData) =>
       prevData.map((row) =>
         row.key === key
@@ -68,7 +63,7 @@ const CaptainTable = ({
   const handleVCButtonClick = (key: number) => {
     setSelectedVCKey((prevKey) => (prevKey === key ? null : key));
     const viceCaptain = rowData.find((row) => row.key === key);
-    setViceCaptainData(viceCaptain?.name || []);
+    setViceCaptainData(viceCaptain?.name || '');
     setRowData((prevData) =>
       prevData.map((row) =>
         row.key === key

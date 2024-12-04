@@ -7,11 +7,12 @@ import { useEffect, useState } from 'react';
 import TypeOfPlayerModal from '@/components/typeOfPlayerModal';
 import CaptainSelectionHeader from '@/components/CaptainSelectionHeader';
 import ChatbotWrapper from '@/components/chatbot/ChatBotWrapper';
+import { rowData } from '@/types';
 
 function Page() {
-  const [rowData, setRowData] = useState<any[]>([]);
-  const [selectedCaptain, setSelectedCaptain] = useState<any | null>(null);
-  const [selectedViceCaptain, setSelectedViceCaptain] = useState<any | null>(
+  const [rowData, setRowData] = useState<rowData[]>([]);
+  const [selectedCaptain, setSelectedCaptain] = useState<string | null>(null);
+  const [selectedViceCaptain, setSelectedViceCaptain] = useState<string | null>(
     null
   );
   const [countSelected, setCountSelected] = useState<number>(0);
@@ -37,11 +38,11 @@ function Page() {
     ) {
       const captain = localStorage.getItem('captain');
       if (captain?.trim() !== '') {
-        setSelectedCaptain(captain?.replace(/"/g, ''));
+        setSelectedCaptain(captain ? captain.replace(/"/g, '') : null);
       }
       const viceCaptain = localStorage.getItem('viceCaptain');
       if (viceCaptain?.trim() !== '') {
-        setSelectedViceCaptain(viceCaptain?.replace(/"/g, ''));
+        setSelectedViceCaptain(viceCaptain ? viceCaptain.replace(/"/g, '') : null);
       }
     }
   }, []);
@@ -51,10 +52,11 @@ function Page() {
       localStorage.getItem('selectedRowData') || '[]'
     );
     const data = JSON.parse(localStorage.getItem('rowData') || '[]');
-    const count = data.filter((player: any) => player.isSelected).length;
+    const count = data.filter((player: rowData) => player.isSelected).length;
     setCountSelected(count);
+    console.log(countSelected)
     setRowData(teamData);
-  }, []);
+  }, [countSelected]);
 
   return (
     <div className="flex flex-col items-center bg-[#0D0402] min-h-screen max-w-screen min-w-screen overflow-x-hidden">
@@ -72,8 +74,8 @@ function Page() {
         <PlayerCard playerName={selectedCaptain || 'Captain Default'} />
         <CaptainTable
           rowData={rowData}
-          setCaptainData={setSelectedCaptain}
-          setViceCaptainData={setSelectedViceCaptain}
+          setCaptainData={(captain: string) => setSelectedCaptain(captain)}
+          setViceCaptainData={(viceCaptain: string) => setSelectedViceCaptain(viceCaptain)}
           setRowData={setRowData}
         />
         <PlayerCard playerName={selectedViceCaptain || 'Vice Captain'} />
