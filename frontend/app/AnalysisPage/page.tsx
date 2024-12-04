@@ -4,10 +4,7 @@ import 'ag-grid-enterprise';
 import Navbar from '@/components/navbar';
 import Transaction from '@/components/Transaction';
 import Models from '@/components/Models';
-import Papa from 'papaparse';
 import { useEffect, useState } from 'react';
-import Box from '@mui/material/Box';
-import { Heatmap } from '@mui/x-charts-pro/Heatmap';
 import Image from 'next/image';
 import {
   Radar,
@@ -18,16 +15,14 @@ import {
   ResponsiveContainer,
   Scatter,
   ScatterChart,
-  CartesianGrid,
   XAxis,
   YAxis,
-  ZAxis,
   Tooltip,
-  Legend,
 } from 'recharts';
 import AddTable from '@/components/AddTable';
 import RemoveTable from '@/components/RemoveTable';
 import ChatbotWrapper from '@/components/chatbot/ChatBotWrapper';
+import { rowData } from '@/types';
 
 const data_highestFantasyPoints = [
   {
@@ -240,8 +235,8 @@ const data04_highestPopularity = [
   { x: 500, y: 300, z: 300 }, // Low risk, high reward
 ];
 
-function page() {
-  const [rowData, setRowData] = useState<any[]>([]);
+function Page() {
+  const [rowData, setRowData] = useState<rowData[]>([]);
   const [initial1, setInitial1] = useState<string>('');
   const [initial2, setInitial2] = useState<string>('');
   const [selectedModel, setSelectedModel] = useState<string>(
@@ -260,6 +255,31 @@ function page() {
       setInitial2(team2);
     }
   }, []);
+
+  const handleRowClick = (key: number) => {
+    const selectedPlayers = rowData.filter((row) => row.isSelected);
+    const clickedRow = rowData.find((row) => row.key === key);
+
+    if (clickedRow) {
+      if (!clickedRow.isSelected) {
+        // Trying to add a player
+        if (selectedPlayers.length >= 11) {
+          // Cannot add more than 11 players
+          alert('You can select up to 11 players only.');
+          return;
+        }
+      }
+      // Toggle isSelected
+      const updatedRowData = rowData.map((row) => {
+        if (row.key === key) {
+          return { ...row, isSelected: !row.isSelected };
+        }
+        return row;
+      });
+      setRowData(updatedRowData);
+      localStorage.setItem('rowData', JSON.stringify(updatedRowData));
+    }
+  };
 
   return (
     <div className="flex flex-col items-center bg-[#0D0402] overflow-clip min-h-screen max-w-screen min-w-screen">
@@ -351,8 +371,17 @@ function page() {
               <p className="h-fit text-4xl font-bold">Drop</p>
             </div>
             <div className="w-full h-full max-h-[400px] flex gap-5">
-              <AddTable rowData={rowData.filter((row) => !row.isSelected)} />
-              <RemoveTable rowData={rowData.filter((row) => row.isSelected)} />
+              <AddTable
+                rowData={rowData.filter((row) => !row.isSelected)}
+                onRowClick={handleRowClick}
+                selectionLimitReached={
+                  rowData.filter((row) => row.isSelected).length >= 11
+                }
+              />
+              <RemoveTable
+                rowData={rowData.filter((row) => row.isSelected)}
+                onRowClick={handleRowClick}
+              />
             </div>
           </div>
         </div>
@@ -393,4 +422,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

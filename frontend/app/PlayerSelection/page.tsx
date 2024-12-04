@@ -5,11 +5,13 @@ import Field from '@/components/field';
 import PlayerTable from '@/components/playerTable';
 import 'ag-grid-enterprise';
 import Header from '@/components/header';
-import Papa from 'papaparse';
+import Papa, { ParseResult } from 'papaparse';
 import { useEffect, useState } from 'react';
 import BattingFirstModal from '@/components/battingFirstModal';
 import ChatbotWrapper from '@/components/chatbot/ChatBotWrapper';
+import { rowData } from '@/types';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const readCSVData = (): Promise<any[]> => {
   return new Promise((resolve, reject) => {
     const match = new window.URLSearchParams(window.location.search).get(
@@ -38,10 +40,10 @@ export const readCSVData = (): Promise<any[]> => {
       .then((data) => {
         Papa.parse(data, {
           header: true,
-          complete: (results: Papa.ParseResult<any>) => {
+          complete: (results: ParseResult<{ [key: string]: string }>) => {
             resolve(results.data);
           },
-          error: (error: any) => {
+          error: (error: Error) => {
             reject(error);
           },
         });
@@ -50,6 +52,7 @@ export const readCSVData = (): Promise<any[]> => {
   });
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const readCSVImageData = (): Promise<any[]> => {
   return new Promise((resolve, reject) => {
     fetch('/names.csv')
@@ -57,10 +60,10 @@ const readCSVImageData = (): Promise<any[]> => {
       .then((data) => {
         Papa.parse(data, {
           header: true,
-          complete: (results: Papa.ParseResult<any>) => {
+          complete: (results: ParseResult<{ [key: string]: string }>) => {
             resolve(results.data);
           },
-          error: (error: any) => {
+          error: (error: Error) => {
             reject(error);
           },
         });
@@ -70,11 +73,11 @@ const readCSVImageData = (): Promise<any[]> => {
 };
 
 export default function Page() {
-  const [rowData, setRowData] = useState<any[]>([]);
-  const [selectedRowData, setSelectedRowData] = useState<any[]>([]);
+  const [rowData, setRowData] = useState<rowData[]>([]);
+  const [selectedRowData, setSelectedRowData] = useState<rowData[]>([]);
   const [countSelected, setCountSelected] = useState<number>(0);
-  const [showModal, setShowModal] = useState<boolean>(false);
-  const [toComparePlayer, setToComparePlayer] = useState<any | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [toComparePlayer, setToComparePlayer] = useState<string>('');
   const [initial1, setInitial1] = useState<string>('');
   const [initial2, setInitial2] = useState<string>('');
 
@@ -88,9 +91,6 @@ export default function Page() {
       setInitial2(team2);
     }
   }, []);
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
 
   const handleAIComparisonClick = () => {
     localStorage.setItem('rowData', JSON.stringify(rowData));
@@ -104,11 +104,14 @@ export default function Page() {
       localStorage.getItem('selectedRowData') || '[]'
     );
     setSelectedRowData(selectedPlayerData);
-    const count = playerData.filter((player: any) => player.isSelected).length;
+    const count = playerData.filter(
+      (player: rowData) => player.isSelected
+    ).length;
     setCountSelected(count);
     if (count === 0) {
       readCSVData().then((data) => {
         readCSVImageData().then((imageData) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const playerData = data.map((row: any, index: number) => {
             const playerImage = imageData.find(
               (img) => img.Name === row['player']

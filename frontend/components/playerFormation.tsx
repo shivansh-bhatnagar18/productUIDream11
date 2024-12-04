@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import PlayerComponent from './playerAvatar';
-
 interface PlayerProps {
   imageSrc: string;
   isSelected: boolean;

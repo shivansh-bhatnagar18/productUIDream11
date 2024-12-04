@@ -10,15 +10,18 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import CaptainSelectionHeader from '@/components/CaptainSelectionHeader';
 import ChatbotWrapper from '@/components/chatbot/ChatBotWrapper';
+import { rowData } from '@/types';
 
-function page() {
+function Page() {
   const searchParams = useSearchParams();
   const name = searchParams.get('playerName');
-  const [rowData, setRowData] = useState<any[]>([]);
-  const [selectedCaptain, setSelectedCaptain] = useState<any | null>(null);
-  const [selectedViceCaptain, setSelectedViceCaptain] = useState<any | null>(
-    null
-  );
+  const [rowData, setRowData] = useState<rowData[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [selectedCaptain, setSelectedCaptain] = useState<string>('Captain');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [selectedViceCaptain, setSelectedViceCaptain] =
+    useState<string>('Vice Captain');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [countSelected, setCountSelected] = useState<number>(0);
   const [toComparePlayer, setToComparePlayer] =
     useState<string>('Compare Player');
@@ -56,14 +59,14 @@ function page() {
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem('rowData') || '[]');
-    const count = data.filter((player: any) => player.isSelected).length;
+    const count = data.filter((player: rowData) => player.isSelected).length;
     setCountSelected(count);
     setRowData(data);
   }, []);
 
   const getPlayerId = (playerName: string) => {
     const data = JSON.parse(localStorage.getItem('rowData') || '[]');
-    const player = data.find((player: any) => player.name === playerName);
+    const player = data.find((player: rowData) => player.name === playerName);
     console.log(player);
     return player ? player.id : '';
   };
@@ -127,4 +130,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
