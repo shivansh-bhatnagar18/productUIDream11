@@ -16,7 +16,7 @@ function CaptainSelectionHeader() {
             Vice Captain gets
           </h3>
           <p className="text-center text-white text-[15px] font-bold  leading-[28px]">
-            2X Points
+            1.5X Points
           </p>
         </div>
       </div>

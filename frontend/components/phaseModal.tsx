@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Image from 'next/image';
 import PlayerCard from './playerCard';
+import { useState } from 'react';
+import { useEffect } from 'react';
 // import PhaseModal from './phaseModal';
 
 interface PhaseModalProps {
@@ -35,6 +37,14 @@ export default function PhaseModal({ matter, player }: PhaseModalProps) {
   const handleClose = () => setOpen(false);
   const [showRecommendations, setShowRecommendations] = React.useState(false);
   const [phase, setPhase] = React.useState('');
+  const [rowData, setRowData] = React.useState<any[]>([]);
+
+  useEffect(() => {
+    const playerData = localStorage.getItem('rowData');
+    if (playerData) {
+      setRowData(JSON.parse(playerData));
+    }
+  }, []);
 
   const handleClick = (typeOfPlayer: string) => {
     handleClose();
@@ -141,10 +151,38 @@ export default function PhaseModal({ matter, player }: PhaseModalProps) {
             Here are our top 3 recommendations
           </p>
           <div className="flex gap-10">
-            <PlayerCard playerName="Virat Kohli" />
-            <PlayerCard playerName="Rohit Sharma" />
-            <PlayerCard playerName="Jasprit Bumrah" />
-            <div />
+            {rowData.slice(0, 3).map((player, index) => (
+              <div key={index} className="flex flex-col relative">
+                {index === 0 && (
+                  <Image
+                    src="/first.png"
+                    width={'72'}
+                    height={'72'}
+                    alt="/"
+                    className="absolute -top-5 -left-5 z-100"
+                  />
+                )}
+                {index === 1 && (
+                  <Image
+                    src="/second.png"
+                    width={'72'}
+                    height={'72'}
+                    alt="/"
+                    className="absolute -top-5 -left-5 z-100"
+                  />
+                )}
+                {index === 2 && (
+                  <Image
+                    src="/third.png"
+                    width={'72'}
+                    height={'72'}
+                    alt="/"
+                    className="absolute -top-5 -left-5 z-100"
+                  />
+                )}
+                <PlayerCard key={index} playerName={player.name} />
+              </div>
+            ))}
           </div>
         </div>
       )}

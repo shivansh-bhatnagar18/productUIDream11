@@ -102,9 +102,19 @@ const data01 = [
 
 function page() {
   const [rowData, setRowData] = useState<any[]>([]);
+  const [initial1, setInitial1] = useState<string>('');
+  const [initial2, setInitial2] = useState<string>('');
   useEffect(() => {
     const playerData = JSON.parse(localStorage.getItem('rowData') || '[]');
     setRowData(playerData);
+    if (typeof window !== 'undefined') {
+      const match = new URLSearchParams(window.location.search).get(
+        'match'
+      ) as string;
+      const [team1, team2] = match.split(' vs ');
+      setInitial1(team1);
+      setInitial2(team2);
+    }
   }, []);
 
   return (
@@ -142,9 +152,9 @@ function page() {
                   className="absolute"
                 />
                 <ScatterChart
-                  width={360}
+                  width={380}
                   height={250}
-                  className="absolute -ml-16 -mb-6"
+                  className="absolute -ml-12 -mb-6"
                 >
                   <XAxis
                     dataKey="x"
@@ -161,7 +171,7 @@ function page() {
                     stroke="white"
                   />
                   <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                  <Scatter name="A school" data={data01} fill="#8884d8" />
+                  <Scatter name="A school" data={data01} fill="#fff" />
                 </ScatterChart>
               </div>
             </div>
@@ -189,7 +199,7 @@ function page() {
           variant="contained"
           className="mt-10 mr-7 focus:border-2 text-[#525E74] hover:bg-[#959595] focus:border-[#525E74] focus:border-solid bg-[#B0AFAF] font-bold rounded-md"
           onClick={() => {
-            window.location.href = '/PlayerSelection';
+            window.location.href = `/PlayerSelection?match=${initial1} vs ${initial2}`;
           }}
         >
           Next
@@ -198,6 +208,9 @@ function page() {
           type="button"
           variant="contained"
           className="mt-10 mr-7 focus:border-2 text-[#000] hover:bg-[#959595] focus:border-[#525E74] focus:border-solid bg-[#34C759] font-bold rounded-md"
+          onClick={() => {
+            window.location.href = `/PlayerSelection?match=${initial1} vs ${initial2}`;
+          }}
         >
           Preview
         </Button>
