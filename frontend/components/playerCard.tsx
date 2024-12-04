@@ -104,7 +104,7 @@ const PlayerCard = ({ playerName }: PlayerCardProps) => {
         <img
           src={playerImgSrc}
           alt="player"
-          className="w-[45%] h-[90%] rounded-xl"
+          className="w-[45%] h-[90%] rounded-full"
         />
         <div className="flex flex-col text-center justify-center gap-2">
           <div className="flex flex-col justify-center">

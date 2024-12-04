@@ -2,7 +2,7 @@
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
 import { ColDef, ColGroupDef, ModuleRegistry } from '@ag-grid-community/core';
 import { AgGridReact } from '@ag-grid-community/react';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import 'ag-grid-enterprise';
@@ -10,7 +10,7 @@ import { themeQuartz } from '@ag-grid-community/theming';
 import Papa from 'papaparse';
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any @typescript-eslint/no-unused-vars
 const readCSVImageData = (): Promise<any[]> => {
   return new Promise((resolve, reject) => {
     fetch('/names.csv')
@@ -18,9 +18,11 @@ const readCSVImageData = (): Promise<any[]> => {
       .then((data) => {
         Papa.parse(data, {
           header: true,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           complete: (results: Papa.ParseResult<any>) => {
             resolve(results.data);
           },
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           error: (error: any) => {
             reject(error);
           },
@@ -31,9 +33,12 @@ const readCSVImageData = (): Promise<any[]> => {
 };
 
 interface PlayerTableProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   rowData: any[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setSelectedRowData: React.Dispatch<React.SetStateAction<any[]>>;
   setCountSelected: React.Dispatch<React.SetStateAction<number>>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setRowData: React.Dispatch<React.SetStateAction<any[]>>;
   setToComparePlayer: React.Dispatch<React.SetStateAction<string>>;
   reverse?: boolean;
@@ -117,9 +122,11 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
 
   const reverseData = [...rowData].reverse();
   // Define columnDefs directly inside the component
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const columnDefs: (ColDef<any, any> | ColGroupDef<any>)[] = [
     {
       headerName: 'Name',
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       cellRenderer: (params: any) => {
         if (!params.data) return null;
         return (
@@ -145,6 +152,7 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
     },
     {
       field: 'Points',
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       valueFormatter: (params: any) => {
         if (!params.data) return '';
         const yPred = params.data.values.y_pred;
@@ -156,6 +164,7 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
     },
     {
       field: 'Lock/Exclude',
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       cellRenderer: (params: any) => {
         if (!params.data) return null;
         return (
@@ -189,6 +198,7 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
       flex: 1,
     },
     {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       cellRenderer: (params: any) => {
         if (!params.data) return null;
         return (
@@ -222,7 +232,7 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
     </div>
   );
 };
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ButtonRendererAdd = (props: any) => {
   const { data, handleButtonClick } = props;
   const clicked = data.isSelected;
