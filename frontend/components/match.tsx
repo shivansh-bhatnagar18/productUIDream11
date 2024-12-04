@@ -19,50 +19,47 @@ const Match: React.FC<MatchProps> = ({
 }) => {
   return (
     <div
-      className="bg-white bg-opacity-20 rounded-xl border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white 
-                 flex flex-col md:flex-row items-center justify-center w-full py-5 px-3 md:px-5 gap-3 md:gap-5 lg:gap-10 mt-2 
-                 shadow-inner shadow-white hover:cursor-pointer transition-all duration-300"
+      className="bg-white bg-opacity-20 rounded-xl border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white flex w-full py-5 px-10 justify-center mt-2 overflow-x-auto shadow-inner shadow-white hover:cursor-pointer"
       onClick={() => {
         localStorage.clear();
         window.location.href = `/PlayerSelection/?match=${initial1} vs ${initial2}`;
       }}
     >
-      {/* Team 1 Info */}
-      <div className="flex flex-col items-center md:items-start w-full sm:w-[30%] text-center md:text-left">
+      <div className="flex items-center gap-10 w-[40%]">
         <Image
           src={`/teamlogos/${initial1}.svg`}
           width={'72'}
           height={'72'}
           alt="/"
-          className="rounded-full h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20"
+          className="rounded-full h-20 w-20"
         />
-        <div className="flex flex-col space-y-1">
-          <h3 className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold leading-snug tracking-tight">
+        <div className="flex flex-col">
+          <h3 className="text-white text-3xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
             {initial1}
           </h3>
-          <p className="text-white text-xs sm:text-sm md:text-md">{Team1}</p>
+          <p className="text-white text-md leading-[ 283.333%] tracking-[-0.6px]">
+            {Team1}
+          </p>
         </div>
       </div>
-
-      {/* Match Time */}
-      <p className="text-[#787878] text-xs sm:text-sm md:text-lg lg:text-xl leading-[283.333%] tracking-tight w-full sm:w-[20%] text-center">
+      <p className="text-[#787878] text-xl leading-[ 283.333%] tracking-[-0.6px]">
         {time}
       </p>
-
-      {/* Team 2 Info */}
-      <div className="flex flex-col items-center md:items-end w-full sm:w-[30%] text-center md:text-right">
+      <div className="flex items-center gap-10 w-[40%] flex-row-reverse">
         <Image
           src={`/teamlogos/${initial2}.svg`}
           width={'72'}
           height={'72'}
           alt="/"
-          className="rounded-full h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20"
+          className="rounded-full h-20 w-20"
         />
-        <div className="flex flex-col space-y-1">
-          <h3 className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold leading-snug tracking-tight">
+        <div className="flex flex-col">
+          <h3 className="text-white text-3xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
             {initial2}
           </h3>
-          <p className="text-white text-xs sm:text-sm md:text-md">{Team2}</p>
+          <p className="text-white text-md leading-[ 283.333%] tracking-[-0.6px]">
+            {Team2}
+          </p>
         </div>
       </div>
     </div>
