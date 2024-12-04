@@ -32,15 +32,7 @@ const Header = ({
             </p>
 
             {/* Main Div containing Player 1 info, Mascot and Player 2 info and a grid Balancing Div */}
-            <div className="w-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 items-center">
-              {/* Mascot GIF */}
-              <div className="col-span-1 flex justify-center md:justify-start">
-                <img
-                  src="/videos/mascot.gif"
-                  alt="Mascot GIF"
-                  className="w-[60%] md:w-[80%] lg:w-[80%] h-auto border-radius-10"
-                />
-              </div>
+            <div className="w-full flex justify-center items-center gap-8">
 
               {/* Team 1 */}
               <div className="flex items-center justify-center gap-8 p-4 rounded-lg">
@@ -79,9 +71,6 @@ const Header = ({
                   className="rounded-full w-20 h-20"
                 />
               </div>
-              {/* Balance div for grid symmetry */}
-              <div className="hidden md:block"></div>
-              {/* credits div */}
             </div>
             <div className="flex flex-col absolute right-0 w-[22%]">
               {/* <h3 className="text-[#EBEBF599] text-lg font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
@@ -92,11 +81,11 @@ const Header = ({
                 </p> */}
               <GraphModal
                 description=""
-                data={{}} // Provide appropriate data here
+                data={{}}
                 Heading="Why this Model?"
                 Component={() => (
                   <img
-                    src="/videos/mascot.gif" // Path relative to the 'public' folder
+                    src="/videos/mascot.gif"
                     alt="Mascot GIF"
                     style={{
                       maxWidth: '100%',
