@@ -58,7 +58,12 @@ function page() {
 
   return (
     <div className="flex flex-col items-center bg-[#0D0402] min-h-screen max-w-screen min-w-screen overflow-x-hidden">
-      <Header initial1={initial1} initial2={initial2} />
+      <Header
+        initial1={initial1}
+        initial2={initial2}
+        team1players={rowData.filter((player) => player.team === 0).length}
+        team2players={rowData.filter((player) => player.team === 1).length}
+      />
       {/* team selection divs */}
       <div className="max-w-[60%] min-w-[60%] mx-auto mt-6">
         <CaptainSelectionHeader />

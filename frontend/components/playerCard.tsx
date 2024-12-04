@@ -27,7 +27,7 @@ const readCSVImageData = (): Promise<any[]> => {
   });
 };
 
-const thunder = '/image 76.svg'
+const thunder = '/image 76.svg';
 
 const PlayerCard = ({ playerName }: PlayerCardProps) => {
   const [playerPosition, setPlayerPosition] = useState('Unknown Position');
@@ -118,12 +118,8 @@ const PlayerCard = ({ playerName }: PlayerCardProps) => {
               {playerCountry}
             </p>
             <div className="flex flex-col text-right pr-4 pb-2">
-              <div className='flex'>
-                <img
-                  src={thunder}
-                  alt="thunder"
-                  className=" w-[50%] h-[80%]"
-                />
+              <div className="flex">
+                <img src={thunder} alt="thunder" className=" w-[50%] h-[80%]" />
                 <p className="text-white text-4xl font-bold">{rank}</p>
               </div>
               <p className="text-white text-xs ">Matchup rank</p>

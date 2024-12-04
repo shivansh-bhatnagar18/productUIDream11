@@ -63,6 +63,10 @@ function Page() {
   useEffect(() => {
     const playerData = JSON.parse(localStorage.getItem('rowData') || '[]');
     setRowData(playerData);
+    const selectedPlayers = playerData.filter(
+      (player: any) => player.isSelected
+    );
+    setSelectedPlayers(selectedPlayers);
     const count = playerData.filter((player: any) => player.isSelected).length;
     setCountSelected(count);
   }, []);
@@ -76,7 +80,16 @@ function Page() {
 
   return (
     <div className="flex flex-col items-center bg-[#0D0402]  min-h-screen max-w-screen min-w-screen overflow-x-hidden">
-      <Header initial1={initial1} initial2={initial2} />
+      <Header
+        initial1={initial1}
+        initial2={initial2}
+        team1players={
+          selectedPlayers.filter((player) => player.team === 0).length
+        }
+        team2players={
+          selectedPlayers.filter((player) => player.team === 1).length
+        }
+      />
       {/* team selection divs */}
       <div className="max-w-[50%] min-w-[50%] mx-auto mt-8">
         <LoadingBar count={countSelected} />

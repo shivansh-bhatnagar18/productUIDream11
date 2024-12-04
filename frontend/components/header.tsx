@@ -6,8 +6,15 @@ import Image from 'next/image';
 interface HeaderProps {
   initial1: string;
   initial2: string;
+  team1players: number;
+  team2players: number;
 }
-const Header = ({ initial1, initial2 }: HeaderProps) => {
+const Header = ({
+  initial1,
+  initial2,
+  team1players,
+  team2players,
+}: HeaderProps) => {
   return (
     <div>
       <Navbar />
@@ -46,7 +53,7 @@ const Header = ({ initial1, initial2 }: HeaderProps) => {
                       {initial1}
                     </h3>
                     <p className="text-white text-2xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
-                      0
+                      {team1players}
                     </p>
                   </div>
                 </div>
@@ -64,7 +71,7 @@ const Header = ({ initial1, initial2 }: HeaderProps) => {
                       {initial2}
                     </h3>
                     <p className="text-white text-2xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
-                      0
+                      {team2players}
                     </p>
                   </div>
                 </div>
