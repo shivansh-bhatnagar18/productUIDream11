@@ -1,8 +1,9 @@
 'use client';
 import NameModal from '@/components/NameModal';
 import Navbar from '@/components/navbar';
+import { Suspense } from 'react';
 
-export default function Mainpage() {
+ function Mainpage() {
   return (
     <div className="flex flex-col items-center bg-[#0D0402] min-h-screen max-w-screen min-w-screen">
       <Navbar />
@@ -56,5 +57,13 @@ export default function Mainpage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div className='h-screen w-screen bg-black'>Loading...</div>}>
+      <Mainpage />
+    </Suspense>
   );
 }

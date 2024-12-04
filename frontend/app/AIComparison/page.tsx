@@ -6,11 +6,11 @@ import 'ag-grid-enterprise';
 import PlayerCard from '@/components/playerCard';
 import PlayerStats from '@/components/playerStats';
 import Header from '@/components/header';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import ChatbotWrapper from '@/components/chatbot/ChatBotWrapper';
 
-function Page() {
+function PageComponents() {
   const searchParams = useSearchParams();
   const name = searchParams.get('name');
   interface Player {
@@ -136,5 +136,10 @@ function Page() {
     </div>
   );
 }
-
-export default Page;
+export default function Page() {
+  return (
+    <Suspense fallback={<div className='h-screen w-screen bg-black'>Loading...</div>}>
+      <PageComponents />
+    </Suspense>
+  );
+}
