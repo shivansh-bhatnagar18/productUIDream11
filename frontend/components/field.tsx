@@ -30,7 +30,7 @@ const Field: React.FC<FieldProps> = ({
 }) => {
   return (
     <Card
-      className="bg-green-200 p-4 rounded-lg shadow-lg w-[100%] "
+      className="bg-green-200 p-4 rounded-lg shadow-lg w-[90%] "
       style={{
         backgroundImage: 'url(/ground.svg)',
         backgroundSize: 'cover',
