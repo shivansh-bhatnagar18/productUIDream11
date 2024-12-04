@@ -47,8 +47,15 @@ const AnalysisTable: React.FC<PlayerTableProps> = ({ rowData }) => {
     {
       field: 'PREDICTED POINTS',
       valueFormatter: (params: any) => {
-        if (!params.data) return '';
-        return params.data.points;
+        if (
+          !params.data ||
+          !params.data.values ||
+          !params.data.values.y_pred ||
+          params.data.values.y_pred[5] === undefined
+        ) {
+          return '';
+        }
+        return Math.round(params.data.values.y_pred[5]).toString();
       },
       flex: 1,
     },

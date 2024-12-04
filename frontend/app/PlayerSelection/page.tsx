@@ -188,7 +188,9 @@ export default function Page() {
           variant="contained"
           color="secondary"
           className="bg-[#525E74]"
-          onClick={() => (window.location.href = '/AnalysisPage')}
+          onClick={() =>
+            (window.location.href = `/AnalysisPage?match=${initial1} vs ${initial2}`)
+          }
         >
           Analyse My Pick
         </Button>

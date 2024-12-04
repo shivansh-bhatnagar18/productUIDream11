@@ -8,6 +8,7 @@ import Papa from 'papaparse';
 import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import { Heatmap } from '@mui/x-charts-pro/Heatmap';
+import Image from 'next/image';
 import {
   Radar,
   RadarChart,
@@ -15,13 +16,21 @@ import {
   PolarAngleAxis,
   PolarRadiusAxis,
   ResponsiveContainer,
+  Scatter,
+  ScatterChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  ZAxis,
+  Tooltip,
+  Legend,
 } from 'recharts';
 import AnalysisTable from '@/components/AnalysisTable';
 import ChatbotWrapper from '@/components/chatbot/ChatBotWrapper';
 
 const data = [
   {
-    subject: ' Predicted Fantasy Points Per Player',
+    subject: 'Predicted Fantasy Points Per Player',
     A: 120,
     B: 110,
     fullMark: 150,
@@ -58,76 +67,44 @@ const data = [
   },
 ];
 
-const dataheat = [
-  [0, 0, 10],
-  [0, 1, 20],
-  [0, 2, 40],
-  [0, 3, 90],
-  [0, 4, 70],
-  [1, 0, 30],
-  [1, 1, 50],
-  [1, 2, 10],
-  [1, 3, 70],
-  [1, 4, 40],
+const data01 = [
+  {
+    x: 100,
+    y: 200,
+    z: 200,
+  },
+  {
+    x: 120,
+    y: 100,
+    z: 260,
+  },
+  {
+    x: 170,
+    y: 300,
+    z: 400,
+  },
+  {
+    x: 140,
+    y: 250,
+    z: 280,
+  },
+  {
+    x: 150,
+    y: 400,
+    z: 500,
+  },
+  {
+    x: 110,
+    y: 280,
+    z: 200,
+  },
 ];
-
-const readCSVData = (): Promise<any[]> => {
-  return new Promise((resolve, reject) => {
-    fetch('/data.csv')
-      .then((response) => response.text())
-      .then((data) => {
-        Papa.parse(data, {
-          header: true,
-          complete: (results: Papa.ParseResult<any>) => {
-            resolve(results.data);
-          },
-          error: (error: any) => {
-            reject(error);
-          },
-        });
-      })
-      .catch((error) => reject(error));
-  });
-};
-
-const readCSVImageData = (): Promise<any[]> => {
-  return new Promise((resolve, reject) => {
-    fetch('/names.csv')
-      .then((response) => response.text())
-      .then((data) => {
-        Papa.parse(data, {
-          header: true,
-          complete: (results: Papa.ParseResult<any>) => {
-            resolve(results.data);
-          },
-          error: (error: any) => {
-            reject(error);
-          },
-        });
-      })
-      .catch((error) => reject(error));
-  });
-};
 
 function page() {
   const [rowData, setRowData] = useState<any[]>([]);
   useEffect(() => {
-    readCSVData().then((data) => {
-      readCSVImageData().then((imageData) => {
-        const playerData = data.map((row: any, index: number) => {
-          const playerImage = imageData.find(
-            (img) => img.Name === row['Predicted Player 1']
-          );
-          return {
-            key: index,
-            name: row['Predicted Player 1'],
-            points: row['Predicted Player 1 Points'],
-            imageSrc: playerImage ? playerImage.image_path : '',
-          };
-        });
-        setRowData(playerData);
-      });
-    });
+    const playerData = JSON.parse(localStorage.getItem('rowData') || '[]');
+    setRowData(playerData);
   }, []);
 
   return (
@@ -156,16 +133,36 @@ function page() {
                   </RadarChart>
                 </ResponsiveContainer>
               </div>
-              <div className="w-full h-full">
-                {/* <Box sx={{ width: '100%', maxWidth: 400 }}>
-                <Heatmap
-                  xAxis={[{ data: [1, 2] }]}
-                  yAxis={[{ data: ['A', 'B'] }]}
-                  series={[{ data: dataheat }]}
-                  margin={{ top: 5, right: 5, left: 20 }}
-                  height={300}
+              <div className="w-full h-full items-center justify-center flex relative">
+                <Image
+                  src="/heat.png"
+                  alt="heatmap"
+                  width={300}
+                  height={400}
+                  className="absolute"
                 />
-              </Box> */}
+                <ScatterChart
+                  width={360}
+                  height={250}
+                  className="absolute -ml-16 -mb-6"
+                >
+                  <XAxis
+                    dataKey="x"
+                    type="number"
+                    name="stature"
+                    unit="cm"
+                    stroke="white"
+                  />
+                  <YAxis
+                    dataKey="y"
+                    type="number"
+                    name="weight"
+                    unit="kg"
+                    stroke="white"
+                  />
+                  <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                  <Scatter name="A school" data={data01} fill="#8884d8" />
+                </ScatterChart>
               </div>
             </div>
           </div>
