@@ -107,12 +107,16 @@ export default function Mainpage() {
               (window.location.href = `/PlayerSelection/?match=AUS vs PAK`)
             }
             disabled={!match}
-            sx={{
-              '&:disabled': {
-                backgroundColor: '#637d6a',
-                color: 'white',
-              },
-            }}
+            sx={
+              !match
+                ? {
+                  '&:disabled': {
+                    backgroundColor: '#637d6a',
+                    color: 'white',
+                  },
+                }
+                : {}
+            }
           >
             Next
           </Button>
