@@ -30,7 +30,7 @@ const ChatbotWrapper: React.FC<ChatbotWrapperProps> = ({
       { text: message, isSender: true },
     ]);
     setLoading(true);
-    if (compare && player1_id != '' && player2_id != '') {
+    if (compare && player1_id == '' && player2_id == '') {
       setMessages((prevMessages) => [
         ...prevMessages,
         { text: 'Please select two players to compare', isSender: false },
