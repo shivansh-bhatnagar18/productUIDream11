@@ -13,8 +13,8 @@ interface PlayerProps {
 interface PlayerFormationProps {
   players: PlayerProps[];
   rowData: any[];
-  setCountSelected?: React.Dispatch<React.SetStateAction<number>>;
   initial1: string;
+  setCountSelected?: React.Dispatch<React.SetStateAction<number>>;
   initial2: string;
 }
 

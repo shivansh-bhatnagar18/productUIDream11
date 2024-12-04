@@ -52,14 +52,14 @@ const PlayerComponent = ({
           <img
             src={team == '0' ? '/icons/team1.png' : '/icons/team2.png'}
             alt={name}
-            className={`w-16 h-16 object-contain ${team == '0' ? 'scale-150' : ''}`}
+            className={`w-16 h-16 object-contain ${team == '0' ? 'scale-100' : ''}`}
           />
         )}
-        <p className="text-sm text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0)] leading-3 text-center absolute">
+        <p className="text-xs rounded-sm text-black bg-white  leading-3 text-center absolute">
           {name}
         </p>
         <div
-          className={`absolute rounded-full w-6 h-6 -top-1 -left-0 text-[0.5rem]   items-center justify-center  ${player && player?.isCaptain ? ' bg-green-500 flex' : player && player?.isViceCaptain ? 'flex  bg-yellow-500' : 'hidden'}`}
+          className={`absolute rounded-full w-6 h-6 -top-1 -left-0 text-[0.5rem]   items-center justify-center  ${player && player?.isCaptain ? ' bg-yellow-500 flex' : player && player?.isViceCaptain ? 'flex  bg-gray-300' : 'hidden'}`}
         >
           {player && player?.isCaptain
             ? 'C'
