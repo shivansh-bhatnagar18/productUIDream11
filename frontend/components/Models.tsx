@@ -1,9 +1,14 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 
-function Models(props: any) {
-  const { classname } = props;
-  const [selectedModel, setSelectedModel] = useState<string>('');
+interface ModelsProps {
+  selectedModel: string;
+  setSelectedModel: (model: string) => void;
+  classname: string;
+}
+
+function Models(props: ModelsProps) {
+  const { classname, selectedModel, setSelectedModel } = props;
 
   const models = [
     {
