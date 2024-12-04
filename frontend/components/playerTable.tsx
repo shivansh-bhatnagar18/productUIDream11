@@ -75,22 +75,31 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
   };
 
   const handleLockedClick = (key: number) => {
-    rowData[key].isLocked = !rowData[key].isLocked;
-    if (rowData[key].isLocked) {
-      rowData[key].isSelected = true;
+    if (rowData[key].isExclude) {
+      rowData[key].isExclude = !rowData[key].isExclude;    
     }
-    setRowData([...rowData]);
-    const updatedSelectedRows = rowData.filter((row) => row.isSelected);
-    setSelectedRowData(updatedSelectedRows);
-    setCountSelected(updatedSelectedRows.length);
-    localStorage.setItem('rowData', JSON.stringify(rowData));
-    localStorage.setItem(
-      'selectedRowData',
-      JSON.stringify(updatedSelectedRows)
+    const selectedRows = rowData.filter((row) => row.isSelected);
+    if (selectedRows.length < 11 || rowData[key].isSelected) {
+      rowData[key].isLocked = !rowData[key].isLocked;
+      if (rowData[key].isLocked) {
+        rowData[key].isSelected = true;
+      }
+      setRowData([...rowData]);
+      const updatedSelectedRows = rowData.filter((row) => row.isSelected);
+      setSelectedRowData(updatedSelectedRows);
+      setCountSelected(updatedSelectedRows.length);
+      localStorage.setItem('rowData', JSON.stringify(rowData));
+      localStorage.setItem(
+        'selectedRowData',
+        JSON.stringify(updatedSelectedRows)
     );
+    }
   };
 
   const handleExcludeClick = (key: number) => {
+    if (rowData[key].isLocked) {
+      rowData[key].isLocked = !rowData[key].isLocked;    
+    }
     rowData[key].isExclude = !rowData[key].isExclude;
     if (rowData[key].isExclude) {
       rowData[key].isSelected = false;
@@ -151,6 +160,7 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
         if (!params.data) return null;
         return (
           <div className="flex gap-2">
+            {}
             <div
               onClick={() => handleLockedClick(params.data.key)}
               className={`w-6 h-6 flex items-center justify-center rounded-full transition-colors ${
