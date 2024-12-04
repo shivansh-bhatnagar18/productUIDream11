@@ -210,156 +210,251 @@ const PlayerStats = (props: any) => {
   if (!playerData) {
     return (
       <div
-        className={`bg-gray-600 bg-opacity-10 border-y-2 border-gray-600 border-opacity-60 flex flex-col w-full ${classname}`}
-      >
-        <div className="w-auto h-[20%] mx-3 mt-3 flex gap-2">
-          <GraphModal
-            Component={() => (
-              <div className="bg-[#312D2C] mr-2 w-[25%] rounded-2xl flex flex-col">
-                <p className="text-[#E4DAD7] text-lg ml-5 mt-2">
-                  Batting First
-                </p>
-                <div className="flex w-full mb-2 mt-2">
-                  <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
+      className={`bg-gray-600 bg-opacity-10 border-y-2 border-gray-600 border-opacity-60 flex flex-col w-full ${classname}`}
+    >
+      <div className="w-full justify-start h-[20%] mx-3 mt-3 flex gap-2">
+        <GraphModal
+          Component={() => (
+            <div className="bg-[#312D2C] px-2 w-full rounded-2xl flex flex-col">
+              <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Batting First</p>
+              <div className="flex w-full mb-2 mt-2">
+                <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
+                  {Math.round(
                     0
-                  </p>
-                  <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
-                    FPts
-                  </p>
-                </div>
+                  )}
+                </p>
+                <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
+                  FPts
+                </p>
               </div>
-            )}
-            Heading="Batting First"
-            description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut ea temporibus odio quaerat laudantium magnam repellat tempore, libero natus. Similique tempora consequatur velit facere quos aut cupiditate temporibus minima. Minima?"
-            data={randomdata}
-          />
-          <div className="bg-[#312D2C] mr-2 w-[25%] rounded-2xl flex flex-col">
-            <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Chasing</p>
-            <div className="flex w-full mb-2 mt-2">
-              <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">0</p>
-              <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
-                FPts
-              </p>
             </div>
-          </div>
-          <div className="bg-[#312D2C] mr-2 w-[25%] rounded-2xl flex flex-col">
-            <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Strike Rate</p>
-            <div className="flex w-full mb-2 mt-2">
-              <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">0</p>
-              <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
-                FPts
-              </p>
+          )}
+          Heading="Batting First"
+          description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut ea temporibus odio quaerat laudantium magnam repellat tempore, libero natus. Similique tempora consequatur velit facere quos aut cupiditate temporibus minima. Minima?"
+          data={null}
+        />
+        <GraphModal
+          Component={() => (
+            <div className="bg-[#312D2C] mr-2 px-2 w-full rounded-2xl flex flex-col">
+              <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Chasing</p>
+              <div className="flex w-full mb-2 mt-2">
+                <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
+                  {' '}
+                  {Math.round(
+                    0
+                  )}
+                </p>
+                <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
+                  FPts
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="bg-[#312D2C] w-[25%] rounded-2xl flex flex-col">
-            <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Economy Rate</p>
-            <div className="flex w-full mb-2 mt-2">
-              <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">0</p>
-              <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
-                FPts
-              </p>
+          )}
+          Heading="Chasing"
+          description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut ea temporibus odio quaerat laudantium magnam repellat tempore, libero natus. Similique tempora consequatur velit facere quos aut cupiditate temporibus minima. Minima?"
+          data={null}
+        />
+        
+        <GraphModal
+          Component={() => (
+            <div className="bg-[#312D2C] mr-2 px-2 w-full rounded-2xl flex flex-col">
+              <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Strike Rate</p>
+              <div className="flex w-full mb-2 mt-2">
+                <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
+                  {Math.round(0)}
+                </p>
+                <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
+                  FPts
+                </p>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="w-auto h-[60%] m-3 rounded-2xl flex gap-2">
-          <div className="w-[60%] rounded-xl flex flex-col gap-2">
-            <div className="bg-[#312D2C] mt-1 mr-2 h-[50%] rounded-xl flex flex-col">
-              <p className="text-[#E4DAD7] text-lg ml-2 mt-2 mb-2 font-bold pl-3">
-                Pitch Performance Prediction
-              </p>
+          )}
+          Heading="Strike Rate"
+          description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut ea temporibus odio quaerat laudantium magnam repellat tempore, libero natus. Similique tempora consequatur velit facere quos aut cupiditate temporibus minima. Minima?"
+          data={null}
+        />
+
+        <GraphModal
+          Component={() => (
+            <div className="bg-[#312D2C] mr-2 px-2 w-full rounded-2xl flex flex-col">
+              <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Economy Rate</p>
+              <div className="flex w-full mb-2 mt-2">
+                <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
+                  {' '}
+                  {Math.round(0)}
+                </p>
+                <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
+                  FPts
+                </p>
+              </div>
+            </div>
+          )}
+          Heading="Economy Rate"
+          description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut ea temporibus odio quaerat laudantium magnam repellat tempore, libero natus. Similique tempora consequatur velit facere quos aut cupiditate temporibus minima. Minima?"
+          data={null}
+        />
+      </div>
+      <div className=" w-auto h-[60%] m-3 rounded-2xl flex gap-2">
+        <div className="w-[60%] rounded-xl flex flex-col gap-2">
+          <div className="bg-[#312D2C] mt-1 mr-2 h-[50%] rounded-xl flex flex-col">
+            <p className="text-[#E4DAD7] text-lg ml-2 mt-2 mb-2 font-bold pl-3">
+              Pitch Performance Prediction
+            </p>
+
+            <div className="scale-[250%] mt-10 h-full w-full items-center justify-center">
               <RadialBarChart
-                width={200}
+                width={250}
                 height={100}
-                outerRadius="80%"
+                innerRadius={20}
+                outerRadius={40}
+                data={null}
                 startAngle={180}
                 endAngle={0}
               >
                 <RadialBar
-                  label={{ fill: '#666', position: 'insideStart' }}
+                  // minAngle={15}
+                  label={{
+                    fill: '#312D2C',
+                    position: 'insideStart',
+                    fontSize: 8,
+                  }}
                   background
+                  // clockWise={true}
                   dataKey="uv"
                 />
               </RadialBarChart>
             </div>
-            <div className="bg-[#312D2C] h-[50%] mt-2 mr-2 rounded-2xl flex flex-col pb-3">
-              <p className="text-[#E4DAD7] text-lg ml-2 mt-2 mb-2 font-bold pl-3">
-                Relative FPts
-              </p>
-              <div className="scale-90 h-full w-full flex items-end justify-center">
-                <PieChart
-                  height={150}
-                  width={250}
-                  series={[
-                    {
-                      color: '#34C759',
-                      data: pieData,
-                      innerRadius: 20,
-                      outerRadius: 50,
-                      paddingAngle: 3,
-                      cornerRadius: 0,
-                      startAngle: 0,
-                      endAngle: 360,
-                      cx: 120,
-                      cy: 80,
-                    },
-                  ]}
-                />
-              </div>
+            {/* <p className=''>High</p> */}
+          </div>
+          <div className="bg-[#312D2C] h-[50%] mt-2 mr-2 rounded-2xl flex flex-col pb-3">
+            <p className="text-[#E4DAD7] text-lg ml-2 mt-2 font-bold pl-3">
+              Relative FPts
+            </p>
+            <div className="scale-90 h-full w-full flex items-end justify-center">
+              <PieChart
+                height={150}
+                width={250}
+                series={[
+                  {
+                    color: '#34C759',
+                    data: pieData,
+                    innerRadius: 20,
+                    outerRadius: 50,
+                    paddingAngle: 3,
+                    cornerRadius: 0,
+                    startAngle: 0,
+                    endAngle: 360,
+                    cx: 120,
+                    cy: 80,
+                  },
+                ]}
+              />
             </div>
           </div>
-          <div className="w-full h-auto rounded-xl mt-1 flex flex-col gap-2">
-            <div className="bg-[#312D2C] h-full rounded-2xl flex flex-col gap-2">
-              <p className="text-[#E4DAD7] text-lg ml-2 mt-2 font-bold pl-2">
-                Performance Prediction
+        </div>
+        <div className="w-full h-auto rounded-xl mt-1 flex flex-col gap-2">
+          <div className="bg-[#312D2C] h-full rounded-2xl flex flex-col gap-2">
+            <p className="text-[#E4DAD7] text-lg ml-2 mt-2 font-bold pl-2">
+              Performance Prediction
+            </p>
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart
+                width={500}
+                height={300}
+                data={databar}
+                margin={{
+                  top: 5,
+                  right: 30,
+                  left: 20,
+                  bottom: 5,
+                }}
+              >
+                <XAxis dataKey="name" stroke="white" />
+                <YAxis stroke="white" />
+                <Tooltip />
+                <Legend />
+                <Line
+                  type="monotone"
+                  dataKey="predictions"
+                  stroke="#367CEA"
+                  activeDot={{ r: 8 }}
+                />
+                <Line type="monotone" dataKey="actual" stroke="#67B402" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+          <div className=" rounded-xl flex gap-1">
+            <div className="bg-[#312D2C] w-full justify-center align-middle mt-2 mr-2 rounded-2xl flex flex-col">
+              <p className="text-[#E4DAD7] text-center text-lg mx-3">
+                Ceil Fpts
               </p>
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart
-                  width={500}
-                  height={300}
-                  data={databar}
-                  margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                >
-                  <XAxis dataKey="name" stroke="white" />
-                  <YAxis stroke="" />
-                  <Tooltip />
-                  <Legend />
-                  <Line
-                    type="monotone"
-                    dataKey="predictions"
-                    stroke="#367CEA"
-                    activeDot={{ r: 8 }}
-                  />
-                  <Line type="monotone" dataKey="actual" stroke="#67B402" />
-                </LineChart>
-              </ResponsiveContainer>
+              <p className="text-[#E4DAD7] text-center text-4xl font-bold">
+                {Number(0)}
+              </p>
             </div>
-            <div className="rounded-xl flex gap-2">
-              <div className="bg-[#312D2C] w-full justify-center align-middle mt-2 mr-2 rounded-2xl flex flex-col">
-                <p className="text-[#E4DAD7] text-center text-lg mx-3">
-                  Ceil Fpts
-                </p>
-                <p className="text-[#E4DAD7] text-center text-3xl font-bold">
-                  0
-                </p>
-              </div>
-              <div className="bg-[#312D2C] w-full justify-center align-middle mt-2 mr-2 rounded-2xl flex flex-col">
-                <p className="text-[#E4DAD7] text-center text-lg mx-3">
-                  Floor Fpts
-                </p>
-                <p className="text-[#E4DAD7] text-center text-3xl font-bold">
-                  0
-                </p>
-              </div>
-              <div className="bg-[#312D2C] w-full mt-2 rounded-2xl flex flex-col">
-                <p className="text-[#E4DAD7] text-lg ml-4 mt-2 mb-2">Risk</p>
-                <p className="text-white mx-4 rounded-[3px] text-center text-2xl bg-[#D83D3D] font-bold mb-2 px-7">
-                  High
-                </p>
-              </div>
+            <div className="bg-[#312D2C] w-full justify-center align-middle mt-2 mr-2 rounded-2xl flex flex-col">
+              <p className="text-[#E4DAD7] text-center text-lg mx-3">
+                Floor Fpts
+              </p>
+              <p className="text-[#E4DAD7] text-center text-4xl font-bold">
+                {Number(0)}
+              </p>
+            </div>
+            <div className="bg-[#312D2C] w-full mt-2 rounded-2xl flex flex-col">
+              <p className="text-[#E4DAD7] text-lg ml-4 mt-2 mb-2">Risk</p>
+              <p className="text-white mx-4 rounded-[3px] text-center text-2xl bg-[#D83D3D] font-bold mb-2 px-7 ">
+                High
+              </p>
             </div>
           </div>
         </div>
       </div>
+      <div className="bg-[#312D2C] w-auto h-[30%] mb-3 mt-1 mx-3 rounded-2xl flex flex-col gap-2">
+        <div className="flex flex-col justify-between my-5">
+          <div className="flex justify-between mb-5">
+            <div className="text-white text-lg ml-9">Alerts</div>
+            <Rating
+              name="read-only"
+              value={aiAlerts?.final_rating || 0}
+              readOnly
+            />
+            <div className="flex justify-around gap-2 ">
+              <div
+                onClick={() => {
+                  setIsClicked((prev) => !prev);
+                }}
+                className={`${isClicked ? 'text-[#787878]' : 'text-white'}`}
+              >
+                English
+              </div>
+              <div>|</div>
+              <div
+                onClick={() => {
+                  setIsClicked((prev) => !prev);
+                }}
+                className={`${isClicked ? 'text-white' : 'text-[#787878]'}`}
+              >
+                हिन्दी
+              </div>
+            </div>
+            <VolumeUpIcon
+              className="mr-5"
+              onClick={() => {
+                const synth = window.speechSynthesis;
+                if (synth.speaking) {
+                  synth.cancel();
+                } else {
+                  isClicked
+                    ? handleSpeakerClickHindi()
+                    : handleSpeakerClickEnglish();
+                }
+              }}
+            />
+          </div>
+          
+        </div>
+      </div>
+    </div>
     );
   }
   console.log(playerData);
@@ -410,6 +505,7 @@ const PlayerStats = (props: any) => {
           description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut ea temporibus odio quaerat laudantium magnam repellat tempore, libero natus. Similique tempora consequatur velit facere quos aut cupiditate temporibus minima. Minima?"
           data={playerData.values.chasing_first_predicted_score}
         />
+
         <GraphModal
           Component={() => (
             <div className="bg-[#312D2C] mr-2 px-2 w-full rounded-2xl flex flex-col">

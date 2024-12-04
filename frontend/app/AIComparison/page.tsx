@@ -23,7 +23,7 @@ function Page() {
   const [rowData, setRowData] = useState<Player[]>([]);
   const [countSelected, setCountSelected] = useState<number>(0);
   const [selectedPlayers, setSelectedPlayers] = useState<Player[]>([]);
-  const [toComparePlayer, setToComparePlayer] = useState<string>(name || '');
+  const [toComparePlayer, setToComparePlayer] = useState<string>("Compare Player");
   const [initial1, setInitial1] = useState<string>('');
   const [initial2, setInitial2] = useState<string>('');
   const [match, setMatch] = useState<string>('');
