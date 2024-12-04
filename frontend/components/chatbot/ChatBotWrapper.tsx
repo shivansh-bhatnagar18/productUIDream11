@@ -37,7 +37,7 @@ const ChatbotWrapper: React.FC<ChatbotWrapperProps> = ({
       ]);
     } else {
       try {
-        const response = await axios.post('http://127.0.0.1:5000/api/chat', {
+        const response = await axios.post(`${BASE_URL}/chat`, {
           player1_id: `${player1_id}`,
           player2_id: `${player2_id}`,
           user_query: `${message}`,
