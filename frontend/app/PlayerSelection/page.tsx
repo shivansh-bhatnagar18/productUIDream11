@@ -151,6 +151,9 @@ export default function Page() {
             }
             return bYpred[5] - aYpred[5];
           });
+          playerData.forEach((player, index) => {
+            player.key = index;
+          });
           setRowData(playerData);
         });
       });
