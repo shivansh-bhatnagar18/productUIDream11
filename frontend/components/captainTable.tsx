@@ -12,8 +12,8 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
 interface CaptainTableProps {
   rowData: rowData[];
   setRowData: React.Dispatch<React.SetStateAction<rowData[]>>;
-  setCaptainData: React.Dispatch<React.SetStateAction<string>>;
-  setViceCaptainData: React.Dispatch<React.SetStateAction<string>>;
+  setCaptainData: (captain: string) => void;            // Updated type
+  setViceCaptainData: (viceCaptain: string) => void;    // Updated type
   setToComparePlayer?: React.Dispatch<React.SetStateAction<string>>;
 }
 
