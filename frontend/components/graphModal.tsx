@@ -22,8 +22,8 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: '40%',
   bgcolor: 'rgba(255, 255, 255, 0.3)',
-  borderRadius: '10px',
-  border: '2px solid #fff',
+  // borderRadius: '10px',
+  // border: '2px solid #fff',
   boxShadow: 24,
   p: 4,
   display: 'flex',
@@ -152,9 +152,9 @@ export default function GraphModal({
                 src="/videos/mascot.gif"
                 alt="Mascot GIF"
                 style={{
-                  maxWidth: '40%',
+                  // maxWidth: '40%',
                   // position: 'fixed',
-                  marginLeft: '-10%',
+                  marginLeft: '-40%',
                   height: '100%',
                   border: 'none',
                 }}

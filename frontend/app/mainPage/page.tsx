@@ -1,6 +1,6 @@
 'use client';
 import Match from '@/components/match';
-import NameModal from '@/components/NameModal'
+import NameModal from '@/components/NameModal';
 import Navbar from '@/components/navbar';
 
 export default function Mainpage() {

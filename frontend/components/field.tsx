@@ -30,7 +30,7 @@ const Field: React.FC<FieldProps> = ({
 }) => {
   return (
     <Card
-      className="bg-green-200 p-4 rounded-lg shadow-lg w-[50%] "
+      className="bg-green-200 p-4 rounded-lg shadow-lg w-[100%] "
       style={{
         backgroundImage: 'url(/ground.svg)',
         backgroundSize: 'cover',
@@ -62,7 +62,7 @@ const Field: React.FC<FieldProps> = ({
         />
       </Box>
 
-      <Box className="flex space-x-2 justify-center items-center w-full">
+      <Box className="flex space-x-2 justify-center items-center w-[70%]">
         <Box
           className="flex items-center p-2 rounded-md flex-row"
           justifyContent="space-between"
@@ -78,13 +78,13 @@ const Field: React.FC<FieldProps> = ({
           <div className="pl-2 grow">
             <Typography
               className="text-xs text-gray-700"
-              style={{ fontSize: '0.5rem', marginTop: '4px' }}
+              style={{ fontSize: '0.7rem', marginTop: '4px' }}
             >
               Pitch
             </Typography>
             <Typography
               className="text-black font-semibold"
-              style={{ fontSize: '0.5rem' }}
+              style={{ fontSize: '0.7rem' }}
             >
               Balanced
             </Typography>
@@ -114,13 +114,13 @@ const Field: React.FC<FieldProps> = ({
           <div className="pl-2 grow">
             <Typography
               className="text-xs text-gray-700"
-              style={{ fontSize: '0.44rem', marginTop: '4px' }}
+              style={{ fontSize: '0.7rem', marginTop: '4px' }}
             >
               Good for
             </Typography>
             <Typography
               className="text-black font-semibold"
-              style={{ fontSize: '0.5rem' }}
+              style={{ fontSize: '0.7rem' }}
             >
               Neutral
             </Typography>
@@ -151,13 +151,13 @@ const Field: React.FC<FieldProps> = ({
           <div className="pl-2 grow">
             <Typography
               className="text-xs text-gray-700"
-              style={{ fontSize: '0.5rem', marginTop: '2px' }}
+              style={{ fontSize: '0.7rem', marginTop: '2px' }}
             >
               Weather
             </Typography>
             <Typography
               className="text-black font-semibold"
-              style={{ fontSize: '0.5rem' }}
+              style={{ fontSize: '0.7rem' }}
             >
               Cloudy
             </Typography>
@@ -186,13 +186,13 @@ const Field: React.FC<FieldProps> = ({
         >
           <Typography
             className="text-xs text-gray-700"
-            style={{ fontSize: '0.5rem', marginTop: '4px' }}
+            style={{ fontSize: '0.7rem', marginTop: '4px' }}
           >
             Avg. Runs
           </Typography>
           <Typography
             className="text-black font-semibold"
-            style={{ fontSize: '0.6rem' }}
+            style={{ fontSize: '0.7rem' }}
           >
             215
           </Typography>

@@ -25,7 +25,8 @@ import {
   Tooltip,
   Legend,
 } from 'recharts';
-import AnalysisTable from '@/components/AnalysisTable';
+import AddTable from '@/components/AddTable';
+import RemoveTable from '@/components/RemoveTable';
 import ChatbotWrapper from '@/components/chatbot/ChatBotWrapper';
 
 const data_highestFantasyPoints = [
@@ -350,12 +351,8 @@ function page() {
               <p className="h-fit text-4xl font-bold">Drop</p>
             </div>
             <div className="w-full h-full max-h-[400px] flex gap-5">
-              <AnalysisTable
-                rowData={rowData.filter((row) => !row.isSelected)}
-              />
-              <AnalysisTable
-                rowData={rowData.filter((row) => row.isSelected)}
-              />
+              <AddTable rowData={rowData.filter((row) => !row.isSelected)} />
+              <RemoveTable rowData={rowData.filter((row) => row.isSelected)} />
             </div>
           </div>
         </div>
@@ -363,6 +360,7 @@ function page() {
           <Models
             selectedModel={selectedModel}
             setSelectedModel={setSelectedModel}
+            classname=""
           />
           <Transaction />
         </div>

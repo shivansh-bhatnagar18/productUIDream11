@@ -367,10 +367,10 @@ const PlayerStats = (props: any) => {
     <div
       className={`bg-gray-600 bg-opacity-10 border-y-2 border-gray-600 border-opacity-60 flex flex-col w-full ${classname}`}
     >
-      <div className="w-full justify-start h-[20%] mx-3 mt-3 flex gap-6">
+      <div className="w-full justify-start h-[20%] mx-3 mt-3 flex gap-2">
         <GraphModal
           Component={() => (
-            <div className="bg-[#312D2C] mr-2 px-3 w-full rounded-2xl flex flex-col">
+            <div className="bg-[#312D2C] px-2 w-full rounded-2xl flex flex-col">
               <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Batting First</p>
               <div className="flex w-full mb-2 mt-2">
                 <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
@@ -390,7 +390,7 @@ const PlayerStats = (props: any) => {
         />
         <GraphModal
           Component={() => (
-            <div className="bg-[#312D2C] mr-2 px-3 w-full rounded-2xl flex flex-col">
+            <div className="bg-[#312D2C] mr-2 px-2 w-full rounded-2xl flex flex-col">
               <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Chasing</p>
               <div className="flex w-full mb-2 mt-2">
                 <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
@@ -411,7 +411,7 @@ const PlayerStats = (props: any) => {
         />
         <GraphModal
           Component={() => (
-            <div className="bg-[#312D2C] mr-2 px-3 w-full rounded-2xl flex flex-col">
+            <div className="bg-[#312D2C] mr-2 px-2 w-full rounded-2xl flex flex-col">
               <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Strike Rate</p>
               <div className="flex w-full mb-2 mt-2">
                 <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
@@ -430,7 +430,7 @@ const PlayerStats = (props: any) => {
 
         <GraphModal
           Component={() => (
-            <div className="bg-[#312D2C] mr-2 px-3 w-full rounded-2xl flex flex-col">
+            <div className="bg-[#312D2C] mr-2 px-2 w-full rounded-2xl flex flex-col">
               <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Economy Rate</p>
               <div className="flex w-full mb-2 mt-2">
                 <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
@@ -537,7 +537,7 @@ const PlayerStats = (props: any) => {
               </LineChart>
             </ResponsiveContainer>
           </div>
-          <div className=" rounded-xl flex gap-2">
+          <div className=" rounded-xl flex gap-1">
             <div className="bg-[#312D2C] w-full justify-center align-middle mt-2 mr-2 rounded-2xl flex flex-col">
               <p className="text-[#E4DAD7] text-center text-lg mx-3">
                 Ceil Fpts

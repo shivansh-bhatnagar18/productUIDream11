@@ -12,7 +12,7 @@ interface PlayerTableProps {
   rowData: any[];
 }
 
-const AnalysisTable: React.FC<PlayerTableProps> = ({ rowData }) => {
+const RemoveTable: React.FC<PlayerTableProps> = ({ rowData }) => {
   const myTheme = themeQuartz.withParams({
     accentColor: '#D22A29',
     backgroundColor: '#0D0402',
@@ -78,4 +78,4 @@ const AnalysisTable: React.FC<PlayerTableProps> = ({ rowData }) => {
   );
 };
 
-export default AnalysisTable;
+export default RemoveTable;
