@@ -1,5 +1,6 @@
 'use client';
 import Match from '@/components/match';
+import NameModal from '@/components/NameModal'
 import Navbar from '@/components/navbar';
 
 export default function Mainpage() {
@@ -21,14 +22,14 @@ export default function Mainpage() {
         </div>
 
         <div className="bg-white bg-opacity-10  rounded-xl border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white flex flex-col w-[80%] py-5 px-10 mt-12 shadow-inner shadow-white">
-          <Match
+          <NameModal
             Team1="Chennai Super Kings"
             Team2="Pune Warriors"
             initial1="CSK"
             initial2="PW"
             time="8:00 PM"
           />
-          <Match
+          <NameModal
             Team1="Australia"
             Team2="Pakistan"
             initial1="AUS"
@@ -46,7 +47,7 @@ export default function Mainpage() {
           <div className="h-[2px] bg-white w-full blur-xs"></div>
         </div>
         <div className="bg-white bg-opacity-10 rounded-xl border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white flex flex-col w-[80%] py-5 px-10 my-12 shadow-inner shadow-white">
-          <Match
+          <NameModal
             Team1="England"
             Team2="South Africa"
             initial1="ENG"

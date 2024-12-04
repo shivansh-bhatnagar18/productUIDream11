@@ -2,6 +2,7 @@
 import React from 'react';
 import Navbar from './navbar';
 import Image from 'next/image';
+import GraphModal from './graphModal';
 
 interface HeaderProps {
   initial1: string;
@@ -78,9 +79,34 @@ const Header = ({
                   className="rounded-full w-20 h-20"
                 />
               </div>
-
               {/* Balance div for grid symmetry */}
               <div className="hidden md:block"></div>
+              {/* credits div */}
+            </div>
+            <div className="flex flex-col absolute right-0 w-[22%]">
+              {/* <h3 className="text-[#EBEBF599] text-lg font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
+                  Credits Used
+                </h3>
+                <p className="text-white text-2xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
+                  11
+                </p> */}
+              <GraphModal
+                description=""
+                data={{}} // Provide appropriate data here
+                Heading="Why this Model?"
+                Component={() => (
+                  <img
+                    src="/videos/mascot.gif" // Path relative to the 'public' folder
+                    alt="Mascot GIF"
+                    style={{
+                      maxWidth: '100%',
+                      height: 'auto',
+                      borderRadius: '10px',
+                      marginTop: '20px',
+                    }}
+                  />
+                )}
+              />
             </div>
           </div>
         </div>
