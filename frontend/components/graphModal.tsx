@@ -5,6 +5,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import React, { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import {
   LineChart,
   Line,
@@ -35,6 +36,7 @@ interface Props {
   description: string;
   data: any;
   Heading: string;
+  image?: string;
 }
 
 export default function GraphModal({
@@ -42,6 +44,7 @@ export default function GraphModal({
   Heading,
   data,
   description,
+  image,
 }: Props) {
   const [open, setOpen] = React.useState(false);
   const [finaldata, setFinalData] = React.useState(data);
@@ -111,43 +114,50 @@ export default function GraphModal({
             </Typography>
             <div className="flex w-full justify-between">
               <div className="flex flex-col justify-center">
-                <div className="w-[350px]">{description}</div>
-                <div className="h-[200px] rounded-xl flex gap-2 w-[350px] -ml-5">
+              <div className="w-[350px]">{description}</div>
+                {image ? (
+                <Image src={image} alt="Image" width={400} height={400} />
+                ) : (
+                data && (
+                  <div className="h-[200px] rounded-xl flex gap-2 w-[350px] -ml-5">
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart
-                      width={500}
-                      height={300}
-                      data={finaldata}
-                      margin={{
-                        top: 5,
-                        right: 30,
-                        left: 20,
-                        bottom: 5,
-                      }}
+                    width={500}
+                    height={300}
+                    data={finaldata}
+                    margin={{
+                      top: 5,
+                      right: 30,
+                      left: 20,
+                      bottom: 5,
+                    }}
                     >
-                      <XAxis dataKey="name" stroke="white" />
-                      <YAxis stroke="white" />
-                      <Tooltip />
-                      <Line
-                        type="monotone"
-                        dataKey="pv"
-                        stroke="#D83D3D"
-                        activeDot={{ r: 8 }}
-                      />
-                      <Line type="monotone" dataKey="uv" stroke="#D83D3D" />
+                    <XAxis dataKey="name" stroke="white" />
+                    <YAxis stroke="white" />
+                    <Tooltip />
+                    <Line
+                      type="monotone"
+                      dataKey="pv"
+                      stroke="#D83D3D"
+                      activeDot={{ r: 8 }}
+                    />
+                    <Line type="monotone" dataKey="uv" stroke="#D83D3D" />
                     </LineChart>
                   </ResponsiveContainer>
-                </div>
+                  </div>
+                )
+                )}
               </div>
               <img
-                src="/videos/mascot.gif"
-                alt="Mascot GIF"
-                style={{
-                  maxWidth: '42%',
-                  display: 'absolute',
-                  height: 'auto',
-                  border: 'none',
-                }}
+              src="/videos/mascot.gif"
+              alt="Mascot GIF"
+              style={{
+                maxWidth: '40%',
+                // position: 'fixed',
+                marginLeft: '-10%',
+                height: '100%',
+                border: 'none',
+              }}
               />
             </div>
           </Box>

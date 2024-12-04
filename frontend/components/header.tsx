@@ -2,6 +2,7 @@
 import React from 'react';
 import Navbar from './navbar';
 import Image from 'next/image';
+import GraphModal from './graphModal';
 
 interface HeaderProps {
   initial1: string;
@@ -85,7 +86,11 @@ const Header = ({
                 <p className="text-white text-2xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
                   11
                 </p> */}
-              <img
+              <GraphModal 
+              description=""
+              data={{}} // Provide appropriate data here
+              Heading="Why this Model?"
+              Component={() => (<img
                 src="/videos/mascot.gif" // Path relative to the 'public' folder
                 alt="Mascot GIF"
                 style={{
@@ -94,7 +99,7 @@ const Header = ({
                   borderRadius: '10px',
                   marginTop: '20px',
                 }}
-              />
+              />)} />
             </div>
           </div>
         </div>
