@@ -2,15 +2,23 @@
 'use client';
 import React from 'react';
 import { AgGridReact } from '@ag-grid-community/react';
-import { ModuleRegistry, ColDef } from '@ag-grid-community/core';
+import {
+  ModuleRegistry,
+  ColDef,
+  ICellRendererParams,
+  ValueFormatterParams,
+  RowClickedEvent,
+} from '@ag-grid-community/core';
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
 import 'ag-grid-enterprise';
 import { themeQuartz } from '@ag-grid-community/theming';
+import { rowData } from '@/types';
+import Image from 'next/image';
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
 interface AddTableProps {
-  rowData: any[];
+  rowData: rowData[];
   onRowClick: (key: number) => void;
   selectionLimitReached: boolean;
 }
@@ -37,13 +45,15 @@ const AddTable: React.FC<AddTableProps> = ({
     {
       headerName: 'PLAYERS',
       field: 'name',
-      cellRenderer: (params: any) => {
+      cellRenderer: (params: ICellRendererParams) => {
         if (!params.data) return null;
         return (
           <div className="flex gap-5">
-            <img
+            <Image
               src={params.data.imageSrc}
               alt={params.data.name}
+              width={32}
+              height={32}
               className="w-8 h-8 rounded-full"
             />
             <p>{params.data.name}</p>
@@ -54,7 +64,7 @@ const AddTable: React.FC<AddTableProps> = ({
     },
     {
       headerName: 'PREDICTED POINTS',
-      valueFormatter: (params: any) => {
+      valueFormatter: (params: ValueFormatterParams) => {
         if (
           !params.data ||
           !params.data.values ||
@@ -69,7 +79,7 @@ const AddTable: React.FC<AddTableProps> = ({
     },
   ];
 
-  const onRowClicked = (event: any) => {
+  const onRowClicked = (event: RowClickedEvent) => {
     if (selectionLimitReached) {
       return;
     }
