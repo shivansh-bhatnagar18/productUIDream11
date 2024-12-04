@@ -76,7 +76,7 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
 
   const handleLockedClick = (key: number) => {
     if (rowData[key].isExclude) {
-      rowData[key].isExclude = !rowData[key].isExclude;    
+      rowData[key].isExclude = !rowData[key].isExclude;
     }
     const selectedRows = rowData.filter((row) => row.isSelected);
     if (selectedRows.length < 11 || rowData[key].isSelected) {
@@ -92,13 +92,13 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
       localStorage.setItem(
         'selectedRowData',
         JSON.stringify(updatedSelectedRows)
-    );
+      );
     }
   };
 
   const handleExcludeClick = (key: number) => {
     if (rowData[key].isLocked) {
-      rowData[key].isLocked = !rowData[key].isLocked;    
+      rowData[key].isLocked = !rowData[key].isLocked;
     }
     rowData[key].isExclude = !rowData[key].isExclude;
     if (rowData[key].isExclude) {

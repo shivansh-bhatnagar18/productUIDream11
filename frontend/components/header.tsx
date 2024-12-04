@@ -86,20 +86,23 @@ const Header = ({
                 <p className="text-white text-2xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
                   11
                 </p> */}
-              <GraphModal 
-              description=""
-              data={{}} // Provide appropriate data here
-              Heading="Why this Model?"
-              Component={() => (<img
-                src="/videos/mascot.gif" // Path relative to the 'public' folder
-                alt="Mascot GIF"
-                style={{
-                  maxWidth: '100%',
-                  height: 'auto',
-                  borderRadius: '10px',
-                  marginTop: '20px',
-                }}
-              />)} />
+              <GraphModal
+                description=""
+                data={{}} // Provide appropriate data here
+                Heading="Why this Model?"
+                Component={() => (
+                  <img
+                    src="/videos/mascot.gif" // Path relative to the 'public' folder
+                    alt="Mascot GIF"
+                    style={{
+                      maxWidth: '100%',
+                      height: 'auto',
+                      borderRadius: '10px',
+                      marginTop: '20px',
+                    }}
+                  />
+                )}
+              />
             </div>
           </div>
         </div>

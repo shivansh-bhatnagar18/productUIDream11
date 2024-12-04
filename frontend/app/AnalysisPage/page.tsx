@@ -182,8 +182,12 @@ function page() {
               <p className="h-fit text-4xl font-bold">Drop</p>
             </div>
             <div className="w-full h-full max-h-[400px] flex gap-5">
-              <AnalysisTable rowData={rowData} />
-              <AnalysisTable rowData={rowData} />
+              <AnalysisTable
+                rowData={rowData.filter((row) => !row.isSelected)}
+              />
+              <AnalysisTable
+                rowData={rowData.filter((row) => row.isSelected)}
+              />
             </div>
           </div>
         </div>
