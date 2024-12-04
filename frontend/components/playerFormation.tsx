@@ -6,7 +6,7 @@ interface PlayerProps {
   points: number;
   name: string;
   key: number;
-  team: string;
+  team: number;
 }
 
 interface PlayerFormationProps {

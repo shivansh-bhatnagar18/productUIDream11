@@ -1,11 +1,11 @@
 'use client';
 import Navbar from '@/components/navbar';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { Button, Select, MenuItem, FormControl } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
 import Team from '@/components/Team';
 
-export default function Mainpage() {
+ function Mainpage() {
   const [date, setDate] = useState('');
   const [match, setMatch] = useState('');
   const handleChangeDate = (e: SelectChangeEvent) => {
@@ -151,5 +151,14 @@ export default function Mainpage() {
         <div className="h-[2px] bg-white w-full blur-xs"></div>
       </div>
     </div>
+  );
+}
+
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div className='h-screen w-screen bg-black'>Loading...</div>}>
+      <Mainpage />
+    </Suspense>
   );
 }

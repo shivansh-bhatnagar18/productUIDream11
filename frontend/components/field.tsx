@@ -5,7 +5,8 @@ import PlayerFormation from './playerFormation';
 import { rowData } from '@/types';
 
 interface FieldProps {
-  players: rowData[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  players: any;
   rowData: rowData[];
   initial1: string;
   initial2: string;

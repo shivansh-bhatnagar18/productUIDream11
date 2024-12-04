@@ -4,7 +4,7 @@ import 'ag-grid-enterprise';
 import Navbar from '@/components/navbar';
 import Transaction from '@/components/Transaction';
 import Models from '@/components/Models';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import Image from 'next/image';
 import {
   Radar,
@@ -235,7 +235,7 @@ const data04_highestPopularity = [
   { x: 500, y: 300, z: 300 }, // Low risk, high reward
 ];
 
-function Page() {
+function PageComponents() {
   const [rowData, setRowData] = useState<rowData[]>([]);
   const [initial1, setInitial1] = useState<string>('');
   const [initial2, setInitial2] = useState<string>('');
@@ -422,4 +422,10 @@ function Page() {
   );
 }
 
-export default Page;
+export default function Page() {
+  return (
+    <Suspense fallback={<div className='h-screen w-screen bg-black'>Loading...</div>}>
+      <PageComponents />
+    </Suspense>
+  );
+}

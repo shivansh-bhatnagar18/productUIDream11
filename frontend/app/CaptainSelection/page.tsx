@@ -3,13 +3,13 @@ import 'ag-grid-enterprise';
 import PlayerCard from '@/components/playerCard';
 import CaptainTable from '@/components/captainTable';
 import Header from '@/components/header';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import TypeOfPlayerModal from '@/components/typeOfPlayerModal';
 import CaptainSelectionHeader from '@/components/CaptainSelectionHeader';
 import ChatbotWrapper from '@/components/chatbot/ChatBotWrapper';
 import { rowData } from '@/types';
 
-function Page() {
+function PageComponents() {
   const [rowData, setRowData] = useState<rowData[]>([]);
   const [selectedCaptain, setSelectedCaptain] = useState<string | null>(null);
   const [selectedViceCaptain, setSelectedViceCaptain] = useState<string | null>(
@@ -91,4 +91,10 @@ function Page() {
   );
 }
 
-export default Page;
+export default function Page() {
+  return (
+    <Suspense fallback={<div className='h-screen w-screen bg-black'>Loading...</div>}>
+      <PageComponents />
+    </Suspense>
+  );
+}
