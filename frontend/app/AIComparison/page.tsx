@@ -13,9 +13,16 @@ import ChatbotWrapper from '@/components/chatbot/ChatBotWrapper';
 function Page() {
   const searchParams = useSearchParams();
   const name = searchParams.get('name');
-  const [rowData, setRowData] = useState<any[]>([]);
+  interface Player {
+    id: string;
+    name: string;
+    team: number;
+    isSelected: boolean;
+  }
+
+  const [rowData, setRowData] = useState<Player[]>([]);
   const [countSelected, setCountSelected] = useState<number>(0);
-  const [selectedPlayers, setSelectedPlayers] = useState<any[]>([]);
+  const [selectedPlayers, setSelectedPlayers] = useState<Player[]>([]);
   const [toComparePlayer, setToComparePlayer] = useState<string>(name || '');
   const [initial1, setInitial1] = useState<string>('');
   const [initial2, setInitial2] = useState<string>('');
@@ -56,16 +63,16 @@ function Page() {
     const playerData = JSON.parse(localStorage.getItem('rowData') || '[]');
     setRowData(playerData);
     const selectedPlayers = playerData.filter(
-      (player: any) => player.isSelected
+      (player: Player) => player.isSelected
     );
     setSelectedPlayers(selectedPlayers);
-    const count = playerData.filter((player: any) => player.isSelected).length;
+    const count = playerData.filter((player: Player) => player.isSelected).length;
     setCountSelected(count);
   }, []);
 
   const getPlayerId = (playerName: string) => {
     const data = JSON.parse(localStorage.getItem('rowData') || '[]');
-    const player = data.find((player: any) => player.name === playerName);
+    const player = data.find((player: Player) => player.name === playerName);
     console.log(player);
     return player ? player.id : '';
   };
