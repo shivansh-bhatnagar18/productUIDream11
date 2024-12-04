@@ -307,7 +307,6 @@ const PlayerStats = (props: any) => {
                 height={100}
                 innerRadius={20}
                 outerRadius={40}
-                data={null}
                 startAngle={180}
                 endAngle={0}
               >
