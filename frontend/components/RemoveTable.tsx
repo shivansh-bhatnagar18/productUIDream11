@@ -1,18 +1,20 @@
+// RemoveTable.tsx
 'use client';
-import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
-import { ColDef, ColGroupDef, ModuleRegistry } from '@ag-grid-community/core';
+import React from 'react';
 import { AgGridReact } from '@ag-grid-community/react';
-import React, { useEffect, useState } from 'react';
+import { ModuleRegistry, ColDef } from '@ag-grid-community/core';
+import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
 import 'ag-grid-enterprise';
 import { themeQuartz } from '@ag-grid-community/theming';
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
-interface PlayerTableProps {
+interface RemoveTableProps {
   rowData: any[];
+  onRowClick: (key: number) => void;
 }
 
-const RemoveTable: React.FC<PlayerTableProps> = ({ rowData }) => {
+const RemoveTable: React.FC<RemoveTableProps> = ({ rowData, onRowClick }) => {
   const myTheme = themeQuartz.withParams({
     accentColor: '#D22A29',
     backgroundColor: '#0D0402',
@@ -26,9 +28,10 @@ const RemoveTable: React.FC<PlayerTableProps> = ({ rowData }) => {
     headerFontSize: 14,
   });
 
-  const columnDefs: (ColDef<any, any> | ColGroupDef<any>)[] = [
+  const columnDefs: ColDef[] = [
     {
       headerName: 'PLAYERS',
+      field: 'name',
       cellRenderer: (params: any) => {
         if (!params.data) return null;
         return (
@@ -45,7 +48,7 @@ const RemoveTable: React.FC<PlayerTableProps> = ({ rowData }) => {
       flex: 2,
     },
     {
-      field: 'PREDICTED POINTS',
+      headerName: 'PREDICTED POINTS',
       valueFormatter: (params: any) => {
         if (
           !params.data ||
@@ -61,9 +64,10 @@ const RemoveTable: React.FC<PlayerTableProps> = ({ rowData }) => {
     },
   ];
 
-  if (!rowData || rowData.length === 0) {
-    return <div>Loading...</div>;
-  }
+  const onRowClicked = (event: any) => {
+    const clickedRow = event.data;
+    onRowClick(clickedRow.key);
+  };
 
   return (
     <div className="w-full">
@@ -71,7 +75,9 @@ const RemoveTable: React.FC<PlayerTableProps> = ({ rowData }) => {
         <AgGridReact
           rowData={rowData}
           columnDefs={columnDefs}
+          onRowClicked={onRowClicked}
           theme={myTheme}
+          rowSelection="single"
         />
       </div>
     </div>
