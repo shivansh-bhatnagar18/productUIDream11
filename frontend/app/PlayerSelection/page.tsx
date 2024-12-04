@@ -33,7 +33,7 @@ export const readCSVData = (): Promise<any[]> => {
       // add error popup here
     }
     const idx = getMatch();
-    fetch(`/file_${idx}_modified.csv`)
+    fetch(`/file_${idx}_final.csv`)
       .then((response) => response.text())
       .then((data) => {
         Papa.parse(data, {
@@ -155,6 +155,7 @@ export default function Page() {
             player.key = index;
           });
           setRowData(playerData);
+          console.log('Player data:', playerData);
         });
       });
       setCountSelected(0);

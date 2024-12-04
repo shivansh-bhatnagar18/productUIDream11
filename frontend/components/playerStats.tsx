@@ -145,23 +145,24 @@ const PlayerStats = (props: any) => {
 
   useEffect(() => {
     if (aiAlerts) {
-      setAlertEng(aiAlerts.insights.join('\n'));
-      const formattedInsights = aiAlerts.insights
-        .map((insight) =>
-          insight.split('\n')[0].split(':').slice(1).join(':').trim()
-        )
+      const englishInsights = aiAlerts.insights
+        .map((insight: any) => insight.en)
         .join('\n');
-      setAlertEng(formattedInsights);
+      const hindiInsights = aiAlerts.insights
+        .map((insight: any) => insight.hi)
+        .join('\n');
+      setAlertEng(englishInsights);
+      setAlertHindi(hindiInsights);
     }
   }, [aiAlerts]);
 
-  useEffect(() => {
-    if (aiAlerts) {
-      setAlertHindi(
-        'प्लेयर एक्स ने शानदार शतक बनाया, लेकिन एक दुर्घटना का शिकार हो गया। \nप्लेयर एक्स की मैच विजेता प्रदर्शन के लिए प्रशंसा की गई। \nखिलाड़ी X को अगले मैच से पहले फिटनेस संबंधी चिंताओं का सामना करना पड़ता है।'
-      );
-    }
-  }, [aiAlerts]);
+  // useEffect(() => {
+  //   if (aiAlerts) {
+  //     setAlertHindi(
+  //       'प्लेयर एक्स ने शानदार शतक बनाया, लेकिन एक दुर्घटना का शिकार हो गया। \nप्लेयर एक्स की मैच विजेता प्रदर्शन के लिए प्रशंसा की गई। \nखिलाड़ी X को अगले मैच से पहले फिटनेस संबंधी चिंताओं का सामना करना पड़ता है।'
+  //     );
+  //   }
+  // }, [aiAlerts]);
 
   useEffect(() => {
     if (playerData && total) {
