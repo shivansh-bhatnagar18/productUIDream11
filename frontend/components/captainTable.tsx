@@ -1,10 +1,6 @@
 'use client';
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
-import {
-  ColDef,
-  ColGroupDef,
-  ModuleRegistry,
-} from '@ag-grid-community/core';
+import { ColDef, ColGroupDef, ModuleRegistry } from '@ag-grid-community/core';
 import { AgGridReact } from '@ag-grid-community/react';
 import React, { useState } from 'react';
 import 'ag-grid-enterprise';
@@ -16,8 +12,8 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
 interface CaptainTableProps {
   rowData: rowData[];
   setRowData: React.Dispatch<React.SetStateAction<rowData[]>>;
-  setCaptainData: (captain: string) => void;            // Updated type
-  setViceCaptainData: (viceCaptain: string) => void;    // Updated type
+  setCaptainData: React.Dispatch<React.SetStateAction<string>>;
+  setViceCaptainData: React.Dispatch<React.SetStateAction<string>>;
   setToComparePlayer?: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -47,7 +43,7 @@ const CaptainTable = ({
   const handleCButtonClick = (key: number) => {
     setSelectedCKey((prevKey) => (prevKey === key ? null : key));
     const captain = rowData.find((row) => row.key === key);
-    setCaptainData(captain?.name || '');
+    setCaptainData(captain ? (captain.name as string) : '');
     setRowData((prevData) =>
       prevData.map((row) =>
         row.key === key
@@ -63,7 +59,7 @@ const CaptainTable = ({
   const handleVCButtonClick = (key: number) => {
     setSelectedVCKey((prevKey) => (prevKey === key ? null : key));
     const viceCaptain = rowData.find((row) => row.key === key);
-    setViceCaptainData(viceCaptain?.name || '');
+    setViceCaptainData(viceCaptain ? (viceCaptain?.name as string) : ' ');
     setRowData((prevData) =>
       prevData.map((row) =>
         row.key === key

@@ -1,3 +1,4 @@
+import { rowData } from '@/types';
 import { init } from 'next/dist/compiled/webpack/webpack';
 import React, { useEffect } from 'react';
 // import handleAIComparisonClick from '../app/PlayerSelection/page';
@@ -7,9 +8,9 @@ interface PlayerProps {
   points: number;
   name: string;
   key: number;
-  team: string;
+  team: number;
   isSelected: boolean;
-  rowData: any[];
+  rowData: rowData[];
   initial1: string;
   initial2: string;
   // setSelectedRowData: React.Dispatch<React.SetStateAction<any[]>>;
@@ -50,9 +51,9 @@ const PlayerComponent = ({
         </p>
         {imageSrc && (
           <img
-            src={team == '0' ? '/icons/team1.png' : '/icons/team2.png'}
+            src={team == 0 ? '/icons/team1.png' : '/icons/team2.png'}
             alt={name}
-            className={`w-16 h-16 object-contain ${team == '0' ? 'scale-100' : ''}`}
+            className={`w-16 h-16 object-contain ${team == 0 ? 'scale-100' : ''}`}
           />
         )}
         <p className="text-xs rounded-sm text-black bg-white  leading-3 text-center absolute">
