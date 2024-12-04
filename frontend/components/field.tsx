@@ -1,21 +1,12 @@
 'use client';
 import React from 'react';
 import { Box, Card, Typography } from '@mui/material';
-import PlayerComponent from './playerAvatar';
 import PlayerFormation from './playerFormation';
-
-interface PlayerProps {
-  imageSrc: string;
-  points: number;
-  name: string;
-  key: number;
-  isSelected: boolean;
-  team: string;
-}
+import { rowData } from '@/types';
 
 interface FieldProps {
-  players: PlayerProps[];
-  rowData: any[];
+  players: rowData[];
+  rowData: rowData[];
   initial1: string;
   initial2: string;
   setCountSelected?: React.Dispatch<React.SetStateAction<number>>;

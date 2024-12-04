@@ -10,4 +10,5 @@ export interface rowData {
   team: number;
   values: any;
   ai_alerts: any;
+  points?: number;
 }
