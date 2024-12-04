@@ -206,6 +206,9 @@ const PlayerStats = (props: any) => {
 
     synth.speak(utterThis);
   };
+  const riskLevels = ['High', 'Mid', 'Low'];
+  const randomRisk = riskLevels[Math.floor(Math.random() * riskLevels.length)];
+  const riskColor = randomRisk === 'High' ? '#D83D3D' : randomRisk === 'Mid' ? '#FFA500' : '#34C759';
 
   if (!playerData) {
     return (
@@ -352,8 +355,8 @@ const PlayerStats = (props: any) => {
               </div>
               <div className="bg-[#312D2C] w-full mt-2 rounded-2xl flex flex-col">
                 <p className="text-[#E4DAD7] text-lg ml-4 mt-2 mb-2">Risk</p>
-                <p className="text-white mx-4 rounded-[3px] text-center text-2xl bg-[#D83D3D] font-bold mb-2 px-7">
-                  High
+                <p className={`text-white mx-4 rounded-[3px] text-center text-2xl bg-[${riskColor}] font-bold mb-2 px-7`}>
+                  {randomRisk}
                 </p>
               </div>
             </div>
@@ -386,7 +389,7 @@ const PlayerStats = (props: any) => {
             </div>
           )}
           Heading="Batting First"
-          description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut ea temporibus odio quaerat laudantium magnam repellat tempore, libero natus. Similique tempora consequatur velit facere quos aut cupiditate temporibus minima. Minima?"
+          description="These show how many fantasy points a player scores when their team bats first or chases a target. Use this to see if a player performs better under pressure or when setting the pace."
           data={playerData.values.batting_first_predicted_score}
         />
         <GraphModal
@@ -407,7 +410,7 @@ const PlayerStats = (props: any) => {
             </div>
           )}
           Heading="Chasing"
-          description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut ea temporibus odio quaerat laudantium magnam repellat tempore, libero natus. Similique tempora consequatur velit facere quos aut cupiditate temporibus minima. Minima?"
+          description="These show how many fantasy points a player scores when their team bats first or chases a target. Use this to see if a player performs better under pressure or when setting the pace."
           data={playerData.values.chasing_first_predicted_score}
         />
         <GraphModal
@@ -425,7 +428,7 @@ const PlayerStats = (props: any) => {
             </div>
           )}
           Heading="Strike Rate"
-          description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut ea temporibus odio quaerat laudantium magnam repellat tempore, libero natus. Similique tempora consequatur velit facere quos aut cupiditate temporibus minima. Minima?"
+          description="This is how quickly a batter scores runs or how efficiently a bowler takes wickets. Higher is usually better?"
           data={playerData.values.strike_rate}
         />
 
@@ -557,8 +560,8 @@ const PlayerStats = (props: any) => {
             </div>
             <div className="bg-[#312D2C] w-full mt-2 rounded-2xl flex flex-col">
               <p className="text-[#E4DAD7] text-lg ml-4 mt-2 mb-2">Risk</p>
-              <p className="text-white mx-4 rounded-[3px] text-center text-2xl bg-[#D83D3D] font-bold mb-2 px-7 ">
-                High
+              <p className={`text-white mx-4 rounded-[3px] text-center text-2xl bg-[${riskColor}] font-bold mb-2 px-7`}>
+                  {randomRisk}
               </p>
             </div>
           </div>
