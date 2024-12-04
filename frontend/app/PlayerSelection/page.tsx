@@ -143,6 +143,14 @@ export default function Page() {
               })(),
             };
           });
+          playerData.sort((a, b) => {
+            const aYpred = a.values.y_pred || [];
+            const bYpred = b.values.y_pred || [];
+            if (bYpred[5] === aYpred[5]) {
+              return a.name.localeCompare(b.name);
+            }
+            return bYpred[5] - aYpred[5];
+          });
           setRowData(playerData);
         });
       });

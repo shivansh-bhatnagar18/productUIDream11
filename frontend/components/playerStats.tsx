@@ -412,36 +412,36 @@ const PlayerStats = (props: any) => {
         <GraphModal
           Component={() => (
             <div className="bg-[#312D2C] mr-2 px-3 w-full rounded-2xl flex flex-col">
-          <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Strike Rate</p>
-          <div className="flex w-full mb-2 mt-2">
-            <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
-              {Math.round(playerData.values.strike_rate[0])}
-            </p>
-            <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
-              FPts
-            </p>
-          </div>
-        </div>
+              <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Strike Rate</p>
+              <div className="flex w-full mb-2 mt-2">
+                <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
+                  {Math.round(playerData.values.strike_rate[0])}
+                </p>
+                <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
+                  FPts
+                </p>
+              </div>
+            </div>
           )}
           Heading="Strike Rate"
           description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut ea temporibus odio quaerat laudantium magnam repellat tempore, libero natus. Similique tempora consequatur velit facere quos aut cupiditate temporibus minima. Minima?"
           data={playerData.values.strike_rate}
         />
-        
+
         <GraphModal
           Component={() => (
             <div className="bg-[#312D2C] mr-2 px-3 w-full rounded-2xl flex flex-col">
-          <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Economy Rate</p>
-          <div className="flex w-full mb-2 mt-2">
-            <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
-              {' '}
-              {Math.round(playerData.values.economy[0])}
-            </p>
-            <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
-              FPts
-            </p>
-          </div>
-        </div>
+              <p className="text-[#E4DAD7] text-lg ml-5 mt-2">Economy Rate</p>
+              <div className="flex w-full mb-2 mt-2">
+                <p className="text-[#E4DAD7] text-5xl font-bold ml-5 mr-4">
+                  {' '}
+                  {Math.round(playerData.values.economy[0])}
+                </p>
+                <p className="text-[#FFA18D] text-md text-center items-center flex font-thin">
+                  FPts
+                </p>
+              </div>
+            </div>
           )}
           Heading="Economy Rate"
           description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut ea temporibus odio quaerat laudantium magnam repellat tempore, libero natus. Similique tempora consequatur velit facere quos aut cupiditate temporibus minima. Minima?"

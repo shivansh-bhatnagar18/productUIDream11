@@ -37,7 +37,12 @@ interface Props {
   Heading: string;
 }
 
-export default function GraphModal({ Component, Heading, data, description }: Props) {
+export default function GraphModal({
+  Component,
+  Heading,
+  data,
+  description,
+}: Props) {
   const [open, setOpen] = React.useState(false);
   const [finaldata, setFinalData] = React.useState(data);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -104,11 +109,9 @@ export default function GraphModal({ Component, Heading, data, description }: Pr
             <Typography id="transition-modal-title" variant="h6" component="h2">
               {Heading}
             </Typography>
-            <div className='flex w-full justify-between'>
-              <div className='flex flex-col justify-center'>
-                <div className='w-[350px]'>
-                  {description}
-                </div>
+            <div className="flex w-full justify-between">
+              <div className="flex flex-col justify-center">
+                <div className="w-[350px]">{description}</div>
                 <div className="h-[200px] rounded-xl flex gap-2 w-[350px] -ml-5">
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart
