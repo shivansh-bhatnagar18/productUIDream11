@@ -4,10 +4,7 @@ import 'ag-grid-enterprise';
 import Navbar from '@/components/navbar';
 import Transaction from '@/components/Transaction';
 import Models from '@/components/Models';
-import Papa from 'papaparse';
 import { useEffect, useState } from 'react';
-import Box from '@mui/material/Box';
-import { Heatmap } from '@mui/x-charts-pro/Heatmap';
 import Image from 'next/image';
 import {
   Radar,
@@ -18,12 +15,9 @@ import {
   ResponsiveContainer,
   Scatter,
   ScatterChart,
-  CartesianGrid,
   XAxis,
   YAxis,
-  ZAxis,
   Tooltip,
-  Legend,
 } from 'recharts';
 import AddTable from '@/components/AddTable';
 import RemoveTable from '@/components/RemoveTable';

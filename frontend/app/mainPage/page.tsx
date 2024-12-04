@@ -1,5 +1,4 @@
 'use client';
-import Match from '@/components/match';
 import NameModal from '@/components/NameModal';
 import Navbar from '@/components/navbar';
 

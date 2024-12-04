@@ -8,7 +8,7 @@ import TypeOfPlayerModal from '@/components/typeOfPlayerModal';
 import CaptainSelectionHeader from '@/components/CaptainSelectionHeader';
 import ChatbotWrapper from '@/components/chatbot/ChatBotWrapper';
 
-function page() {
+function Page() {
   const [rowData, setRowData] = useState<any[]>([]);
   const [selectedCaptain, setSelectedCaptain] = useState<any | null>(null);
   const [selectedViceCaptain, setSelectedViceCaptain] = useState<any | null>(
@@ -89,4 +89,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

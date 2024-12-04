@@ -11,7 +11,7 @@ import { useSearchParams } from 'next/navigation';
 import CaptainSelectionHeader from '@/components/CaptainSelectionHeader';
 import ChatbotWrapper from '@/components/chatbot/ChatBotWrapper';
 
-function page() {
+function Page() {
   const searchParams = useSearchParams();
   const name = searchParams.get('playerName');
   const [rowData, setRowData] = useState<any[]>([]);
@@ -127,4 +127,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
