@@ -7,6 +7,7 @@ interface PlayerProps {
   points: number;
   name: string;
   key: number;
+  team: string;
   isSelected: boolean;
   rowData: any[];
   initial1: string;
@@ -19,6 +20,7 @@ interface PlayerProps {
 const PlayerComponent = ({
   imageSrc,
   points,
+  team,
   name,
   rowData,
   initial1,
@@ -28,7 +30,7 @@ const PlayerComponent = ({
   const player = rowData.find((row) => row.name === name);
   return (
     <div
-      className="w-[20%] self-center flex flex-col relative m-2 bg-[#878789] rounded-full"
+      className="w-[20%] self-center flex flex-col relative m-2"
       onClick={() => {
         setCountSelected(rowData.filter((row) => row.isSelected).length);
         const params = new URLSearchParams({
@@ -42,11 +44,17 @@ const PlayerComponent = ({
         localStorage.setItem('rowData', JSON.stringify(updatedRowData));
       }}
     >
-      <div className="relative flex flex-col z-100 justify-end items-cent</div>er ">
+      <div className="relative flex flex-col z-100 justify-end items-center ">
         <p className="text-2xl font-bold text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0)] text-end w-fit px-3 rounded-3xl absolute bottom-3 -right-6">
-          {points}
+          {points}{' '}
         </p>
-        <img src={imageSrc} alt={name} className="rounded-full " />
+        {imageSrc && (
+          <img
+            src={team == '0' ? '/icons/team1.png' : '/icons/team2.png'}
+            alt={name}
+            className={`w-16 h-16 object-contain ${team == '0' ? 'scale-150' : ''}`}
+          />
+        )}
         <p className="text-sm text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0)] leading-3 text-center absolute">
           {name}
         </p>

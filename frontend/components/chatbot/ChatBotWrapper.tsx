@@ -23,7 +23,7 @@ const ChatbotWrapper: React.FC<ChatbotWrapperProps> = ({
   const [chatbotOpen, setChatbotOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
-  console.log('BASE_URL', BASE_URL);
+  // console.log('BASE_URL', BASE_URL);
   const sendChatMessage = async (message: string) => {
     setMessages((prevMessages) => [
       ...prevMessages,
@@ -53,9 +53,9 @@ const ChatbotWrapper: React.FC<ChatbotWrapperProps> = ({
     }
     setLoading(false);
   };
-  console.log('player1_id', player1_id);
-  console.log('player2_id', player2_id);
-  console.log('match_no', match_no);
+  // console.log('player1_id', player1_id);
+  // console.log('player2_id', player2_id);
+  // console.log('match_no', match_no);
   return (
     <div className="fixed bottom-0 right-0 p-4 z-50">
       {chatbotOpen ? (

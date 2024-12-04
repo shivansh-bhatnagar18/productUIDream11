@@ -139,7 +139,9 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
       valueFormatter: (params: any) => {
         if (!params.data) return '';
         const yPred = params.data.values.y_pred;
-        return Array.isArray(yPred) && yPred.length > 5 ? Math.round(yPred[5]).toString() : '';
+        return Array.isArray(yPred) && yPred.length > 5
+          ? Math.round(yPred[5]).toString()
+          : '';
       },
       flex: 1,
     },
@@ -216,8 +218,8 @@ const ButtonRendererAdd = (props: any) => {
   const clicked = data.isSelected;
   const excluded = data.isExclude;
 
-  return (
-    excluded ? (<button
+  return excluded ? (
+    <button
       disabled
       onClick={() => handleButtonClick(data.key)}
       className={`w-6 h-6 flex items-center justify-center rounded-full text-white transition-colors ${
@@ -227,8 +229,9 @@ const ButtonRendererAdd = (props: any) => {
       }`}
     >
       {clicked ? '-' : '+'}
-    </button>) :
-    (<button
+    </button>
+  ) : (
+    <button
       onClick={() => handleButtonClick(data.key)}
       className={`w-6 h-6 flex items-center justify-center rounded-full text-white transition-colors ${
         clicked
@@ -237,7 +240,7 @@ const ButtonRendererAdd = (props: any) => {
       }`}
     >
       {clicked ? '-' : '+'}
-    </button>)
+    </button>
   );
 };
 

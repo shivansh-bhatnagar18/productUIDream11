@@ -69,7 +69,7 @@ const dataheat = [
   [1, 2, 10],
   [1, 3, 70],
   [1, 4, 40],
-]
+];
 
 const readCSVData = (): Promise<any[]> => {
   return new Promise((resolve, reject) => {
@@ -157,7 +157,7 @@ function page() {
                 </ResponsiveContainer>
               </div>
               <div className="w-full h-full">
-              <Box sx={{ width: '100%', maxWidth: 400 }}>
+                {/* <Box sx={{ width: '100%', maxWidth: 400 }}>
                 <Heatmap
                   xAxis={[{ data: [1, 2] }]}
                   yAxis={[{ data: ['A', 'B'] }]}
@@ -165,7 +165,7 @@ function page() {
                   margin={{ top: 5, right: 5, left: 20 }}
                   height={300}
                 />
-              </Box>
+              </Box> */}
               </div>
             </div>
           </div>

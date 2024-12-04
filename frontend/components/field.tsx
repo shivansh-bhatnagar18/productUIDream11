@@ -10,6 +10,7 @@ interface PlayerProps {
   name: string;
   key: number;
   isSelected: boolean;
+  team: string;
 }
 
 interface FieldProps {

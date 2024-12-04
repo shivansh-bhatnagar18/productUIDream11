@@ -24,9 +24,9 @@ export default function Mainpage() {
       <div className="w-[80%] flex flex-col justify-center items-center">
         <div className="w-full flex items-center justify-center mt-10">
           <div className="h-[2px] bg-white w-full blur-xs"></div>
-            <h1 className="text-white w-full text-center text-4xl font-normal">
-                Choose Match
-            </h1>
+          <h1 className="text-white w-full text-center text-4xl font-normal">
+            Choose Match
+          </h1>
           <div className="h-[2px] bg-white w-full blur-xs"></div>
         </div>
 

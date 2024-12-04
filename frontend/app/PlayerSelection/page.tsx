@@ -33,7 +33,7 @@ export const readCSVData = (): Promise<any[]> => {
       // add error popup here
     }
     const idx = getMatch();
-    fetch(`/file_${idx}.csv`)
+    fetch(`/file_${idx}_modified.csv`)
       .then((response) => response.text())
       .then((data) => {
         Papa.parse(data, {
@@ -122,6 +122,7 @@ export default function Page() {
               isCaptain: false,
               isViceCaptain: false,
               toCompare: false,
+              team: index === 0 ? 0 : row['team'] === data[0]['team'] ? 0 : 1,
               values: (() => {
                 try {
                   const fixedJSONString = row['values'].replace(/'/g, '"');
@@ -133,7 +134,7 @@ export default function Page() {
               })(),
               ai_alerts: (() => {
                 try {
-                  const fixedJSONString = row['ai_alerts'].replace(/'/g, '"');
+                  const fixedJSONString = row['ai_alerts'];
                   return JSON.parse(fixedJSONString);
                 } catch (e) {
                   console.error('Error parsing JSON:', e);
@@ -148,7 +149,7 @@ export default function Page() {
       setCountSelected(0);
     }
   }, []);
-  console.log(rowData);
+
   return (
     <div className="flex flex-col items-center bg-[#0D0402] min-h-screen max-w-screen min-w-screen">
       <Header initial1={initial1} initial2={initial2} />
@@ -173,7 +174,7 @@ export default function Page() {
         />
       </div>
       <div className="flex flex-row gap-4">
-      <Button
+        <Button
           type="submit"
           variant="contained"
           color="secondary"
@@ -182,16 +183,16 @@ export default function Page() {
         >
           Analyse My Pick
         </Button>
-        {
-          countSelected !== 11 && <BattingFirstModal
-          rowData={rowData}
-          setRowData={setRowData}
-          setSelectedRowData={setSelectedRowData}
-          setCountSelected={setCountSelected}
-          initial1={initial1}
-          initial2={initial2}
-        />
-        }
+        {countSelected !== 11 && (
+          <BattingFirstModal
+            rowData={rowData}
+            setRowData={setRowData}
+            setSelectedRowData={setSelectedRowData}
+            setCountSelected={setCountSelected}
+            initial1={initial1}
+            initial2={initial2}
+          />
+        )}
         <Button
           type="button"
           variant="contained"

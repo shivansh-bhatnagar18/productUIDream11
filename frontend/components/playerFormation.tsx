@@ -7,13 +7,12 @@ interface PlayerProps {
   points: number;
   name: string;
   key: number;
+  team: string;
 }
 
 interface PlayerFormationProps {
   players: PlayerProps[];
   rowData: any[];
-  initial1: string;
-  initial2: string;
   setCountSelected?: React.Dispatch<React.SetStateAction<number>>;
   initial1: string;
   initial2: string;

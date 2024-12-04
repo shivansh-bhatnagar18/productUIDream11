@@ -51,7 +51,9 @@ export interface PlayerData {
 
 const sortRowDataByScore = (data: any[]) => {
   return data
-    .filter((player) => player && player.values && player.values.score !== undefined)
+    .filter(
+      (player) => player && player.values && player.values.score !== undefined
+    )
     .sort((a, b) => b.values.score - a.values.score);
 };
 
@@ -91,22 +93,24 @@ const PlayerStats = (props: any) => {
   }, [rowData, playerName]);
 
   useEffect(() => {
-  if (rowData && rowData.length > 0) {
-    const sortedRowData = sortRowDataByScore(rowData);
-    console.log('Sorted rowData:', sortedRowData);
-    let sum = 0;
-    for (let i = 0; i < Math.min(11, sortedRowData.length); i++) {
-      sum += sortedRowData[i].values.score;
+    if (rowData && rowData.length > 0) {
+      const sortedRowData = sortRowDataByScore(rowData);
+      console.log('Sorted rowData:', sortedRowData);
+      let sum = 0;
+      for (let i = 0; i < Math.min(11, sortedRowData.length); i++) {
+        sum += sortedRowData[i].values.score;
+      }
+      setTotal(sum);
+      const data = sortedRowData.find(
+        (player: any) => player.name === playerName
+      );
+      console.log('Found player data:', data);
+      setPlayerData(data);
+      if (data) {
+        setAiAlerts(data.ai_alerts);
+      }
     }
-    setTotal(sum);
-    const data = sortedRowData.find((player: any) => player.name === playerName);
-    console.log('Found player data:', data);
-    setPlayerData(data);
-    if (data) {
-      setAiAlerts(data.ai_alerts);
-    }
-  }
-}, [rowData, playerName]);
+  }, [rowData, playerName]);
 
   const updateDatabar = (y_actual: number[], y_pred: number[]) => {
     const updatedDatabar = databar.map((item, index) => ({
@@ -162,10 +166,18 @@ const PlayerStats = (props: any) => {
 
   useEffect(() => {
     if (playerData && total) {
-      console.log(total)
-      let endAngle = (playerData.values.score/total)*100
-      setEndAngle(endAngle)
-      setPieData([{ name: playerName, value: endAngle}, { name: playerName, value: 100 - endAngle , color: '#312d2c', stroke: 'transparent', }]);
+      console.log(total);
+      let endAngle = (playerData.values.score / total) * 100;
+      setEndAngle(endAngle);
+      setPieData([
+        { name: playerName, value: endAngle },
+        {
+          name: playerName,
+          value: 100 - endAngle,
+          color: '#312d2c',
+          stroke: 'transparent',
+        },
+      ]);
     }
   }, [playerData, total]);
 
@@ -274,24 +286,25 @@ const PlayerStats = (props: any) => {
                 Relative FPts
               </p>
               <div className="scale-90 h-full w-full flex items-end justify-center">
-              <PieChart
-              height={150}
-              width={250}
-                series={[
-                  {
-                    color: '#34C759',
-                    data: pieData,
-                    innerRadius: 20,
-                    outerRadius: 50,
-                    paddingAngle: 3,
-                    cornerRadius: 0,
-                    startAngle: 0,
-                    endAngle: 360,
-                    cx: 120,
-                    cy: 80,
-                  }]}
-              />            
-            </div>
+                <PieChart
+                  height={150}
+                  width={250}
+                  series={[
+                    {
+                      color: '#34C759',
+                      data: pieData,
+                      innerRadius: 20,
+                      outerRadius: 50,
+                      paddingAngle: 3,
+                      cornerRadius: 0,
+                      startAngle: 0,
+                      endAngle: 360,
+                      cx: 120,
+                      cy: 80,
+                    },
+                  ]}
+                />
+              </div>
             </div>
           </div>
           <div className="w-full h-auto rounded-xl mt-1 flex flex-col gap-2">
@@ -457,8 +470,8 @@ const PlayerStats = (props: any) => {
             </p>
             <div className="scale-90 h-full w-full flex items-end justify-center">
               <PieChart
-              height={150}
-              width={250}
+                height={150}
+                width={250}
                 series={[
                   {
                     color: '#34C759',
@@ -471,8 +484,9 @@ const PlayerStats = (props: any) => {
                     endAngle: 360,
                     cx: 120,
                     cy: 80,
-                  }]}
-              />            
+                  },
+                ]}
+              />
             </div>
           </div>
         </div>
