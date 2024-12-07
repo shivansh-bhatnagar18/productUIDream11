@@ -1,6 +1,5 @@
 'use client';
 import React from 'react';
-import { Button } from '@mui/material';
 
 function Transaction(props: any) {
   const { classname } = props;
@@ -31,14 +30,12 @@ function Transaction(props: any) {
           </div>
         </div>
       </div>
-      <div className="flex w-full items-center justify-center">
-        <Button
-          type="button"
-          variant="contained"
-          className=" hover:bg-[#b03434] bg-[#F64848] font-bold rounded-lg p-2 justify-center align-middle mb-4"
-        >
-          View Detailed Analysis
-        </Button>
+      <div className="flex flex-col  w-full items-center justify-center px-4 py-8 gap-y-2">
+        <hr className="w-full border-t border-white opacity-50" />
+        <span className="text-white text-[0.8rem]">
+          THIS TRANSACTION BENEFITS YOUR TEAM
+        </span>
+        <hr className="w-full border-t border-white opacity-50" />
       </div>
     </div>
   );
