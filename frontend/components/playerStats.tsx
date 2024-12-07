@@ -215,7 +215,7 @@ const PlayerStats = (props: any) => {
       <div
       className={`bg-gray-600 bg-opacity-10 border-y-2 border-gray-600 border-opacity-60 flex flex-col w-full ${classname}`}
     >
-      <div className="w-full justify-between h-[20%] mx-3 mt-3 flex">
+      <div className="w-[95%] justify-between h-[20%] mt-3 flex ml-5">
         <GraphModal
           Component={() => (
             <div className="bg-[#312D2C] px-2 w-full rounded-2xl flex flex-col">
@@ -465,7 +465,7 @@ const PlayerStats = (props: any) => {
     <div
       className={`bg-gray-600 bg-opacity-10 border-y-2 border-gray-600 border-opacity-60 flex flex-col w-full ${classname}`}
     >
-      <div className="w-full justify-start h-[20%] mx-3 mt-3 flex gap-2">
+      <div className="w-[95%] justify-between h-[20%] mt-3 flex ml-5">
         <GraphModal
           Component={() => (
             <div className="bg-[#312D2C] px-2 w-full rounded-2xl flex flex-col">
