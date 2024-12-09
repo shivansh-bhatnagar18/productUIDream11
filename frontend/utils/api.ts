@@ -22,7 +22,7 @@ export const readCSVData = (): Promise<any[]> => {
       return;
     }
     const idx = getMatch();
-    fetch(`/file_${idx}_final.csv`)
+    fetch(`/file_${Number(idx) + 3}_final.csv`)
       .then((response) => response.text())
       .then((data) => {
         Papa.parse(data, {
