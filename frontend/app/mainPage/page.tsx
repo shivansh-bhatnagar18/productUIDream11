@@ -23,17 +23,17 @@ import { Suspense } from 'react';
 
         <div className="bg-white bg-opacity-10  rounded-xl border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white flex flex-col w-[80%] py-5 px-10 mt-12 shadow-inner shadow-white">
           <NameModal
-            Team1="Chennai Super Kings"
-            Team2="Pune Warriors"
-            initial1="CSK"
+            Team1="India"
+            Team2="South Africa"
+            initial1="IND"
             initial2="PW"
             time="8:00 PM"
           />
           <NameModal
-            Team1="Australia"
-            Team2="Pakistan"
-            initial1="AUS"
-            initial2="PAK"
+            Team1="India"
+            Team2="Sri Lanka"
+            initial1="IND"
+            initial2="SL"
             time="12:00 PM"
           />
         </div>
@@ -48,10 +48,10 @@ import { Suspense } from 'react';
         </div>
         <div className="bg-white bg-opacity-10 rounded-xl border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white flex flex-col w-[80%] py-5 px-10 my-12 shadow-inner shadow-white">
           <NameModal
-            Team1="England"
-            Team2="South Africa"
-            initial1="ENG"
-            initial2="SA"
+            Team1="Delhi Capitals"
+            Team2="Royal Challengers Bangalore"
+            initial1="DC"
+            initial2="RCB"
             time="4:00 PM"
           />
         </div>

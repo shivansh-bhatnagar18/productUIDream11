@@ -142,6 +142,8 @@ const PlayerStats = (props: any) => {
 
   const [alertEng, setAlertEng] = useState<string>('Loading...');
   const [alertHindi, setAlertHindi] = useState<string>('Loading...');
+  const [risk, setRisk] = useState<string>('Low');
+  const [riskColor, setRiskColor] = useState<string>('#34C759');
 
   useEffect(() => {
     if (aiAlerts) {
@@ -177,6 +179,11 @@ const PlayerStats = (props: any) => {
           color: '#312d2c',
         },
       ]);
+      const riskValue = playerData?.values.risk_value || Math.floor(Math.random() * 101);
+      const risk = riskValue <= 33 ? 'Low' : riskValue <= 66 ? 'Mid' : 'High';
+      const riskColor = risk === 'High' ? '#D83D3D' : risk === 'Mid' ? '#FCDC3C' : '#34C759';
+      setRisk(risk);
+      setRiskColor(riskColor);
     }
   }, [playerData, total]);
 
@@ -206,9 +213,6 @@ const PlayerStats = (props: any) => {
 
     synth.speak(utterThis);
   };
-  const riskLevels = ['High', 'Mid', 'Low'];
-  const randomRisk = riskLevels[Math.floor(Math.random() * riskLevels.length)];
-  const riskColor = randomRisk === 'High' ? '#D83D3D' : randomRisk === 'Mid' ? '#FFA500' : '#34C759';
 
   if (!playerData) {
     return (
@@ -656,7 +660,7 @@ const PlayerStats = (props: any) => {
             <div className="bg-[#312D2C] w-full mt-2 rounded-2xl flex flex-col">
               <p className="text-[#E4DAD7] text-lg ml-4 mt-2 mb-2">Risk</p>
               <p className={`text-white mx-4 rounded-[3px] text-center text-2xl bg-[${riskColor}] font-bold mb-2 px-7`}>
-                  {randomRisk}
+                {risk}
               </p>
             </div>
           </div>
