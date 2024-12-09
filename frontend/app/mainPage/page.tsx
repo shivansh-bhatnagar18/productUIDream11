@@ -27,14 +27,14 @@ function Mainpage() {
             Team2="South Africa"
             initial1="IND"
             initial2="SA"
-            time="8:00 PM"
+            time="5:00 PM"
           />
           <NameModal
             Team1="India"
             Team2="Sri Lanka"
             initial1="IND"
             initial2="SL"
-            time="12:00 PM"
+            time="2:30 PM"
           />
         </div>
         <div className="w-full flex items-center justify-center mt-10">
@@ -52,7 +52,7 @@ function Mainpage() {
             Team2="Royal Challengers"
             initial1="DC"
             initial2="RCB"
-            time="8:00 PM"
+            time="7:30 PM"
           />
         </div>
       </div>
