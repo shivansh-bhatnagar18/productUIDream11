@@ -3,7 +3,7 @@ import NameModal from '@/components/NameModal';
 import Navbar from '@/components/navbar';
 import { Suspense } from 'react';
 
- function Mainpage() {
+function Mainpage() {
   return (
     <div className="flex flex-col items-center bg-[#0D0402] min-h-screen max-w-screen min-w-screen">
       <Navbar />
@@ -26,7 +26,7 @@ import { Suspense } from 'react';
             Team1="India"
             Team2="South Africa"
             initial1="IND"
-            initial2="PW"
+            initial2="SA"
             time="8:00 PM"
           />
           <NameModal
@@ -52,7 +52,7 @@ import { Suspense } from 'react';
             Team2="Royal Challengers Bangalore"
             initial1="DC"
             initial2="RCB"
-            time="4:00 PM"
+            time="8:00 PM"
           />
         </div>
       </div>
@@ -62,7 +62,9 @@ import { Suspense } from 'react';
 
 export default function Page() {
   return (
-    <Suspense fallback={<div className='h-screen w-screen bg-black'>Loading...</div>}>
+    <Suspense
+      fallback={<div className="h-screen w-screen bg-black">Loading...</div>}
+    >
       <Mainpage />
     </Suspense>
   );
