@@ -101,7 +101,7 @@ const Match: React.FC<MatchProps> = ({
             alt="/"
             className="rounded-full h-20 w-20"
           />
-          <div className="flex flex-col">
+          <div className="flex flex-col items-end">
             <h3 className="text-white text-3xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
               {initial2}
             </h3>

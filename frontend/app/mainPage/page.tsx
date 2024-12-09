@@ -49,7 +49,7 @@ function Mainpage() {
         <div className="bg-white bg-opacity-10 rounded-xl border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white flex flex-col w-[80%] py-5 px-10 my-12 shadow-inner shadow-white">
           <NameModal
             Team1="Delhi Capitals"
-            Team2="Royal Challengers Bangalore"
+            Team2="Royal Challengers"
             initial1="DC"
             initial2="RCB"
             time="8:00 PM"
