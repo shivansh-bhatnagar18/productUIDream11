@@ -79,7 +79,7 @@ const Match: React.FC<MatchProps> = ({
             width={'72'}
             height={'72'}
             alt="/"
-            className="rounded-full h-20 w-20"
+            className="rounded-full h-20 w-20 object-contain"
           />
           <div className="flex flex-col">
             <h3 className="text-white text-3xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
@@ -99,7 +99,7 @@ const Match: React.FC<MatchProps> = ({
             width={'72'}
             height={'72'}
             alt="/"
-            className="rounded-full h-20 w-20"
+            className="rounded-full h-20 w-20 object-contain"
           />
           <div className="flex flex-col items-end">
             <h3 className="text-white text-3xl font-bold leading-[ 283.333%] tracking-[-0.6px] mt-3">
