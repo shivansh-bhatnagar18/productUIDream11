@@ -239,9 +239,10 @@ function PageComponents() {
   const [rowData, setRowData] = useState<rowData[]>([]);
   const [initial1, setInitial1] = useState<string>('');
   const [initial2, setInitial2] = useState<string>('');
-  const [selectedModel, setSelectedModel] = useState<string>(
-    'highestFantasyPoints'
-  );
+  const [selectedModel, setSelectedModel] = useState<string>('highestFantasyPoints');
+  const [fantasyPoints, setFantasyPoints] = useState<number>(0);
+  const [strikeRate, setStrikeRate] = useState<number>(0);
+  const [economy, setEconomy] = useState<number>(0);
 
   useEffect(() => {
     const playerData = JSON.parse(localStorage.getItem('rowData') || '[]');
@@ -262,24 +263,34 @@ function PageComponents() {
 
     if (clickedRow) {
       if (!clickedRow.isSelected) {
-        // Trying to add a player
-        if (selectedPlayers.length >= 11) {
-          // Cannot add more than 11 players
-          alert('You can select up to 11 players only.');
-          return;
-        }
+      // Trying to add a player
+      if (selectedPlayers.length >= 11) {
+        // Cannot add more than 11 players
+        alert('You can select up to 11 players only.');
+        return;
+      }
+      // Add player stats to total
+      setFantasyPoints(Math.round(fantasyPoints + clickedRow.values.y_pred[clickedRow.values.y_pred.length - 1]));
+      setStrikeRate(Math.round(strikeRate + clickedRow.values.strike_rate[0]));
+      setEconomy(Math.round(economy + clickedRow.values.economy[0]));
+      } else {
+      // Remove player stats from total
+      setFantasyPoints(Math.round(fantasyPoints - clickedRow.values.y_pred[clickedRow.values.y_pred.length - 1]));
+      setStrikeRate(Math.round(strikeRate - clickedRow.values.strike_rate[0]));
+      setEconomy(Math.round(economy - clickedRow.values.economy[0]));
       }
       // Toggle isSelected
       const updatedRowData = rowData.map((row) => {
-        if (row.key === key) {
-          return { ...row, isSelected: !row.isSelected };
-        }
-        return row;
+      if (row.key === key) {
+        return { ...row, isSelected: !row.isSelected };
+      }
+      return row;
       });
       setRowData(updatedRowData);
       localStorage.setItem('rowData', JSON.stringify(updatedRowData));
     }
-  };
+    };
+
 
   return (
     <div className="flex flex-col items-center bg-[#0D0402] overflow-clip min-h-screen max-w-screen min-w-screen">
@@ -372,15 +383,15 @@ function PageComponents() {
             </div>
             <div className="w-full h-full max-h-[400px] flex gap-5">
               <AddTable
-                rowData={rowData.filter((row) => !row.isSelected)}
-                onRowClick={handleRowClick}
-                selectionLimitReached={
-                  rowData.filter((row) => row.isSelected).length >= 11
-                }
+              rowData={rowData.filter((row) => !row.isSelected && row.key < 11)}
+              onRowClick={handleRowClick}
+              selectionLimitReached={
+                rowData.filter((row) => row.isSelected).length >= 11
+              }
               />
               <RemoveTable
-                rowData={rowData.filter((row) => row.isSelected)}
-                onRowClick={handleRowClick}
+              rowData={rowData.filter((row) => row.isSelected && row.key >= 11)}
+              onRowClick={handleRowClick}
               />
             </div>
           </div>
@@ -391,7 +402,11 @@ function PageComponents() {
             setSelectedModel={setSelectedModel}
             classname=""
           />
-          <Transaction />
+          <Transaction 
+            fantasyPoint = {fantasyPoints}
+            strikeRate = {strikeRate}
+            economyRate = {economy}
+          />
         </div>
       </div>
 
@@ -422,10 +437,12 @@ function PageComponents() {
   );
 }
 
-export default function Page() {
+export default function Page(): JSX.Element {
   return (
-    <Suspense fallback={<div className='h-screen w-screen bg-black'>Loading...</div>}>
+    <div className="flex items-center justify-center h-screen w-screen">
+      <Suspense fallback={<div className='h-screen w-screen bg-black'>Loading...</div>}>
       <PageComponents />
-    </Suspense>
+      </Suspense>
+    </div>
   );
 }

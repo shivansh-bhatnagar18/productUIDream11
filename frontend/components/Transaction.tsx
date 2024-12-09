@@ -2,6 +2,23 @@
 import React from 'react';
 
 function Transaction(props: any) {
+
+  const [fantasyPoint, setFantasyPoint] = React.useState(12);
+  const [strikeRate, setStrikeRate] = React.useState(12);
+  const [economyRate, setEconomyRate] = React.useState(12);
+
+  React.useEffect(() => {
+    if (props.fantasyPoint !== undefined) {
+      setFantasyPoint(props.fantasyPoint);
+    }
+    if (props.strikeRate !== undefined) {
+      setStrikeRate(props.strikeRate);
+    }
+    if (props.economyRate !== undefined) {
+      setEconomyRate(props.economyRate);
+    }
+  }, [props.fantasyPoint, props.strikeRate, props.economyRate]);
+
   const { classname } = props;
   return (
     <div
@@ -13,21 +30,21 @@ function Transaction(props: any) {
       <div className="flex flex-col">
         <div className="w-full justify-between flex px-5 mb-4 mt-4">
           <p className="font-bold text-xl"> Fantasy Point</p>
-          <div className="px-8 py-1 rounded-sm bg-[#34C759] w-fit font-bold text-2xl text-[#271919]">
-            +12
-          </div>
+            <div className={`px-8 py-1 rounded-sm w-fit font-bold text-2xl ${fantasyPoint > 0 ? 'bg-[#34C759] text-[#271919]' : 'bg-[#FF3B30] text-white'}`}>
+              {fantasyPoint}
+            </div>
         </div>
         <div className="w-full justify-between flex px-5 mb-4">
           <p className="text-xl"> Strike Rate </p>
-          <div className="px-8 py-1 rounded-sm bg-[#4D3232] w-fit font-bold text-xl text-[#34C759]">
-            +12
-          </div>
+            <div className={`px-8 py-1 rounded-sm w-fit font-bold text-2xl ${strikeRate > 0 ? 'text-[#34C759]' : 'text-[#FF3B30]'}`}>
+            {strikeRate}
+            </div>
         </div>
         <div className="w-full justify-between flex px-5 mb-4">
           <p className="text-xl"> Economy Rate</p>
-          <div className="px-8 py-1 rounded-sm bg-[#4D3232] w-fit font-bold text-xl text-[#34C759]">
-            +12
-          </div>
+            <div className={`px-8 py-1 rounded-sm w-fit font-bold text-2xl ${economyRate > 0 ? 'text-[#34C759]' : 'text-[#FF3B30]'}`}>
+            {economyRate}
+            </div>
         </div>
       </div>
       <div className="flex flex-col  w-full items-center justify-center px-4 py-8 gap-y-2">
