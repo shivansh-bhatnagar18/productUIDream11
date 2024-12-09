@@ -41,7 +41,9 @@ const Field: React.FC<FieldProps> = ({
         }}
       >
         Venue:{' '}
-        <span className="text-white font-sans">SuperSport Park, Centurion</span>
+        <span className="text-white font-sans">
+          {rowData[0]?.values?.venue || ''}
+        </span>
       </Typography>
 
       <Box className="relative my-4 w-96 h-96 rounded-md flex justify-center items-center bg-cover bg-center">

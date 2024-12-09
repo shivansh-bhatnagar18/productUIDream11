@@ -73,7 +73,9 @@ const AddTable: React.FC<AddTableProps> = ({
         ) {
           return '';
         }
-        return Math.round(params.data.values.y_pred[5]).toString();
+        return Math.round(
+          params.data.values.y_pred[params.data.values.y_pred.length - 1]
+        ).toString();
       },
       flex: 1,
     },

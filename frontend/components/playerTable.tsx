@@ -156,8 +156,8 @@ const PlayerTable: React.FC<PlayerTableProps> = ({
       valueFormatter: (params: any) => {
         if (!params.data) return '';
         const yPred = params.data.values.y_pred;
-        return Array.isArray(yPred) && yPred.length > 5
-          ? Math.round(yPred[5]).toString()
+        return Array.isArray(yPred)
+          ? Math.round(yPred[yPred.length - 1]).toString()
           : '';
       },
       flex: 1,
