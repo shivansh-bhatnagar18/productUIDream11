@@ -35,11 +35,11 @@ function PageComponents() {
       ) as string;
       const getMatch = () => {
         switch (match) {
-          case 'CSK vs PW':
+          case 'IND vs SA':
             return '1';
-          case 'AUS vs PAK':
+          case 'IND vs SL':
             return '2';
-          case 'ENG vs SA':
+          case 'DC vs RCB':
             return '3';
           default:
             return -1;
