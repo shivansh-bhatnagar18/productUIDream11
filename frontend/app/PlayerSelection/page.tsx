@@ -49,6 +49,7 @@ export default function Page() {
       const [team1, team2] = match.split(' vs ');
       setInitial1(team1);
       setInitial2(team2);
+      console.log('Match:', team1, team2);
     }
   }, []);
 
