@@ -305,7 +305,7 @@ const PlayerStats = (props: any) => {
         <div className="w-[60%] rounded-xl flex flex-col gap-2">
           <div className="bg-[#312D2C] mt-1 mr-2 h-[50%] rounded-xl flex flex-col">
             <p className="text-[#E4DAD7] text-lg ml-2 mt-2 mb-2 font-bold pl-3">
-              Pitch Performance Prediction
+              Pitch Performance
             </p>
 
             <div className="scale-[250%] mt-10 h-full w-full items-center justify-center">
