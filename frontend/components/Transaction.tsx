@@ -35,13 +35,13 @@ function Transaction(props: any) {
             </div>
         </div>
         <div className="w-full justify-between flex px-5 mb-4">
-          <p className="text-xl"> Strike Rate </p>
+          <p className="text-xl"> Batting Strength </p>
             <div className={`px-8 py-1 rounded-sm w-fit font-bold text-2xl ${strikeRate > 0 ? 'text-[#34C759]' : 'text-[#FF3B30]'}`}>
             {strikeRate}
             </div>
         </div>
         <div className="w-full justify-between flex px-5 mb-4">
-          <p className="text-xl"> Economy Rate</p>
+          <p className="text-xl"> Bowling Strength</p>
             <div className={`px-8 py-1 rounded-sm w-fit font-bold text-2xl ${economyRate > 0 ? 'text-[#34C759]' : 'text-[#FF3B30]'}`}>
             {economyRate}
             </div>
@@ -50,7 +50,9 @@ function Transaction(props: any) {
       <div className="flex flex-col  w-full items-center justify-center px-4 py-8 gap-y-2">
         <hr className="w-full border-t border-white opacity-50" />
         <span className="text-white text-[0.8rem]">
-          THIS TRANSACTION BENEFITS YOUR TEAM
+            <span className={fantasyPoint > 0 ? 'text-[#34C759]' : 'text-[#FF3B30]'}>
+            {fantasyPoint > 0 ? 'THIS TRANSACTION BENEFITS YOUR TEAM' : 'THIS TRANSACTION HARMS YOUR TEAM'}
+            </span>
         </span>
         <hr className="w-full border-t border-white opacity-50" />
       </div>
