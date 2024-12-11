@@ -75,7 +75,7 @@ const Match: React.FC<MatchProps> = ({
       >
         <div className="flex items-center gap-10 w-[40%]">
           <Image
-            src={`/teamlogos/${initial1}.svg`}
+            src={`/teamlogos/${initial1 == 'T1' ? `${initial1}.png` : `${initial1}.svg`}`}
             width={'72'}
             height={'72'}
             alt="/"
@@ -95,7 +95,7 @@ const Match: React.FC<MatchProps> = ({
         </p>
         <div className="flex items-center gap-10 w-[40%] flex-row-reverse">
           <Image
-            src={`/teamlogos/${initial2}.svg`}
+            src={`/teamlogos/${initial2 == 'T2' ? `${initial2}.png` : `${initial2}.svg`}`}
             width={'72'}
             height={'72'}
             alt="/"

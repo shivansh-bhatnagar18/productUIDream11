@@ -39,11 +39,11 @@ function Mainpage() {
         </div>
         <div className="w-full flex items-center justify-center mt-10">
           <div className="h-[2px] bg-white w-full blur-xs"></div>
-          <div className="flex items-center z-10">
-            <h2 className="text-white text-2xl font-normal leading-[141.667%] tracking-[-1.2px] py-2 w-max px-4">
-              UPCOMING MATCHES
-            </h2>
-          </div>
+            <div className="flex items-center z-10">
+              <h2 className="text-white text-2xl font-normal leading-[141.667%] tracking-[-1.2px] py-2 w-max px-4">
+                UPCOMING MATCHES
+              </h2>
+            </div>
           <div className="h-[2px] bg-white w-full blur-xs"></div>
         </div>
         <div className="bg-white bg-opacity-10 rounded-xl border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white flex flex-col w-[80%] py-5 px-10 my-12 shadow-inner shadow-white">
@@ -52,6 +52,24 @@ function Mainpage() {
             Team2="Royal Challengers"
             initial1="DC"
             initial2="RCB"
+            time="7:30 PM"
+          />
+        </div>
+        <div className="w-full flex items-center justify-center mt-10">
+          <div className="h-[2px] bg-white w-full blur-xs"></div>
+            <div className="flex items-center z-10">
+              <h2 className="text-white text-2xl font-normal leading-[141.667%] tracking-[-1.2px] py-2 w-max px-4">
+                CSV GENERATOR
+              </h2>
+            </div>
+          <div className="h-[2px] bg-white w-full blur-xs"></div>
+        </div>
+        <div className="bg-white bg-opacity-10 rounded-xl border-[1px] border-opacity-10 border-b-black border-l-black border-t-white border-r-white flex flex-col w-[80%] py-5 px-10 my-12 shadow-inner shadow-white">
+          <NameModal
+            Team1="Team 1"
+            Team2="Team 2"
+            initial1="T1"
+            initial2="T2"
             time="7:30 PM"
           />
         </div>

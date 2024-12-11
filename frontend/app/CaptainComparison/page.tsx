@@ -41,6 +41,8 @@ function PageComponents() {
             return '2';
           case 'DC vs RCB':
             return '3';
+          case 'T1 vs T2':
+            return '4';  
           default:
             return -1;
         }
