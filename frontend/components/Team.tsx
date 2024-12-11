@@ -23,7 +23,7 @@ const Match: React.FC<MatchProps> = ({ Team, initial }) => {
           {Team}
         </p>
         <Image
-          src={`/teamlogos/${initial}.svg`}
+          src={`/teamlogos/${initial === 'T1' || initial === 'T2' ? `${initial}.png` : `${initial}.svg`}`}
           width={'72'}
           height={'72'}
           alt="/"
